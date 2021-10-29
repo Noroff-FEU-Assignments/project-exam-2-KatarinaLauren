@@ -1,6 +1,15 @@
-@import "./partials/custom";
-
-body {
-  color: White;
-  font-family: "open-sans";
+@font-face {
+  font-family: "Titan One";
+  src: url("../fonts/TitanOne-Regular.ttf") format("woff2");
 }
+@font-face {
+  font-family: "Signifika Negative";
+  src: url("../fonts/SignikaNegative-Bold.ttf") format("woff2");
+}
+@font-face {
+  font-family: "Open Sans";
+  src: url("../fonts/OpenSans-VariableFont_wdth\,wght.ttf") format("woff2");
+}
+@import "./partials/custom";
+@import "~bootstrap/scss/bootstrap";
+@import "./partials/globals";

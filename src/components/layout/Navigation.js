@@ -6,10 +6,10 @@ import Logo from "./Logo";
 
 function Navigation() {
   return (
-    <Navbar collapseOnSelect expand="lg" bg="primary" variant="dark">
+    <Navbar collapseOnSelect expand="lg" bg="primary">
       <Container fluid>
         <NavLink to="/" exact className="nav-link m-auto p-0">
-          <Logo />
+          <Logo breakPoint="lg" />
         </NavLink>
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
         <Navbar.Collapse id="basic-navbar-nav">

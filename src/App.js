@@ -6,13 +6,17 @@ import Accommodations from "./components/accommodations/Accommodations";
 import Booking from "./components/booking/Booking";
 import Contact from "./components/contact/Contact";
 import Admin from "./components/admin/Admin";
+import Footer from "./components/layout/Footer";
 
 import "./sass/style.scss";
 
 function App() {
   return (
     <Router>
-      <Navigation />
+      <div class="wrapper">
+        <Navigation />
+      </div>
+      <Footer />
       <Container>
         <Switch>
           <Route path="/" exact component={Home} />

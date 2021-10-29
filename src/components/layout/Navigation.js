@@ -2,13 +2,14 @@ import Navbar from "react-bootstrap/Navbar";
 import Nav from "react-bootstrap/Nav";
 import Container from "react-bootstrap/Container";
 import { NavLink } from "react-router-dom";
+import Logo from "./Logo";
 
 function Navigation() {
   return (
     <Navbar collapseOnSelect expand="lg" bg="primary" variant="dark">
       <Container fluid>
-        <NavLink to="/" exact className="nav-link">
-          <Navbar.Brand>HOLIDAZE BERGEN</Navbar.Brand>
+        <NavLink to="/" exact className="nav-link m-auto p-0">
+          <Logo />
         </NavLink>
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
         <Navbar.Collapse id="basic-navbar-nav">

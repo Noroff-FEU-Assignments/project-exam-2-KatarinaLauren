@@ -12,20 +12,28 @@ function Navigation() {
           <Logo breakPoint="lg" />
         </NavLink>
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
-        <Navbar.Collapse id="basic-navbar-nav">
+        <Navbar.Collapse id="basic-navbar-nav" timeout="500">
           <Nav className="ms-auto">
-            <NavLink to="/" exact className="ms-lg-3 nav-link">
-              HOME
-            </NavLink>
-            <NavLink to="/accommodations" className="ms-lg-3 nav-link">
-              ACCOMMODATIONS
-            </NavLink>
-            <NavLink to="/booking" className="ms-lg-3 nav-link">
-              BOOKING
-            </NavLink>
-            <NavLink to="/contact" className="ms-lg-3 me-lg-5 nav-link">
-              CONTACT
-            </NavLink>
+            <Nav.Link eventKey="1">
+              <NavLink to="/" exact className="ms-3 nav-link">
+                HOME
+              </NavLink>
+            </Nav.Link>
+            <Nav.Link eventKey="2">
+              <NavLink to="/accommodations" className="ms-3 nav-link">
+                ACCOMMODATIONS
+              </NavLink>
+            </Nav.Link>
+            <Nav.Link eventKey="3">
+              <NavLink to="/booking" className="ms-3 nav-link">
+                BOOKING
+              </NavLink>
+            </Nav.Link>
+            <Nav.Link eventKey="4">
+              <NavLink to="/contact" className="ms-3 me-lg-5 nav-link">
+                CONTACT
+              </NavLink>
+            </Nav.Link>
           </Nav>
         </Navbar.Collapse>
       </Container>

@@ -1,7 +1,11 @@
-import React from "react";
+import GetAccommodations from "./GetAccommodations";
 
 function Accommodations() {
-  return <div></div>;
+  return (
+    <div>
+      <GetAccommodations />
+    </div>
+  );
 }
 
 export default Accommodations;

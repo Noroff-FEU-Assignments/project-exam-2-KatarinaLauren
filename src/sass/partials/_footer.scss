@@ -1,5 +1,22 @@
 footer {
   .nav-link {
-    font-size: 0.9rem;
+    @media (min-width: 768px) {
+      font-size: 0.9rem;
+    }
+    font-weight: lighter;
+    &:hover {
+      color: rgba(#fff, 0.65);
+    }
+    &:focus {
+      color: #fff;
+    }
+  }
+  a {
+    &:hover {
+      color: rgba(#fff, 0.65);
+    }
+    &:focus {
+      color: #fff;
+    }
   }
 }

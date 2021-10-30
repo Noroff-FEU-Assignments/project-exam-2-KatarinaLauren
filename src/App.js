@@ -8,8 +8,6 @@ import Contact from "./components/contact/Contact";
 import Admin from "./components/admin/Admin";
 import Footer from "./components/layout/Footer";
 
-import "./sass/style.scss";
-
 function App() {
   return (
     <Router>

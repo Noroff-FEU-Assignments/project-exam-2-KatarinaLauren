@@ -1,7 +1,5 @@
-import Container from "react-bootstrap/Container";
-// import Row from "react-bootstrap/Row";
-// import Col from "react-bootstrap/Col";
 import { NavLink } from "react-router-dom";
+import Container from "react-bootstrap/Container";
 import Logo from "./Logo";
 
 function Footer() {
@@ -12,8 +10,7 @@ function Footer() {
           <div className="m-3 align-self-center">
             <Logo breakPoint="md" />
           </div>
-
-          <ul className="list-unstyled m-3">
+          <ul className="list-unstyled m-md-3">
             <li>
               <NavLink to="/" exact className="nav-link">
                 Home
@@ -35,8 +32,7 @@ function Footer() {
               </NavLink>
             </li>
           </ul>
-
-          <ul className="list-unstyled m-3">
+          <ul className="list-unstyled m-md-3">
             <li>
               <a href="#!" className="nav-link">
                 Inspiration
@@ -58,8 +54,7 @@ function Footer() {
               </a>
             </li>
           </ul>
-
-          <div className=" align-self-center">
+          <div className=" align-self-center mb-5 pb-3 m-md-0 p-md-0 mt-3">
             <a href="#!" className="p-3">
               <i class="fab fa-facebook-f"></i>
             </a>
@@ -73,6 +68,11 @@ function Footer() {
             <a href="#!" className="p-3">
               <i class="fas fa-globe-americas"></i>
             </a>
+          </div>
+          <div className="position-absolute bottom-0 end-0">
+            <NavLink to="/admin" className="nav-link">
+              Admin
+            </NavLink>
           </div>
         </div>
       </Container>

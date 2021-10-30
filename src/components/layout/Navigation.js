@@ -8,7 +8,7 @@ function Navigation() {
   return (
     <Navbar collapseOnSelect expand="lg" bg="primary">
       <Container fluid>
-        <NavLink to="/" exact className="nav-link m-auto p-0">
+        <NavLink to="/" exact className="nav-link m-auto ps-5 p-lg-0">
           <Logo breakPoint="lg" />
         </NavLink>
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
@@ -25,11 +25,6 @@ function Navigation() {
             </NavLink>
             <NavLink to="/contact" className="ms-lg-3 me-lg-5 nav-link">
               CONTACT
-            </NavLink>
-          </Nav>
-          <Nav>
-            <NavLink to="/admin" className="ms-lg-5 me-lg-0 pe-lg-0 mt-5 mt-lg-auto nav-link">
-              Admin
             </NavLink>
           </Nav>
         </Navbar.Collapse>

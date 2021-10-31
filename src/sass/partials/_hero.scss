@@ -14,13 +14,13 @@
 }
 .hero__text {
   position: absolute;
-  top: 50%;
+  top: 55%;
   left: 50%;
   transform: translate(-50%, -50%);
   @media (min-width: 768px) {
-    top: 40%;
+    top: 50%;
   }
   @media (min-width: 992px) {
-    top: 30%;
+    top: 40%;
   }
 }

@@ -1,5 +1,4 @@
 import Navigation from "./components/layout/Navigation";
-import Container from "react-bootstrap/Container";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import Home from "./components/home/Home";
 import Accommodations from "./components/accommodations/Accommodations";
@@ -15,7 +14,7 @@ function App() {
       <div class="wrapper">
         <Navigation />
 
-        <Container>
+        <div>
           <Switch>
             <Route path="/" exact component={Home} />
             <Route path="/accommodations" component={Accommodations} />
@@ -23,7 +22,7 @@ function App() {
             <Route path="/contact" component={Contact} />
             <Route path="/admin" component={Admin} />
           </Switch>
-        </Container>
+        </div>
       </div>
       <Footer />
     </Router>

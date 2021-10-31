@@ -1,3 +1,5 @@
+// COLORS
+
 $body-bgcolor: #f6f8f9;
 $primary-color: #02a6b5;
 $secondary-color: #a6adb4;
@@ -16,10 +18,15 @@ $theme-colors: (
   "dark": $dark-color,
 );
 
-// scss-docs-end navbar-theme-variables
+// BODY STYLES
 
 $body-bg: $body-bgcolor;
 $body-color: $text-color;
+
+// BUTTONS
+
+$input-btn-font-family: "Open Sans", sans-serif;
+$btn-font-weight: bold;
 
 // $success: $green !default;
 // $info: $cyan !default;

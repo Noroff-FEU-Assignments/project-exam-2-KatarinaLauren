@@ -30,6 +30,7 @@ const GetData = (url) => {
 
 function GetAccommodations() {
   const { data, error, isLoaded } = GetData(url + "accommodations");
+  console.log(data);
 
   if (error !== null) {
     return <div>Error: {error.message}</div>;
@@ -41,7 +42,7 @@ function GetAccommodations() {
     <div>
       items
       {data.map((item) => (
-        <div>{item.id}</div>
+        <div key={item.id}>{item.id}</div>
       ))}
     </div>
   );

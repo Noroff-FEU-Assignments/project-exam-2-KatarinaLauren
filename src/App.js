@@ -7,23 +7,25 @@ import Booking from "./components/booking/Booking";
 import Contact from "./components/contact/Contact";
 import Admin from "./components/admin/Admin";
 import Footer from "./components/layout/Footer";
+import "./sass/style.scss";
 
 function App() {
   return (
     <Router>
       <div class="wrapper">
         <Navigation />
+
+        <Container>
+          <Switch>
+            <Route path="/" exact component={Home} />
+            <Route path="/accommodations" component={Accommodations} />
+            <Route path="/booking" component={Booking} />
+            <Route path="/contact" component={Contact} />
+            <Route path="/admin" component={Admin} />
+          </Switch>
+        </Container>
       </div>
       <Footer />
-      <Container>
-        <Switch>
-          <Route path="/" exact component={Home} />
-          <Route path="/accommodations" component={Accommodations} />
-          <Route path="/booking" component={Booking} />
-          <Route path="/contact" component={Contact} />
-          <Route path="/admin" component={Admin} />
-        </Switch>
-      </Container>
     </Router>
   );
 }

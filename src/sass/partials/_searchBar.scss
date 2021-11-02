@@ -1,0 +1,16 @@
+.searchbar {
+  width: 90%;
+  max-width: 600px;
+}
+.hhsRSK > .wrapper {
+  z-index: 99999;
+}
+.hhsRSK > .wrapper > .sc-bwzfXH {
+  color: $light-color;
+
+  li {
+    &:hover {
+      color: #fff;
+    }
+  }
+}

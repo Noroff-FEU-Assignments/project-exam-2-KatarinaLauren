@@ -1,12 +1,10 @@
 import GetAccommodations from "./GetAccommodations";
-import Heading from "../layout/Heading";
+import PageHeading from "../layout/PageHeading";
 
 function Accommodations() {
   return (
     <>
-      <Heading color={"#000"} fontSize={"3rem"}>
-        ACCOMMODATIONS
-      </Heading>
+      <PageHeading color={"#000"}>ACCOMMODATIONS</PageHeading>
       <GetAccommodations />
     </>
   );

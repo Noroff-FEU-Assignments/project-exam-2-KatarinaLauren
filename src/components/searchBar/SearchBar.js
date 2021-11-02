@@ -29,29 +29,41 @@ function SearchBar() {
     console.log(string, results);
   };
 
-  const handleOnHover = (result) => {
-    // the item hovered
-    console.log(result);
-  };
+  // const handleOnHover = (result) => {
+  //   // the item hovered
+  //   console.log(result);
+  // };
 
   const handleOnSelect = (item) => {
     // the item selected
     console.log(item);
   };
 
-  const handleOnFocus = () => {
-    console.log("Focused");
-  };
+  // const handleOnFocus = () => {
+  //   console.log("Focused");
+  // };
 
   const formatResult = (item) => {
     // return item;
     return <p dangerouslySetInnerHTML={{ __html: "<strong>" + item + "</strong>" }}></p>; //To format result as html
   };
   return (
-    <div className="App">
-      <div style={{ width: 400 }}>
-        <ReactSearchAutocomplete items={items} onSearch={handleOnSearch} onHover={handleOnHover} onSelect={handleOnSelect} onFocus={handleOnFocus} autoFocus formatResult={formatResult} />
-      </div>
+    <div className="m-auto mb-5 searchbar">
+      <ReactSearchAutocomplete
+        placeholder={"Search for accommodations.."}
+        items={items}
+        onSearch={handleOnSearch}
+        onSelect={handleOnSelect}
+        autoFocus
+        formatResult={formatResult}
+        styling={{
+          fontFamily: "Open Sans",
+          color: "#343638",
+          borderRadius: "0.25rem",
+          hoverBackgroundColor: "#02a6b5",
+          placeholderColor: "#a6adb4",
+        }}
+      />
     </div>
   );
 }

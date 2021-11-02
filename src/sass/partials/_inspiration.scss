@@ -1,0 +1,49 @@
+.cardgroup a {
+  .card {
+    width: 300px;
+    border: none;
+
+    &:focus,
+    &:active {
+      outline: 3px solid $accent-color;
+    }
+  }
+  .cardgroup__overview {
+    height: 100px;
+  }
+  h5 {
+    font-size: 1rem;
+    color: $primary-color;
+    font-family: "Open Sans", sans-serif;
+    font-weight: bold;
+  }
+  p,
+  li {
+    color: $text-color;
+    font-weight: 300;
+  }
+}
+
+.cardgroup__card--wide {
+  width: 90%;
+  @media (min-width: 768px) {
+    width: 500px;
+  }
+  .accordion-button {
+    background-color: #fff;
+    font-family: "Open Sans";
+    height: 110px;
+    padding: 0.5rem;
+    &:focus {
+      box-shadow: none;
+    }
+  }
+  .accordion-button:not(.collapsed) {
+    color: $text-color;
+    background-color: #fff;
+    box-shadow: none;
+  }
+  .accordion-body {
+    background-color: #fff;
+  }
+}

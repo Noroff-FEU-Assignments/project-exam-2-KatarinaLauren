@@ -1,10 +1,10 @@
-import { NavLink } from "react-router-dom";
+import { Link } from "react-router-dom";
 import Container from "react-bootstrap/Container";
 import Logo from "./Logo";
 
 function Footer() {
   return (
-    <footer className="bg-primary text-center text-md-start p-2">
+    <footer className="bg-primary text-center text-md-start p-2 position-relative">
       <Container fluid>
         <div className="d-flex flex-column flex-md-row justify-content-between align-items-center">
           <div className="m-3 align-self-center">
@@ -12,31 +12,31 @@ function Footer() {
           </div>
           <ul className="list-unstyled m-md-3">
             <li>
-              <NavLink to="/" exact className="nav-link">
+              <Link to="/" exact className="nav-link">
                 Home
-              </NavLink>
+              </Link>
             </li>
             <li>
-              <NavLink to="/accommodations" className="nav-link">
+              <Link to="/accommodations" className="nav-link">
                 Accommodations
-              </NavLink>
+              </Link>
             </li>
             <li>
-              <NavLink to="/booking" className="nav-link">
+              <Link to="/booking" className="nav-link">
                 Booking
-              </NavLink>
+              </Link>
             </li>
             <li>
-              <NavLink to="/contact" className="nav-link">
+              <Link to="/contact" className="nav-link">
                 Contact
-              </NavLink>
+              </Link>
             </li>
           </ul>
           <ul className="list-unstyled m-md-3">
             <li>
-              <a href="#!" className="nav-link">
+              <Link to="/inspiration" className="nav-link">
                 Inspiration
-              </a>
+              </Link>
             </li>
             <li>
               <a href="#!" className="nav-link">
@@ -70,9 +70,9 @@ function Footer() {
             </a>
           </div>
           <div className="position-absolute bottom-0 end-0">
-            <NavLink to="/admin" className="nav-link">
+            <Link to="/admin" className="nav-link">
               Admin
-            </NavLink>
+            </Link>
           </div>
         </div>
       </Container>

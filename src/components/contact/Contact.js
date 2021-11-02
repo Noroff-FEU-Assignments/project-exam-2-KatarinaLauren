@@ -1,11 +1,9 @@
-import Heading from "../layout/Heading";
+import PageHeading from "../layout/PageHeading";
 
 function Contact() {
   return (
     <div>
-      <Heading color={"#000"} fontSize={"3rem"}>
-        BOOKING ENQUIRIES
-      </Heading>
+      <PageHeading color={"#000"}>CONTACT US</PageHeading>
     </div>
   );
 }

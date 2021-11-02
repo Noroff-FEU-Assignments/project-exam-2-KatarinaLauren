@@ -1,11 +1,9 @@
-import Heading from "../layout/Heading";
+import PageHeading from "../layout/PageHeading";
 
 function Admin() {
   return (
     <div>
-      <Heading color={"#02a6b5"} fontSize={"3rem"}>
-        ADMIN LOGIN
-      </Heading>
+      <PageHeading color={"#02a6b5"}>ADMIN LOGIN</PageHeading>
     </div>
   );
 }

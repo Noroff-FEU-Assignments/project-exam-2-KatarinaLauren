@@ -6,6 +6,7 @@ import Booking from "./components/booking/Booking";
 import Contact from "./components/contact/Contact";
 import Admin from "./components/admin/Admin";
 import Footer from "./components/layout/Footer";
+import Inspiration from "./components/inspiration/Inspiration";
 import "./sass/style.scss";
 
 function App() {
@@ -21,6 +22,7 @@ function App() {
             <Route path="/booking" component={Booking} />
             <Route path="/contact" component={Contact} />
             <Route path="/admin" component={Admin} />
+            <Route path="/inspiration" component={Inspiration} />
           </Switch>
         </div>
       </div>

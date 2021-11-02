@@ -1,6 +1,6 @@
 import PropTypes from "prop-types";
 
-function Heading(props) {
+function PageHeading(props) {
   const headingStyle = {
     color: props.color,
     fontSize: props.fontSize,
@@ -11,11 +11,11 @@ function Heading(props) {
     </h1>
   );
 }
-Heading.propTypes = {
+PageHeading.propTypes = {
   children: PropTypes.node.isRequired,
   color: PropTypes.string,
   fontSize: PropTypes.string,
   className: PropTypes.string,
 };
 
-export default Heading;
+export default PageHeading;

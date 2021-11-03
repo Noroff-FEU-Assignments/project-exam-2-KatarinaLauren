@@ -1,3 +1,4 @@
+import fetchAccommodations from "../../utilities/fetchAccommodations";
 import PageHeading from "../layout/PageHeading";
 import { Link } from "react-router-dom";
 import Hero from "../layout/Hero";
@@ -7,8 +8,10 @@ import Paragraph from "../layout/Paragraph";
 import SearchBar from "../searchBar/SearchBar";
 import InspirationCards from "./InspirationCards";
 import Container from "react-bootstrap/Container";
+import AccommodationOverview from "./AccommodationOverview";
 
 function Home() {
+  fetchAccommodations();
   return (
     <div>
       <Hero image={heroImage}>
@@ -30,7 +33,9 @@ function Home() {
       <SearchBar />
       <Container>
         <h3 className="mt-5 mb-4">INSPIRATION</h3>
-        <InspirationCards cardLink="true" />
+        <InspirationCards />
+        <h3 className="mt-5 mb-4">ACCOMMODATION</h3>
+        <AccommodationOverview />
       </Container>
     </div>
   );

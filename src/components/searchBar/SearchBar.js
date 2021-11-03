@@ -1,28 +1,8 @@
 import { ReactSearchAutocomplete } from "react-search-autocomplete";
+import { getFromStorage } from "../../utilities/localStorage/localStorageFunctions";
 
 function SearchBar() {
-  const items = [
-    {
-      id: 0,
-      name: "Cobol",
-    },
-    {
-      id: 1,
-      name: "JavaScript",
-    },
-    {
-      id: 2,
-      name: "Basic",
-    },
-    {
-      id: 3,
-      name: "PHP",
-    },
-    {
-      id: 4,
-      name: "Java",
-    },
-  ];
+  const items = getFromStorage();
   const handleOnSearch = (string, results) => {
     // onSearch will have as the first callback parameter
     // the string searched and for the second the results.

@@ -1,0 +1,20 @@
+.accommodation__container {
+  height: 250px;
+  width: 95%;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  position: relative;
+  @media (min-width: 768px) {
+    height: 350px;
+  }
+  @media (min-width: 992px) {
+    max-width: 550px;
+  }
+
+  h5 {
+    top: 80%;
+    left: 3%;
+    color: #fff;
+  }
+}

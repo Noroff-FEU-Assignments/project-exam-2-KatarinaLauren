@@ -8,6 +8,7 @@ const url = BaseUrl;
 
 function RenderAccommodations() {
   const [data, setData] = useState([]);
+  const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
   useEffect(function () {
@@ -15,11 +16,14 @@ function RenderAccommodations() {
     if (accommodations.length > 0) {
       console.log(accommodations);
       setData(accommodations);
+      setLoading(false);
     } else {
       setError("No information about accommodations available");
     }
   }, []);
-
+  if (loading) {
+    return <div>Loading...</div>;
+  }
   if (error) {
     return (
       <div>

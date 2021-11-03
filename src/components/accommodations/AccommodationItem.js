@@ -5,8 +5,8 @@ import Card from "react-bootstrap/Card";
 function AccommodationItem({ id, name, location, rate, image }) {
   return (
     <Link to={`detail/${id}`}>
-      <Card className="m-0 mt-3 m-md-3">
-        <Card.Img variant="top" src={image} />
+      <Card className="m-0 mt-3 m-md-3 accommodation__card flex-row">
+        <Card.Img variant="top" src={image} style={{ width: "20rem" }} />
         <Card.Body>
           <Card.Title>{name}</Card.Title>
           <Card.Text>Location: {location}</Card.Text>

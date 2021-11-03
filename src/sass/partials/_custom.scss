@@ -8,6 +8,10 @@ $cta-color: #ff8a00;
 $text-color: #343638;
 $light-color: #cbd0d3;
 $dark-color: #202124;
+$red: #dc3545;
+$yellow: #ffc107;
+$warning: $yellow;
+$danger: $red;
 
 $theme-colors: (
   "primary": $primary-color,
@@ -16,6 +20,8 @@ $theme-colors: (
   "info": $accent-color,
   "light": $light-color,
   "dark": $dark-color,
+  "danger": $danger,
+  "warning": $warning,
 );
 
 // BODY STYLES

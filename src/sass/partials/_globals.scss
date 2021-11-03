@@ -19,3 +19,9 @@ body {
 footer {
   flex-shrink: 0;
 }
+
+.alert {
+  max-width: 600px;
+  margin: 2em auto;
+  text-align: center;
+}

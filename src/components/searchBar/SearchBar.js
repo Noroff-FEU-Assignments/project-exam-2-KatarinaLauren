@@ -1,22 +1,25 @@
 import { ReactSearchAutocomplete } from "react-search-autocomplete";
 import { getFromStorage } from "../../utilities/localStorage/localStorageFunctions";
+import { useHistory } from "react-router-dom";
 
 function SearchBar() {
+  let history = useHistory();
   const items = getFromStorage();
-  const handleOnSearch = (string, results) => {
-    // onSearch will have as the first callback parameter
-    // the string searched and for the second the results.
-    console.log(string, results);
-  };
+
+  // const handleOnSearch = (string, results) => {
+  //   // onSearch will have as the first callback parameter
+  //   // the string searched and for the second the results.
+  //   console.log(string, results);
+  // };
 
   // const handleOnHover = (result) => {
   //   // the item hovered
   //   console.log(result);
   // };
-
   const handleOnSelect = (item) => {
-    // the item selected
-    console.log(item);
+    // console.log(item.id);
+    const route = `/detail/:${item.id}`;
+    history.push(route);
   };
 
   // const handleOnFocus = () => {
@@ -32,7 +35,6 @@ function SearchBar() {
       <ReactSearchAutocomplete
         placeholder={"Search for accommodations.."}
         items={items}
-        onSearch={handleOnSearch}
         onSelect={handleOnSelect}
         autoFocus
         formatResult={formatResult}

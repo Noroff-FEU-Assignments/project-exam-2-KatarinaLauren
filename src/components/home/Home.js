@@ -1,4 +1,4 @@
-import fetchAccommodations from "../../utilities/fetchAccommodations";
+import { fetchAccommodations } from "../../utilities/fetchAccommodations";
 import PageHeading from "../layout/PageHeading";
 import { Link } from "react-router-dom";
 import Hero from "../layout/Hero";

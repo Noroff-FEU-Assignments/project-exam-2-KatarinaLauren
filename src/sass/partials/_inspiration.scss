@@ -25,25 +25,9 @@
 }
 
 .cardgroup__card--wide {
+  border: none;
   width: 90%;
   @media (min-width: 768px) {
     width: 500px;
-  }
-  .accordion-button {
-    background-color: #fff;
-    font-family: "Open Sans";
-    height: 110px;
-    padding: 0.5rem;
-    &:focus {
-      box-shadow: none;
-    }
-  }
-  .accordion-button:not(.collapsed) {
-    color: $text-color;
-    background-color: #fff;
-    box-shadow: none;
-  }
-  .accordion-body {
-    background-color: #fff;
   }
 }

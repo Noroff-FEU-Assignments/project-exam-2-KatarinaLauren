@@ -1,3 +1,26 @@
-.accommodation_card {
-  flex-direction: row;
+.accommodation__card {
+  width: 250px;
+  margin: 2rem auto;
+  color: $text-color;
+  border: none;
+  @media (min-width: 768px) {
+    width: 65%;
+    max-width: 650px;
+  }
+
+  .card__text--location {
+    color: $secondary-color;
+  }
+  .card__text--rate {
+    font-weight: bold;
+  }
+  .h5 {
+    font-family: "Open Sans", sans-serif;
+    font-weight: bold;
+  }
+
+  .card-img-top {
+    height: 200px;
+    width: 250px;
+  }
 }

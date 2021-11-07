@@ -5,7 +5,7 @@ import Logo from "./Logo";
 function Footer() {
   return (
     <footer className="bg-primary text-center text-md-start p-2 position-relative">
-      <Container fluid>
+      <Container>
         <div className="d-flex flex-column flex-md-row justify-content-between align-items-center">
           <div className="m-3 align-self-center">
             <Logo breakPoint="md" />
@@ -54,7 +54,7 @@ function Footer() {
               </a>
             </li>
           </ul>
-          <div className=" align-self-center mb-5 pb-3 m-md-0 p-md-0 mt-3">
+          <div className="align-self-center mb-5 pb-3 m-md-0 p-md-0 mt-3 d-flex">
             <a href="#!" className="p-3">
               <i class="fab fa-facebook-f"></i>
             </a>

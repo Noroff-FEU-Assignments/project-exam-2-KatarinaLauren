@@ -26,7 +26,7 @@ AccommodationItem.propTypes = {
   name: PropTypes.string.isRequired,
   location: PropTypes.string.isRequired,
   rate: PropTypes.number.isRequired,
-  image: PropTypes.isRequired,
+  image: PropTypes.string.isRequired,
 };
 
 export default AccommodationItem;

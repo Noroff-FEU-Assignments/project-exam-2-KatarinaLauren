@@ -3,6 +3,7 @@ import { getFromStorage } from "../../utilities/localStorage/localStorageFunctio
 import AccommodationItem from "./AccommodationItem";
 import Alert from "react-bootstrap/Alert";
 import { BaseUrl } from "../../constants/api";
+import { filterData } from "../../utilities/filterFunctions";
 
 const url = BaseUrl;
 
@@ -34,7 +35,7 @@ function RenderAccommodations() {
 
   return (
     <div className="accommodations">
-      {data.map(function (acc) {
+      {data.filter(filterData).map(function (acc) {
         const imageUrl = acc.images[0].url;
         const image = url + imageUrl;
         const { id, name, location, room_rate } = acc;

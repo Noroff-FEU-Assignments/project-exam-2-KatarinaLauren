@@ -5,6 +5,7 @@ function Paragraph(props) {
     color: props.color,
     fontSize: props.fontSize,
     backgroundColor: props.bgColor,
+    fontWeight: props.fontWeight,
   };
   return (
     <p style={paragrahStyle} className={props.className}>
@@ -18,6 +19,7 @@ Paragraph.propTypes = {
   fontSize: PropTypes.string,
   bgColor: PropTypes.string,
   className: PropTypes.string,
+  fontWeight: PropTypes.string,
 };
 
 export default Paragraph;

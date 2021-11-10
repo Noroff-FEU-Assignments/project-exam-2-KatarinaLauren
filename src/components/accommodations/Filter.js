@@ -13,7 +13,7 @@ function Filters(props) {
           <Accordion.Header>Filters</Accordion.Header>
           <Accordion.Body>
             <Paragraph fontWeight={"bold"}>Facilities </Paragraph>
-            <Form>
+            <Form onReset={props.changeFunction}>
               <Form.Group className="mb-3 filter__facilities" controlId="formBasicCheckbox">
                 {data.map(function (name) {
                   return <Form.Check type="checkbox" name={name} label={name.charAt(0).toUpperCase() + name.slice(1)} onChange={props.changeFunction} />;

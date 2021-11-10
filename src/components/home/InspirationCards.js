@@ -9,7 +9,6 @@ const url = BaseUrl;
 
 function InspirationCards() {
   const { data, error, isLoaded } = GetData(url + "/inspirations");
-  console.log(data);
 
   if (error !== null) {
     return <div>Error: {error.message}</div>;

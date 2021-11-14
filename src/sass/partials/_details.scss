@@ -1,0 +1,43 @@
+.carousel-inner {
+  margin: 0;
+  width: 100%;
+}
+.details__carousel__image {
+  display: block;
+  height: 300px;
+  width: 100%;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  position: relative;
+
+  @media (min-width: 768px) {
+    height: 400px;
+  }
+  @media (min-width: 992px) {
+    height: 500px;
+  }
+}
+.details__facilities__container {
+  padding: 2em;
+  background-color: #fff;
+
+  i {
+    font-size: 3em;
+    color: $accent-color;
+  }
+}
+.details__facilities {
+  display: inline-block;
+  margin-right: 1em;
+  font-weight: bold;
+  color: $secondary-color;
+  @media (min-width: 768px) {
+    background-color: $accent-color;
+    padding: 1em;
+
+    border-radius: 25px;
+    width: 150px;
+    text-align: center;
+  }
+}

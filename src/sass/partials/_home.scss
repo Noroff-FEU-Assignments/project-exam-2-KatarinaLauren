@@ -1,4 +1,9 @@
-.home__paragraph {
+.home__div {
+  background-color: #fff;
+  padding-bottom: 1em;
+}
+
+.home__div__paragraph {
   font-weight: bold;
   font-size: 1rem;
   @media (min-width: 768px) {

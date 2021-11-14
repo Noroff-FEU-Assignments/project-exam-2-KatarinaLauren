@@ -7,7 +7,7 @@ import Contact from "./components/contact/Contact";
 import Admin from "./components/admin/Admin";
 import Footer from "./components/layout/Footer";
 import Inspiration from "./components/inspiration/Inspiration";
-import Details from "./components/accommodations/Details";
+import Details from "./components/accommodations/details/Details";
 import "./sass/style.scss";
 
 function App() {

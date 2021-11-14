@@ -27,14 +27,16 @@ function Home() {
           </Button>
         </Link>
       </Hero>
-      <Paragraph color={"#02A6B5"} bgColor={"#fff"} className={"text-center p-4 mb-4 home__paragraph"}>
-        Find your ideal accommodation in and around the city
-      </Paragraph>
-      <SearchBar />
+      <div className={"home__div"}>
+        <Paragraph color={"#02A6B5"} bgColor={"#fff"} className={"text-center p-4 mb-4 home__div__paragraph"}>
+          Find your ideal accommodation in and around the city
+        </Paragraph>
+        <SearchBar className={"mt-5"} />
+      </div>
       <Container>
         <h3 className="mt-5 mb-4">INSPIRATION</h3>
         <InspirationCards />
-        <h3 className="mt-5 mb-4">ACCOMMODATION</h3>
+        <h3 className="mt-5 mb-4">ACCOMMODATIONS</h3>
         <AccommodationOverview />
       </Container>
     </div>

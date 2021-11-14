@@ -1,11 +1,13 @@
 import { useState, useEffect } from "react";
 import { useParams, useHistory } from "react-router-dom";
-import { getFromStorage } from "../../utilities/localStorage/localStorageFunctions";
+import { getFromStorage } from "../../../utilities/localStorage/localStorageFunctions";
 import Alert from "react-bootstrap/Alert";
-import Container from "react-bootstrap/Container";
+// import Container from "react-bootstrap/Container";
 import Spinner from "react-bootstrap/Spinner";
 import Carousel from "react-bootstrap/Carousel";
-import { BaseUrl } from "../../constants/api";
+import { BaseUrl } from "../../../constants/api";
+import PageHeading from "../../layout/PageHeading";
+import Facilities from "./Facilities";
 
 function Details() {
   const [data, setData] = useState(null);
@@ -46,22 +48,25 @@ function Details() {
   }
 
   const images = data.images;
+  const facilities = data.facilities;
 
   return (
-    <Container>
+    <>
       <Carousel>
         {images.map(function (image) {
           return (
             <Carousel.Item>
-              <img className="d-block w-100" src={BaseUrl + image.url} alt={image.alternativeText} />
+              <div className="details__carousel__image" style={{ backgroundImage: `url(${BaseUrl + image.url})` }} alt={image.alternativeText} />
             </Carousel.Item>
           );
         })}
       </Carousel>
-
-      <h1>{data.name}</h1>
-      <p>{data.description}</p>
-    </Container>
+      <PageHeading className={"text-center mt-5"}>{data.name.toUpperCase()}</PageHeading>
+      <div className={"d-flex align-items-center justify-content-between m-3 details__facilities__container"}>
+        <i class="fas fa-check me-4"></i>
+        <Facilities accFacilities={facilities} />
+      </div>
+    </>
   );
 }
 

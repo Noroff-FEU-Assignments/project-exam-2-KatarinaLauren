@@ -1,8 +1,36 @@
-.filters__accordion {
-  width: 90%;
+.filters__container {
+  max-width: 90%;
   margin: 1rem auto;
+  border: none;
+  background-color: #fff;
 
   .accordion-button {
     height: 2rem;
+  }
+
+  .form-check {
+    padding: 0.3em;
+    .form-check-input {
+      margin-left: 1em;
+      margin-right: 0.5em;
+      padding: 0.5em;
+    }
+    .form-check-label {
+      padding: 0.1em;
+    }
+  }
+  @media (min-width: 992px) {
+    max-width: 400px;
+    padding: 2.5em;
+    margin-top: 2em;
+    .accordion-item {
+      border: none;
+    }
+    .accordion-button::after {
+      display: none;
+    }
+    .accordion-collapse {
+      display: block;
+    }
   }
 }

@@ -160,3 +160,19 @@ $navbar-light-active-color: #fff;
 // $navbar-light-brand-hover-color: $navbar-light-active-color !default;
 // $navbar-dark-brand-color: $navbar-dark-active-color !default;
 // $navbar-dark-brand-hover-color: $navbar-dark-active-color !default;
+
+// FORM Checkboxes
+
+$input-focus-bg: $accent-color;
+$input-focus-border-color: tint-color($accent-color, 50%);
+$input-focus-color: $accent-color;
+$input-focus-width: $accent-color;
+$input-focus-box-shadow: $accent-color;
+
+$form-check-input-border: 2px solid $accent-color;
+$form-check-input-focus-border: tint-color($accent-color, 50%);
+$form-check-input-focus-box-shadow: tint-color($accent-color, 50%);
+
+$form-check-input-checked-color: #fff;
+$form-check-input-checked-bg-color: $accent-color;
+$form-check-input-checked-border-color: tint-color($accent-color, 50%);

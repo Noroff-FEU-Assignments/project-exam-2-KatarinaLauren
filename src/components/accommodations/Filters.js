@@ -11,8 +11,9 @@ function Filters(props) {
       {/* SMALL SCREENS  */}
       <Accordion className={"filters__container"}>
         <Accordion.Item eventKey="0">
-          <Accordion.Header>Filters</Accordion.Header>
+          <Accordion.Header className={"d-lg-none"}>Filters</Accordion.Header>
           <Accordion.Body>
+            <h5 className={"d-none d-lg-block mb-4"}>Filters</h5>
             <Paragraph>Find your perfect match by choosing what is important to you! </Paragraph>
             <Paragraph fontWeight={"bold"}>Facilities </Paragraph>
             <Form onReset={props.changeFunction}>
@@ -20,7 +21,7 @@ function Filters(props) {
                 return <Form.Check type="checkbox" id={name} name={name} label={name.charAt(0).toUpperCase() + name.slice(1)} onChange={props.changeFunction} />;
               })}
               <div className={"d-flex justify-content-center justify-content-lg-end mb-3"}>
-                <Button variant="outline-info" className="mt-4" type="reset" onClick={props.resetFunction}>
+                <Button variant="outline-info" className="mt-4" onClick={props.resetFunction}>
                   Clear all
                 </Button>
               </div>
@@ -28,23 +29,6 @@ function Filters(props) {
           </Accordion.Body>
         </Accordion.Item>
       </Accordion>
-
-      {/* LARGE SCREENS  */}
-      {/* <div className={"d-none d-lg-block filters__container"}>
-        <h5>Filters</h5>
-        <Paragraph>Find your perfect match by choosing what is important to you! </Paragraph>
-        <Paragraph fontWeight={"bold"}>Facilities </Paragraph>
-        <Form onReset={props.changeFunction}>
-          {data.map(function (name) {
-            return <Form.Check type="checkbox" id={name} name={name} label={name.charAt(0).toUpperCase() + name.slice(1)} onChange={props.changeFunction} />;
-          })}
-          <div className={"d-flex justify-content-end"}>
-            <Button variant="outline-info" className="mt-4" type="reset" onClick={props.resetFunction}>
-              Clear all
-            </Button>
-          </div>
-        </Form>
-      </div> */}
     </div>
   );
 }

@@ -48,20 +48,23 @@ class RenderAccommodation extends React.Component {
     }
   }
 
-  resetFilters() {
-    this.setState({
-      facilitiesFilter: {},
-    });
+  filterChange(e) {
+    if (e.target.name) {
+      this.setState({ [e.target.name]: e.target.checked });
+
+      let facilitiesList = this.state.facilitiesFilter;
+      facilitiesList[e.target.name] = e.target.checked;
+
+      this.setState({
+        facilitiesFilter: facilitiesList,
+      });
+    }
   }
 
-  filterChange(e) {
-    this.setState({ [e.target.name]: e.target.checked });
-
-    let facilitiesList = this.state.facilitiesFilter;
-    facilitiesList[e.target.name] = e.target.checked;
-
+  resetFilters(e) {
+    e.target.form.reset();
     this.setState({
-      facilitiesFilter: facilitiesList,
+      facilitiesFilter: {},
     });
   }
 

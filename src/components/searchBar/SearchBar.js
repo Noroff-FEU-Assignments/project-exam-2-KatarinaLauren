@@ -18,7 +18,7 @@ function SearchBar() {
   // };
   const handleOnSelect = (item) => {
     // console.log(item.id);
-    const route = `/detail/:${item.id}`;
+    const route = `/detail/${item.id}`;
     history.push(route);
   };
 

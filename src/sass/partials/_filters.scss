@@ -22,12 +22,10 @@
   @media (min-width: 992px) {
     max-width: 400px;
     padding: 2.5em;
+    padding-top: 1em;
     margin-top: 2em;
     .accordion-item {
       border: none;
-    }
-    .accordion-button::after {
-      display: none;
     }
     .accordion-collapse {
       display: block;

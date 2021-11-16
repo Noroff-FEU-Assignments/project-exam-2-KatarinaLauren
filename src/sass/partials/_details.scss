@@ -1,3 +1,5 @@
+// IMAGECAROUSEL
+
 .carousel-inner {
   margin: 0;
   width: 100%;
@@ -18,6 +20,9 @@
     height: 500px;
   }
 }
+
+// FACILITIES
+
 .details__container__facilities {
   padding: 2em;
   background-color: #fff;
@@ -60,6 +65,22 @@
   }
 }
 
+.details__facilities--false {
+  display: none;
+  @media (min-width: 992px) {
+    display: block;
+    background-color: $light-color;
+    padding: 0.9em;
+  }
+}
+
+// INFO, DESCRIPTION, CONTACT
+
+.details__paragraph__label {
+  color: $primary-color;
+  font-weight: 600;
+}
+
 .details__container__info,
 .details__container__description,
 .details__container__contact {
@@ -94,16 +115,29 @@
   }
 }
 .details__container__contact {
-  width: 400px;
-  padding: 2em;
-  max-width: 100%;
+  width: 95%;
+  @media (min-width: 576px) {
+    width: 100%;
+  }
+  // @media (min-width: 768px) {
+  //   width: 650px;
+  // }
+  // @media (min-width: 992px) {
+  //   width: 450px;
+  // }
+
   i {
     color: $secondary-color;
     display: inline-block;
     margin-right: 1em;
   }
 }
-.label {
-  color: $primary-color;
-  font-weight: 600;
+
+.details__map {
+  margin: 0 auto;
+  i {
+    color: $cta-color;
+    font-size: 2.5em;
+    padding-bottom: 1em;
+  }
 }

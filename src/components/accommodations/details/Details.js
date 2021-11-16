@@ -31,7 +31,6 @@ function Details() {
       if (accommodations.length > 0) {
         const accDetails = accommodations.filter((acc) => acc.id === parseInt(id));
         setData(accDetails[0]);
-        console.log(data);
       } else {
         setError("An error occured");
       }
@@ -54,7 +53,7 @@ function Details() {
 
   const images = data.images;
   const facilities = data.facilities;
-
+  console.log(data);
   return (
     <>
       <Carousel>
@@ -68,12 +67,12 @@ function Details() {
       </Carousel>
       <Container>
         <PageHeading className={"text-center mt-5"}>{data.name.toUpperCase()}</PageHeading>
-        <div className={"d-flex align-items-center justify-content-between details__facilities__container"}>
-          <i class="fas fa-check me-4 d-md-none"></i>
+
+        <div className={"d-flex align-items-center justify-content-center details__container__facilities"}>
+          <i class="fas fa-check me-4 d-lg-none"></i>
           <Facilities accFacilities={facilities} />
         </div>
-
-        <Button variant="success" className="d-block m-auto mt-4" size="lg">
+        <Button variant="success" className="d-block d-lg-none m-auto mt-4" size="lg">
           Book a room
         </Button>
         <div className={"mt-5 details__container__info text-center"}>
@@ -90,8 +89,9 @@ function Details() {
             {data.room_rate} NOK
           </Paragraph>
         </div>
-        <div className={"d-flex flex-column flex-lg-row justify-content-center"}>
-          <Accordion className={"mt-5 details__container__description"}>
+
+        <div className={"d-flex flex-column flex-lg-row align-items-center align-items-lg-start justify-content-center mt-5"}>
+          <Accordion className={"mt-3 mt-lg-0 details__container__description"}>
             <Accordion.Item eventKey="0">
               <Accordion.Header className={"d-md-none"}>Description</Accordion.Header>
               <Accordion.Body>
@@ -103,11 +103,11 @@ function Details() {
             </Accordion.Item>
           </Accordion>
           <div>
-            <Button variant="success" className="d-block m-auto mt-4" size="lg">
+            <Button variant="success" className="d-none d-lg-block m-auto pe-5 ps-5" size="lg">
               Book a room
             </Button>
             <div className={"details__container__contact"}>
-              <Paragraph color={"#02a6b5"} fontWeight={"bold"} className={"d-none d-md-block"}>
+              <Paragraph color={"#02a6b5"} fontWeight={"bold"}>
                 Contact information
               </Paragraph>
               <Paragraph>
@@ -124,7 +124,7 @@ function Details() {
                 <i class="fas fa-envelope"></i>
                 {data.email}
               </Paragraph>
-              <Paragraph color={"#02a6b5"} fontWeight={"bold"} className={"d-none d-md-block"}>
+              <Paragraph color={"#02a6b5"} fontWeight={"bold"} className={"mt-4"}>
                 Location
               </Paragraph>
               <Location latitude={data.latitude} longitude={data.longitude} />

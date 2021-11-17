@@ -7,7 +7,7 @@ function ImageCarousel(props) {
     <Carousel>
       {images.map(function (image) {
         return (
-          <Carousel.Item>
+          <Carousel.Item key={image.id}>
             <div className="details__carousel__image" style={{ backgroundImage: `url(${BaseUrl + image.url})` }} alt={image.alternativeText} />
           </Carousel.Item>
         );

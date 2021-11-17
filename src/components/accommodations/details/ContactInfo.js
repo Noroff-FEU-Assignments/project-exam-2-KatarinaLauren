@@ -8,17 +8,17 @@ function ContactInfo(props) {
       </Paragraph>
 
       <Paragraph>
-        <i class="fas fa-map-marker-alt"></i>
+        <i className="fas fa-map-marker-alt"></i>
         {props.address}
       </Paragraph>
 
       <Paragraph>
-        <i class="fas fa-phone"></i>
+        <i className="fas fa-phone"></i>
         {props.phone}
       </Paragraph>
 
       <Paragraph>
-        <i class="fas fa-envelope"></i>
+        <i className="fas fa-envelope"></i>
         {props.email}
       </Paragraph>
     </div>

@@ -59,10 +59,10 @@ function Details() {
 
   const hotelImages = data.images;
   const facilities = data.facilities;
-  console.log(data);
+  // console.log(data);
   return (
     <>
-      <BookingModal show={show} closeFunction={handleClose} />
+      <BookingModal show={show} closeFunction={handleClose} accName={data.name} />
       <ImageCarousel images={hotelImages} />
       <Container>
         <PageHeading className={"text-center mt-5"}>{data.name.toUpperCase()}</PageHeading>

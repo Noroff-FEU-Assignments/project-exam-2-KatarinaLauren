@@ -3,4 +3,28 @@
     display: block;
     width: 100%;
   }
+  .booking__form__dates {
+    @media (min-width: 768px) {
+      width: 45%;
+    }
+  }
+  .booking__form__select {
+    width: 50%;
+    select {
+      @media (min-width: 768px) {
+        width: 50%;
+      }
+    }
+  }
+}
+.formError {
+  color: red;
+}
+.booking__modal {
+  .alert-light {
+    background-color: #fff !important;
+  }
+  a {
+    color: $primary-color;
+  }
 }

@@ -1,12 +1,12 @@
 import React from "react";
 import PageHeading from "../layout/PageHeading";
+import BookingForm from "./BookingForm";
 
 function Booking() {
   return (
     <div>
-      <PageHeading color={"#000"} fontSize={"3rem"}>
-        BOOKING ENQUIRIES
-      </PageHeading>
+      <PageHeading className={"text-center mt-5"}>BOOKING ENQUIRIES</PageHeading>
+      <BookingForm />
     </div>
   );
 }

@@ -28,7 +28,7 @@ function Home() {
         </Link>
       </Hero>
       <div className={"home__div"}>
-        <Paragraph color={"#02A6B5"} bgColor={"#fff"} className={"text-center p-4 mb-4 home__div__paragraph"}>
+        <Paragraph color={"#02A6B5"} className={"text-center p-4 mb-1 home__div__paragraph"}>
           Find your ideal accommodation in and around the city
         </Paragraph>
         <SearchBar className={"mt-5"} />

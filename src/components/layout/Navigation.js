@@ -30,6 +30,11 @@ function Navigation() {
               </NavLink>
             </Nav.Link>
             <Nav.Link eventKey="4">
+              <NavLink to="/inspiration" className="ms-3 nav-link">
+                INSPIRATION
+              </NavLink>
+            </Nav.Link>
+            <Nav.Link eventKey="5">
               <NavLink to="/contact" className="ms-3 me-lg-5 nav-link">
                 CONTACT
               </NavLink>

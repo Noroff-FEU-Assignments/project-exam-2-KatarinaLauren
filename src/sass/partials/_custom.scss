@@ -163,16 +163,41 @@ $navbar-light-active-color: #fff;
 
 // FORM Checkboxes
 
-$input-focus-bg: $accent-color;
+// $input-focus-bg: $accent-color;
 $input-focus-border-color: tint-color($accent-color, 50%);
-$input-focus-color: $accent-color;
-$input-focus-width: $accent-color;
+// $input-focus-color: $accent-color;
+// $input-focus-width: $accent-color;
+$input-focus-box-shadow: $accent-color;
+
+// $input-bg: $body-bg !default;
+// $input-disabled-bg: $gray-200 !default;
+// $input-disabled-border-color: null !default;
+
+// $input-color: $body-color !default;
+// $input-border-color: $gray-400 !default;
+// $input-border-width: $input-btn-border-width !default;
+// $input-box-shadow: $box-shadow-inset !default;
+
+// $input-border-radius: $border-radius !default;
+// $input-border-radius-sm: $border-radius-sm !default;
+// $input-border-radius-lg: $border-radius-lg !default;
+
+// $input-focus-bg: $input-bg !default;
+$input-focus-border-color: $accent-color;
+// $input-focus-color: $accent-color;
+// $input-focus-width: $input-btn-focus-width !default;
 $input-focus-box-shadow: $accent-color;
 
 $form-check-input-border: 2px solid $accent-color;
-$form-check-input-focus-border: tint-color($accent-color, 50%);
-$form-check-input-focus-box-shadow: tint-color($accent-color, 50%);
+$form-check-input-focus-border: $accent-color;
+$form-check-input-focus-box-shadow: $accent-color;
 
 $form-check-input-checked-color: #fff;
 $form-check-input-checked-bg-color: $accent-color;
-$form-check-input-checked-border-color: tint-color($accent-color, 50%);
+$form-check-input-checked-border-color: $accent-color;
+
+$input-btn-focus-width: 0.25rem !default;
+$input-focus-width: $input-btn-focus-width !default;
+$form-select-focus-width: $input-focus-width !default;
+$form-select-focus-box-shadow: 0 0 0 $form-select-focus-width $accent-color;
+$form-select-focus-border-color: darken($accent-color, 10%);

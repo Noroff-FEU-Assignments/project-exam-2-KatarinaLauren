@@ -1,13 +1,16 @@
 .booking__form {
+  background-color: #fff;
+  padding: 1em;
   input {
     display: block;
     width: 100%;
   }
   .booking__form__dates {
     @media (min-width: 768px) {
-      width: 45%;
+      width: 250px;
     }
   }
+
   .booking__form__select {
     width: 50%;
     select {
@@ -17,14 +20,25 @@
     }
   }
 }
+
 .formError {
   color: red;
 }
-.booking__modal {
-  .alert-light {
-    background-color: #fff !important;
-  }
+
+.booking__form__alert {
+  border: none;
   a {
     color: $primary-color;
+    font-weight: bold;
+    &:hover {
+      opacity: 70%;
+    }
   }
+}
+.booking__message {
+  background-color: #fff;
+  padding: 1em 0;
+}
+.booking__message__button {
+  width: 190px;
 }

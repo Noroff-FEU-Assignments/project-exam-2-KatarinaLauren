@@ -4,11 +4,15 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import { useState } from "react";
 import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
-import FormError from "./FormError";
+import FormError from "../../utilities/FormError";
 import Paragraph from "../layout/Paragraph";
 import SuccessMessage from "./SuccessMessage";
 import { getFromStorage } from "../../utilities/localStorage/localStorageFunctions";
+import { BaseUrl } from "../../constants/api";
+import { postData } from "../../utilities/PostData";
 
+const url = BaseUrl;
+const enquiryUrl = url + "/enquiries";
 const items = getFromStorage();
 
 const date = new Date();
@@ -20,76 +24,86 @@ dayAfterTomorrow.setDate(tomorrow.getDate() + 1);
 const dayAfterTomorrowsDate = dayAfterTomorrow.toISOString().substring(0, 10);
 
 const schema = yup.object().shape({
-  accommodation: yup.string(),
-  checkin: yup.date().nullable().required().min(date),
-  checkout: yup.date().nullable().required().min(tomorrow),
-  noOfGuest: yup.number(),
-  name: yup.string().min(4, "Must be minimum 4 characters long").required("Please enter your name"),
+  accommodation: yup.string().required(),
+  checkin_date: yup.date().nullable().required().min(date),
+  checkout_date: yup.date().nullable().required().min(tomorrow),
+  number_of_guests: yup.number(),
+  customer_name: yup.string().min(4, "Must be minimum 4 characters long").required("Please enter your name"),
   email: yup.string().email("Please enter a valid email address").required("Please enter an email address"),
-  phone: yup.number().required(),
+  phone_number: yup.number().required(),
   message: yup.string(),
 });
 
-function BookingForm(props) {
+function BookingForm() {
   const {
     register,
     handleSubmit,
+    reset,
     formState: { errors },
   } = useForm({
     resolver: yupResolver(schema),
   });
-  const [data, setData] = useState(null);
-  const [accommodationInput, setaccommodationInput] = useState("");
 
-  if (props.accName) {
-    setaccommodationInput(<Form.Control {...register("accommodation")} value={props.accName} readOnly />);
-  }
-  if (!props.accName) {
-    setaccommodationInput(
-      <Form.Select aria-label="Select accommodation" {...register("accommodation")}>
-        {items.map(function (item) {
-          console.log(
-            <option key={item.id} value={item.id}>
-              {item.name}
-            </option>
-          );
-        })}
-      </Form.Select>
-    );
-  }
+  const [data, setData] = useState(null);
 
   function onSubmit(values) {
     setData(values);
-    console.log(values);
+    postData(values, enquiryUrl);
   }
 
-  // console.log(errors);
+  function resetData() {
+    setData(null);
+    reset();
+  }
+
+  const accommodationOptions = items.map(function (item) {
+    return (
+      <option key={item.id} value={item.name}>
+        {item.name}
+      </option>
+    );
+  });
+
   if (data) {
-    return <SuccessMessage />;
+    return (
+      <div className={"booking__message d-flex flex-column justify-content-center mb-md-5 mt-md-4"}>
+        <SuccessMessage />
+        <Button variant="success" onClick={resetData} className="booking__message__button m-auto mb-4">
+          Make a new enquiry
+        </Button>
+      </div>
+    );
   } else {
     return (
-      <>
+      <div className={"booking__form"}>
         <Paragraph className={"fst-italic"}>The booking department of your chosen accommodation will answer your enquiry within 24 hours.</Paragraph>
-        <Form onSubmit={handleSubmit(onSubmit)} className={"booking__form"}>
+
+        <Form onSubmit={handleSubmit(onSubmit)}>
           <Form.Group className="mb-2" controlId="controlInput1">
             <Form.Label>Accommodation</Form.Label>
-            {accommodationInput}
+            <Form.Select aria-label="Select accommodation" {...register("accommodation")}>
+              <option value={""}>Select accommodation</option>
+              {accommodationOptions}
+              {errors.accommodation && <FormError>{"Please select your accommodation"}</FormError>}
+            </Form.Select>
           </Form.Group>
+          <div className=" d-flex flex-column flex-md-row mb-3 justify-content-evenly">
+            <Form.Group className="booking__form__dates" controlId="controlInput1">
+              <Form.Label>Check-in date</Form.Label>
+              <Form.Control type="date" name="checkin" error={errors.checkin} {...register("checkin_date")} defaultValue={tomorrowsDate} />
+              {errors.checkin && <FormError>{"Check-in date is required and must be a future date"}</FormError>}
+            </Form.Group>
 
-          <Form.Group className="m-auto mb-3 booking__form__dates d-block d-md-inline-block ms-md-3" controlId="controlInput1">
-            <Form.Label>Check-in date</Form.Label>
-            <Form.Control type="date" name="checkin" error={errors.checkin} {...register("checkin")} defaultValue={tomorrowsDate} />
-            {errors.checkin && <FormError>{"Check-in date is required and must be a future date"}</FormError>}
-          </Form.Group>
-          <Form.Group className="m-auto mb-3 booking__form__dates d-block d-md-inline-block ms-md-3" controlId="controlInput1">
-            <Form.Label>Check-out date</Form.Label>
-            <Form.Control type="date" name="checkout" error={errors.checkin} {...register("checkout")} defaultValue={dayAfterTomorrowsDate} />
-            {errors.checkout && <FormError>{"Check-in date is required and must be a future date"}</FormError>}
-          </Form.Group>
+            <Form.Group className="booking__form__dates" controlId="controlInput1">
+              <Form.Label>Check-out date</Form.Label>
+              <Form.Control type="date" name="checkout" error={errors.checkin} {...register("checkout_date")} defaultValue={dayAfterTomorrowsDate} />
+              {errors.checkout && <FormError>{"Check-in date is required and must be a future date"}</FormError>}
+            </Form.Group>
+          </div>
 
           <Form.Group className="booking__form__select m-auto mb-2 text-center" controlId="controlInput1">
             <Form.Label>Number of guests</Form.Label>
-            <Form.Select aria-label="Select number of guests" {...register("noOfGuest")} className="m-auto">
+            <Form.Select aria-label="Select number of guests" {...register("number_of_guests")} className="m-auto">
               <option value="1">1</option>
               <option value="2">2</option>
               <option value="3">3</option>
@@ -105,7 +119,7 @@ function BookingForm(props) {
 
           <Form.Group className="mb-2" controlId="ControlInput1">
             <Form.Label>Full name*</Form.Label>
-            <Form.Control {...register("name")} name="name" type="text" />
+            <Form.Control {...register("customer_name")} name="customer_name" type="text" />
             {errors.name && <FormError>{errors.name.message}</FormError>}
           </Form.Group>
 
@@ -117,7 +131,7 @@ function BookingForm(props) {
 
           <Form.Group className="mb-2" controlId="exampleForm.ControlInput1">
             <Form.Label>Phone Number*</Form.Label>
-            <Form.Control {...register("phone")} />
+            <Form.Control {...register("phone_number")} />
             {errors.phone && <FormError>{"Please enter a valid phone number"}</FormError>}
           </Form.Group>
 
@@ -127,11 +141,11 @@ function BookingForm(props) {
             {errors.message && <FormError>{errors.message.message}</FormError>}
           </Form.Group>
 
-          <Button variant="primary" type="submit">
+          <Button variant="primary" type="submit" className="m-3 ms-auto pe-5 ps-5">
             Submit
           </Button>
         </Form>
-      </>
+      </div>
     );
   }
 }

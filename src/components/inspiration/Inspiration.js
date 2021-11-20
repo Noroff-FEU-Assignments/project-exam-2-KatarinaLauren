@@ -9,7 +9,7 @@ const url = BaseUrl;
 
 function Inspiration() {
   const { data, error, isLoaded } = GetData(url + "/inspirations");
-  console.log(data);
+  // console.log(data);
 
   if (error !== null) {
     return <div>Error: {error.message}</div>;
@@ -28,7 +28,7 @@ function Inspiration() {
       </PageHeading>
       <Container className="d-flex flex-wrap cardgroup">
         {data.map((item) => (
-          <Card className="m-auto mt-5 mb-5 cardgroup__card--wide align-self-start">
+          <Card key={item.id} className="m-auto mt-5 mb-5 cardgroup__card--wide align-self-start">
             <Card.Img variant="top" src={url + item.image.url} />
             <Card.Body>
               <Card.Title>{item.title}</Card.Title>

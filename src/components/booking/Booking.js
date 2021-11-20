@@ -12,7 +12,7 @@ function Booking() {
         <PageHeading color={"#fff"}>BOOKING ENQUIRIES</PageHeading>
       </Hero>
       <Container className="booking__form__container mt-4 mb-5">
-        <h5 className="text-center">Submit your booking enquiry</h5>
+        <h5 className="text-center booking__form__heading">Booking enquiry</h5>
         <BookingForm />
       </Container>
     </div>

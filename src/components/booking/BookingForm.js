@@ -4,12 +4,13 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import { useState } from "react";
 import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
-import FormError from "../../utilities/FormError";
+import FormError from "../layout/FormError";
 import Paragraph from "../layout/Paragraph";
 import SuccessMessage from "./SuccessMessage";
 import { getFromStorage } from "../../utilities/localStorage/localStorageFunctions";
 import { BaseUrl } from "../../constants/api";
-import { postData } from "../../utilities/PostData";
+import axios from "axios";
+import ErrorMessage from "../layout/ErrorMessage";
 
 const url = BaseUrl;
 const enquiryUrl = url + "/enquiries";
@@ -45,6 +46,22 @@ function BookingForm() {
   });
 
   const [data, setData] = useState(null);
+  const [error, setError] = useState(null);
+
+  function postData(data, url) {
+    const formData = new FormData();
+    formData.append("data", JSON.stringify(data));
+
+    axios
+      .post(url, formData)
+      .then((response) => {
+        console.log(response);
+      })
+      .catch((error) => {
+        console.log(error);
+        setError(error);
+      });
+  }
 
   function onSubmit(values) {
     setData(values);
@@ -53,6 +70,7 @@ function BookingForm() {
 
   function resetData() {
     setData(null);
+    setError(null);
     reset();
   }
 
@@ -64,7 +82,11 @@ function BookingForm() {
     );
   });
 
-  if (data) {
+  if (error !== null) {
+    return <ErrorMessage />;
+  }
+
+  if (data && error === null) {
     return (
       <div className={"booking__message d-flex flex-column justify-content-center mb-md-5 mt-md-4"}>
         <SuccessMessage />

@@ -5,6 +5,10 @@
   @media (min-width: 768px) {
     padding: 2em;
   }
+  .booking__form__heading {
+    padding-bottom: 1em;
+    border-bottom: 1px solid $light-color;
+  }
 }
 .booking__container {
   .hero__text {

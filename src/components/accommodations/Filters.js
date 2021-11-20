@@ -17,7 +17,7 @@ function Filters(props) {
             <Paragraph fontWeight={"bold"}>Facilities </Paragraph>
             <Form onReset={props.changeFunction}>
               {data.map(function (name) {
-                return <Form.Check type="checkbox" id={name} name={name} label={name.charAt(0).toUpperCase() + name.slice(1)} onChange={props.changeFunction} />;
+                return <Form.Check type="checkbox" key={name} id={name} name={name} label={name.charAt(0).toUpperCase() + name.slice(1)} onChange={props.changeFunction} />;
               })}
               <div className={"d-flex justify-content-center justify-content-lg-end mb-3"}>
                 <Button variant="outline-info" className="mt-4" onClick={props.resetFunction}>

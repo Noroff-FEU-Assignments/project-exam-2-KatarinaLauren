@@ -1,0 +1,9 @@
+.errormessage__alert {
+  color: $text-color;
+  h5 {
+    color: $text-color;
+  }
+  .errormessage__alert--bold {
+    font-weight: bold;
+  }
+}

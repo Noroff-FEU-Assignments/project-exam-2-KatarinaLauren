@@ -5,8 +5,8 @@ function Hero(props) {
     backgroundImage: `url(${props.image})`,
   };
   return (
-    <div class="hero__image text-center" style={heroStyle}>
-      <div class="hero__text">{props.children}</div>
+    <div className="hero__image text-center" style={heroStyle}>
+      <div className="hero__text">{props.children}</div>
     </div>
   );
 }

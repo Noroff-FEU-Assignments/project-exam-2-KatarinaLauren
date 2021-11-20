@@ -4,6 +4,7 @@ import Spinner from "react-bootstrap/Spinner";
 import { Link } from "react-router-dom";
 import { GetData } from "../../utilities/GetData";
 import { BaseUrl } from "../../constants/api";
+import ErrorMessage from "../layout/ErrorMessage";
 
 const url = BaseUrl;
 
@@ -11,7 +12,7 @@ function InspirationCards() {
   const { data, error, isLoaded } = GetData(url + "/inspirations");
 
   if (error !== null) {
-    return <div>Error: {error.message}</div>;
+    return <ErrorMessage />;
   }
   if (!isLoaded) {
     return (

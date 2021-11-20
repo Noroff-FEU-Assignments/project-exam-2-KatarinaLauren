@@ -5,14 +5,15 @@ import { useState } from "react";
 import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
 import Container from "react-bootstrap/Container";
-import FormError from "../../utilities/FormError";
+import FormError from "../layout/FormError";
 import ContactMessage from "./ContactMessage";
 import { Link } from "react-router-dom";
 import { BaseUrl } from "../../constants/api";
-import { postData } from "../../utilities/PostData";
+import axios from "axios";
+import ErrorMessage from "../layout/ErrorMessage";
 
 const url = BaseUrl;
-const messagesUrl = url + "/messages";
+const messagesUrl = url + "/messsages";
 
 const schema = yup.object().shape({
   name: yup.string().min(4, "Must be minimum 4 characters long").required("Please enter your name"),
@@ -32,6 +33,22 @@ function ContactForm() {
   });
 
   const [data, setData] = useState(null);
+  const [error, setError] = useState(null);
+
+  function postData(data, url) {
+    const formData = new FormData();
+    formData.append("data", JSON.stringify(data));
+
+    axios
+      .post(url, formData)
+      .then((response) => {
+        console.log(response);
+      })
+      .catch((error) => {
+        console.log(error);
+        setError(error);
+      });
+  }
 
   function onSubmit(values) {
     setData(values);
@@ -40,10 +57,15 @@ function ContactForm() {
 
   function resetData() {
     setData(null);
+    setError(null);
     reset();
   }
 
-  if (data) {
+  if (error !== null) {
+    return <ErrorMessage />;
+  }
+
+  if (data && error === null) {
     return (
       <Container className="contact__form mb-5 mt-5">
         <div className={"booking__message d-flex flex-column justify-content-center mb-md-5 mt-md-4"}>
@@ -62,50 +84,49 @@ function ContactForm() {
         </div>
       </Container>
     );
-  } else {
-    return (
-      <Container className="contact__form mb-5 p-3 pt-1 mt-5">
-        <ContactMessage>
-          <h5>We at Holidaze would love to hear from you!</h5>
-          <div className="text-start mt-3">
-            <p>Please use the form below to get in touch with us. We will get back to you as soon as possible after we recieve your message.</p>
-            <p>
-              For booking enquiries - kindly use the form found on <Link to="/booking">the bookings page</Link>
-            </p>
-          </div>
-        </ContactMessage>
-        <Form onSubmit={handleSubmit(onSubmit)}>
-          <Form.Group className="mb-2" controlId="ControlInput1">
-            <Form.Label>Full name*</Form.Label>
-            <Form.Control {...register("name")} name="name" type="text" />
-            {errors.name && <FormError>{errors.name.message}</FormError>}
-          </Form.Group>
-
-          <Form.Group className="mb-2" controlId="exampleForm.ControlInput1">
-            <Form.Label>Email*</Form.Label>
-            <Form.Control {...register("email")} />
-            {errors.email && <FormError>{errors.email.message}</FormError>}
-          </Form.Group>
-
-          <Form.Group className="mb-2" controlId="exampleForm.ControlInput1">
-            <Form.Label>Phone Number*</Form.Label>
-            <Form.Control {...register("phone")} />
-            {errors.phone && <FormError>{"Please enter a valid phone number"}</FormError>}
-          </Form.Group>
-
-          <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
-            <Form.Label>Message</Form.Label>
-            <Form.Control as="textarea" rows={5} {...register("message")} />
-            {errors.message && <FormError>{errors.message.message}</FormError>}
-          </Form.Group>
-
-          <Button variant="primary" type="submit" className="m-3 ms-auto ps-5 pe-5">
-            Send
-          </Button>
-        </Form>
-      </Container>
-    );
   }
+  return (
+    <Container className="contact__form mb-5 p-3 pt-1 mt-5">
+      <ContactMessage>
+        <h5>We at Holidaze would love to hear from you!</h5>
+        <div className="text-start mt-3">
+          <p>Please use the form below to get in touch with us. We will get back to you as soon as possible after we recieve your message.</p>
+          <p>
+            For booking enquiries - kindly use the form found on <Link to="/booking">the bookings page</Link>
+          </p>
+        </div>
+      </ContactMessage>
+      <Form onSubmit={handleSubmit(onSubmit)}>
+        <Form.Group className="mb-2" controlId="ControlInput1">
+          <Form.Label>Full name*</Form.Label>
+          <Form.Control {...register("name")} name="name" type="text" />
+          {errors.name && <FormError>{errors.name.message}</FormError>}
+        </Form.Group>
+
+        <Form.Group className="mb-2" controlId="exampleForm.ControlInput1">
+          <Form.Label>Email*</Form.Label>
+          <Form.Control {...register("email")} />
+          {errors.email && <FormError>{errors.email.message}</FormError>}
+        </Form.Group>
+
+        <Form.Group className="mb-2" controlId="exampleForm.ControlInput1">
+          <Form.Label>Phone Number*</Form.Label>
+          <Form.Control {...register("phone")} />
+          {errors.phone && <FormError>{"Please enter a valid phone number"}</FormError>}
+        </Form.Group>
+
+        <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
+          <Form.Label>Message</Form.Label>
+          <Form.Control as="textarea" rows={5} {...register("message")} />
+          {errors.message && <FormError>{errors.message.message}</FormError>}
+        </Form.Group>
+
+        <Button variant="primary" type="submit" className="m-3 ms-auto ps-5 pe-5">
+          Send
+        </Button>
+      </Form>
+    </Container>
+  );
 }
 
 export default ContactForm;

@@ -1,10 +1,11 @@
 import { GetData } from "./GetData";
 import { BaseUrl } from "../constants/api";
 import { saveToStorage } from "./localStorage/localStorageFunctions";
+import { accommodationKey } from "../constants/keys";
 
 const url = BaseUrl;
 
 export function fetchAccommodations() {
   const { data } = GetData(url + "/accommodations");
-  saveToStorage(data);
+  saveToStorage(accommodationKey, data);
 }

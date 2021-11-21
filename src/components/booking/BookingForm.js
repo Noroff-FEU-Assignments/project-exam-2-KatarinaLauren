@@ -11,10 +11,11 @@ import { getFromStorage } from "../../utilities/localStorage/localStorageFunctio
 import { BaseUrl } from "../../constants/api";
 import axios from "axios";
 import ErrorMessage from "../layout/ErrorMessage";
+import { accommodationKey } from "../../constants/keys";
 
 const url = BaseUrl;
 const enquiryUrl = url + "/enquiries";
-const items = getFromStorage();
+const items = getFromStorage(accommodationKey);
 
 const date = new Date();
 const tomorrow = new Date(date);

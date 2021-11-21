@@ -6,6 +6,7 @@ import Container from "react-bootstrap/Container";
 import Spinner from "react-bootstrap/Spinner";
 import { BaseUrl } from "../../constants/api";
 import Filters from "./Filters";
+import { accommodationKey } from "../../constants/keys";
 
 const url = BaseUrl;
 
@@ -27,7 +28,7 @@ class RenderAccommodation extends React.Component {
   }
 
   componentDidMount() {
-    const accommodations = getFromStorage();
+    const accommodations = getFromStorage(accommodationKey);
     if (accommodations.length > 0) {
       const facilities = accommodations[0].facilities;
       const facilityNames = Object.keys(facilities);

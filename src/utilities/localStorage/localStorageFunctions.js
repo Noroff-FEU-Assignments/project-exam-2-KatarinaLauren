@@ -1,9 +1,9 @@
-export function saveToStorage(data) {
-  localStorage.setItem("accommodations", JSON.stringify(data));
+export function saveToStorage(key, data) {
+  localStorage.setItem(key, JSON.stringify(data));
 }
 
-export function getFromStorage() {
-  const storageData = localStorage.getItem("accommodations");
+export function getFromStorage(key) {
+  const storageData = localStorage.getItem(key);
   if (storageData === null) {
     return [];
   } else {

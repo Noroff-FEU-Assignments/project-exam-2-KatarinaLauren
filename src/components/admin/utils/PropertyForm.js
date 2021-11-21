@@ -10,6 +10,7 @@ import Paragraph from "../../layout/Paragraph";
 // import { BaseUrl } from "../../constants/api";
 import { Link } from "react-router-dom";
 import { getFromStorage } from "../../../utilities/localStorage/localStorageFunctions";
+import { accommodationKey } from "../../../constants/keys";
 
 // const url = BaseUrl;
 // const accUrl = url + "/accommodations";
@@ -66,7 +67,7 @@ function PropertyForm() {
     //   setLoading(false);
     // }
   }
-  const accommodations = getFromStorage();
+  const accommodations = getFromStorage(accommodationKey);
   const facilities = accommodations[0].facilities;
   const facilityNames = Object.keys(facilities);
   facilityNames.shift();
@@ -86,7 +87,7 @@ function PropertyForm() {
           </FormError>
         )}
         <fieldset disabled={loading}>
-          <Form.Group className="mb-2" controlId="ControlInput1">
+          <Form.Group className="mb-3" controlId="ControlInput1">
             <Form.Label>Accommodation name</Form.Label>
             <Form.Control {...register("name")} />
             {errors.name && <FormError>{errors.name.message}</FormError>}
@@ -94,6 +95,9 @@ function PropertyForm() {
 
           <Form.Group className="mb-2" controlId="ControlInput1">
             <Form.Label>Location</Form.Label>
+            <Form.Text className="d-block mt-0" muted>
+              Can be for example "City center", harbour, Fløien etc.
+            </Form.Text>
             <Form.Control {...register("location")} />
             {errors.location && <FormError>{errors.location.message}</FormError>}
           </Form.Group>
@@ -136,7 +140,7 @@ function PropertyForm() {
             {errors.room_rate && <FormError>{errors.room_rate.message}</FormError>}
           </Form.Group>
 
-          <Form.Group className="m-auto mb-2 text-center" controlId="controlInput1">
+          <Form.Group className="m-auto mb-3 text-center" controlId="controlInput1">
             <Form.Label>Category</Form.Label>
             <Form.Select aria-label="Select category" {...register("category")} className="m-auto">
               <option>Select one option</option>
@@ -149,11 +153,18 @@ function PropertyForm() {
 
           <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
             <Form.Label>Description</Form.Label>
+            <Form.Text className="d-block mt-0" muted>
+              A general description of the property with facilities and room types. Remember to include USPs (Unique Selling Points) and keep the text fun and interesting!
+            </Form.Text>
             <Form.Control as="textarea" rows={10} {...register("description")} />
             {errors.description && <FormError>{errors.description.message}</FormError>}
           </Form.Group>
 
           <Form.Group className="mb-3 d-flex flex-wrap justify-content-between justify-content-md-start" controlId="formBasicCheckbox">
+            <Form.Label>Facilities</Form.Label>
+            <Form.Text className="d-block mt-0" muted>
+              Check the facilities that are available at your accommodation. Leave the other ones empty.
+            </Form.Text>
             {facilityNames.map(function (name) {
               return (
                 <Controller

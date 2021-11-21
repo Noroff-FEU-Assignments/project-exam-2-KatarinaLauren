@@ -14,6 +14,7 @@ import Location from "./Location";
 import Info from "./Info";
 import ContactInfo from "./ContactInfo";
 import BookingModal from "./BookingModal";
+import { accommodationKey } from "../../../constants/keys";
 
 function Details() {
   const [data, setData] = useState(null);
@@ -33,7 +34,7 @@ function Details() {
 
   useEffect(
     function () {
-      const accommodations = getFromStorage();
+      const accommodations = getFromStorage(accommodationKey);
       if (accommodations.length > 0) {
         const accDetails = accommodations.filter((acc) => acc.id === parseInt(id));
         setData(accDetails[0]);

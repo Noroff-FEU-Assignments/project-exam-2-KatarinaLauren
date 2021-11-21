@@ -1,10 +1,11 @@
 import { ReactSearchAutocomplete } from "react-search-autocomplete";
 import { getFromStorage } from "../../utilities/localStorage/localStorageFunctions";
 import { useHistory } from "react-router-dom";
+import { accommodationKey } from "../../constants/keys";
 
 function SearchBar() {
   let history = useHistory();
-  const items = getFromStorage();
+  const items = getFromStorage(accommodationKey);
 
   // const handleOnSearch = (string, results) => {
   //   // onSearch will have as the first callback parameter

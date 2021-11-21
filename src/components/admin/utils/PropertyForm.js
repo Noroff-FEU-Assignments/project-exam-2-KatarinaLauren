@@ -6,14 +6,17 @@ import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
 import FormError from "../../layout/FormError";
 import Paragraph from "../../layout/Paragraph";
-// import axios from "axios";
-// import { BaseUrl } from "../../constants/api";
+import axios from "axios";
+import { BaseUrl } from "../../../constants/api";
 import { Link } from "react-router-dom";
 import { getFromStorage } from "../../../utilities/localStorage/localStorageFunctions";
-import { accommodationKey } from "../../../constants/keys";
+import { accommodationKey, authKey } from "../../../constants/keys";
 
-// const url = BaseUrl;
-// const accUrl = url + "/accommodations";
+const url = BaseUrl;
+const accUrl = url + "/accommodations";
+
+const authData = getFromStorage(authKey);
+const authJWT = authData.jwt;
 
 const schema = yup.object().shape({
   name: yup.string().required("Please enter the name of the property"),
@@ -48,24 +51,25 @@ function PropertyForm() {
     setLoading(true);
     setError(null);
     setMessage(false);
-    reset();
-
-    console.log(data);
 
     // console.log(data);
 
-    // try {
-    //   const response = await axios.post(accUrl, data);
+    try {
+      const response = await axios.post(accUrl, data, {
+        headers: {
+          Authorization: "Bearer " + authJWT,
+        },
+      });
 
-    //   console.log("response", response.data);
-    //   setMessage(true);
-    //   reset();
-    // } catch (error) {
-    //   console.log("error", error);
-    //   setError(true);
-    // } finally {
-    //   setLoading(false);
-    // }
+      console.log("response", response.data);
+      setMessage(true);
+      reset();
+    } catch (error) {
+      console.log("error", error);
+      setError(true);
+    } finally {
+      setLoading(false);
+    }
   }
   const accommodations = getFromStorage(accommodationKey);
   const facilities = accommodations[0].facilities;

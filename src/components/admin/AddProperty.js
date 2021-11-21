@@ -2,13 +2,11 @@ import React from "react";
 import PropertyForm from "./utils/PropertyForm";
 import PageHeading from "../layout/PageHeading";
 import Container from "react-bootstrap/Container";
-// import TestForm from "./utils/TestForm";
 
 function AddProperty() {
   return (
     <Container>
       <PageHeading className="text-center mt-5">Add property</PageHeading>
-
       <PropertyForm />
     </Container>
   );

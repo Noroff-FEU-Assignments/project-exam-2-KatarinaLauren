@@ -13,7 +13,7 @@ import axios from "axios";
 import ErrorMessage from "../layout/ErrorMessage";
 
 const url = BaseUrl;
-const messagesUrl = url + "/messsages";
+const messagesUrl = url + "/messages";
 
 const schema = yup.object().shape({
   name: yup.string().min(4, "Must be minimum 4 characters long").required("Please enter your name"),

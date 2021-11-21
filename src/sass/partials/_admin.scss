@@ -1,0 +1,27 @@
+.login__form {
+  background-color: #fff;
+  max-width: 500px;
+  margin: 0 auto;
+
+  input {
+    width: 300px;
+  }
+}
+.admin__login__message {
+  background-color: white;
+  max-width: 500px;
+  margin: 0 auto;
+}
+
+// DASHBOARD
+
+.admindash__container {
+  background: #fff;
+  max-width: 300px;
+  margin: 0 auto;
+
+  a .btn-outline-primary {
+    font-weight: 400;
+    width: 90%;
+  }
+}

@@ -1,7 +1,15 @@
 .btn-success,
 .btn-primary {
   color: #fff;
+  letter-spacing: 1px;
 
+  &:hover {
+    color: #fff;
+  }
+}
+
+.btn-outline-primary {
+  color: $text-color;
   &:hover {
     color: #fff;
   }

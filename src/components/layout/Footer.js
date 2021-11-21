@@ -1,8 +1,20 @@
-import { Link } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
+import { useContext } from "react";
 import Container from "react-bootstrap/Container";
+import Button from "react-bootstrap/Button";
 import Logo from "./Logo";
+import AuthContext from "../../context/AuthContext";
 
 function Footer() {
+  const [auth, setAuth] = useContext(AuthContext);
+
+  const history = useHistory();
+
+  function logout() {
+    setAuth(null);
+    history.push("/");
+  }
+
   return (
     <footer className="bg-primary text-center text-md-start p-2 position-relative">
       <Container>
@@ -70,9 +82,20 @@ function Footer() {
             </a>
           </div>
           <div className="position-absolute bottom-0 end-0">
-            <Link to="/admin" className="nav-link">
-              Admin
-            </Link>
+            {auth ? (
+              <>
+                <Link to="/dashboard" className="me-3">
+                  Admin dashboard
+                </Link>
+                <Button variant="outline-white" onClick={logout} className="me-3 mb-2">
+                  Log out
+                </Button>
+              </>
+            ) : (
+              <Link to="/admin" className="nav-link">
+                Admin
+              </Link>
+            )}
           </div>
         </div>
       </Container>

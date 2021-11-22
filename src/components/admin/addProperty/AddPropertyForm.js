@@ -32,7 +32,7 @@ const schema = yup.object().shape({
   facilities: yup.object().required(),
 });
 
-function PropertyForm() {
+function AddPropertyForm() {
   const {
     register,
     handleSubmit,
@@ -204,4 +204,4 @@ function PropertyForm() {
   );
 }
 
-export default PropertyForm;
+export default AddPropertyForm;

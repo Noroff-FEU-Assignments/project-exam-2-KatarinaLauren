@@ -9,9 +9,17 @@ import SearchBar from "../searchBar/SearchBar";
 import InspirationCards from "./InspirationCards";
 import Container from "react-bootstrap/Container";
 import AccommodationOverview from "./AccommodationOverview";
+import { useHistory } from "react-router-dom";
 
 function Home() {
   fetchAccommodations();
+  let history = useHistory();
+
+  const handleOnSelect = (item) => {
+    // console.log(item.id);
+    const route = `/detail/${item.id}`;
+    history.push(route);
+  };
   return (
     <div>
       <Hero image={heroImage}>
@@ -31,7 +39,7 @@ function Home() {
         <Paragraph color={"#02A6B5"} className={"text-center p-4 mb-1 home__div__paragraph"}>
           Find your ideal accommodation in and around the city
         </Paragraph>
-        <SearchBar className={"mt-5"} />
+        <SearchBar onSelect={handleOnSelect} />
       </div>
       <Container>
         <h3 className="mt-5 mb-4">INSPIRATION</h3>

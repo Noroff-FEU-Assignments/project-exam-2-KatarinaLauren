@@ -1,24 +1,22 @@
 import { useForm, Controller } from "react-hook-form";
 import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
-import { useState } from "react";
+// import { useState } from "react";
 import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
 import FormError from "../../layout/FormError";
 import Paragraph from "../../layout/Paragraph";
-import axios from "axios";
-import { BaseUrl } from "../../../constants/api";
-import { Link } from "react-router-dom";
 import { getFromStorage } from "../../../utilities/localStorage/localStorageFunctions";
-import { accommodationKey, authKey } from "../../../constants/keys";
+import { accommodationKey } from "../../../constants/keys";
 
-const url = BaseUrl;
-const accUrl = url + "/accommodations";
+// const url = BaseUrl;
+// const accUrl = url + "/accommodations";
 
-const authData = getFromStorage(authKey);
-const authJWT = authData.jwt;
+// const authData = getFromStorage(authKey);
+// const authJWT = authData.jwt;
 
 const schema = yup.object().shape({
+  id: yup.number().required(),
   name: yup.string().required("Please enter the name of the property"),
   description: yup.string().min(20, "Must be minimum 20 characters long").required(),
   room_rate: yup.number().required("Please enter the minimum room rate"),
@@ -32,45 +30,19 @@ const schema = yup.object().shape({
   facilities: yup.object().required(),
 });
 
-function PropertyForm() {
+function RemovePropertyForm(props) {
+  const defaultValues = props.defaultValues;
+
   const {
     register,
     handleSubmit,
-    reset,
     control,
     formState: { errors },
   } = useForm({
     resolver: yupResolver(schema),
+    defaultValues,
   });
-  // const [data, setData] = useState(null);
-  const [error, setError] = useState(null);
-  const [loading, setLoading] = useState(false);
-  const [message, setMessage] = useState(false);
 
-  async function onSubmit(data) {
-    setLoading(true);
-    setError(null);
-    setMessage(false);
-
-    // console.log(data);
-
-    try {
-      const response = await axios.post(accUrl, data, {
-        headers: {
-          Authorization: "Bearer " + authJWT,
-        },
-      });
-
-      console.log("response", response.data);
-      setMessage(true);
-      reset();
-    } catch (error) {
-      console.log("error", error);
-      setError(true);
-    } finally {
-      setLoading(false);
-    }
-  }
   const accommodations = getFromStorage(accommodationKey);
   const facilities = accommodations[0].facilities;
   const facilityNames = Object.keys(facilities);
@@ -78,19 +50,16 @@ function PropertyForm() {
 
   return (
     <>
-      <Form className="property__form p-5 m-auto mb-5 mt-5" onSubmit={handleSubmit(onSubmit)}>
+      <Form className="property__form p-5 m-auto mb-5 mt-5" onSubmit={handleSubmit(props.onSubmit)}>
         <Paragraph className="fst-italic text-center mb-4" color="#a6adb4">
           All fields are required*
         </Paragraph>
-        {message && <p>Property added</p>}
-        {error && (
-          <FormError>
-            <p>
-              Something went wrong. Please try again or <Link to="/contact">contact us</Link>
-            </p>
-          </FormError>
-        )}
-        <fieldset disabled={loading}>
+
+        <fieldset disabled={props.disabled}>
+          <Form.Group className="mb-3" controlId="ControlInput1">
+            <Form.Label>Id</Form.Label>
+            <Form.Control {...register("id")} disabled />
+          </Form.Group>
           <Form.Group className="mb-3" controlId="ControlInput1">
             <Form.Label>Accommodation name</Form.Label>
             <Form.Control {...register("name")} />
@@ -195,7 +164,7 @@ function PropertyForm() {
 
           <div className="text-center">
             <Button variant="success" type="submit" className="mt-4 pe-5 ps-5">
-              {loading ? "Uploading" : "Add property"}
+              Add Property
             </Button>
           </div>
         </fieldset>
@@ -204,4 +173,4 @@ function PropertyForm() {
   );
 }
 
-export default PropertyForm;
+export default RemovePropertyForm;

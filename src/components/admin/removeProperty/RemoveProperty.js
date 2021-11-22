@@ -5,10 +5,10 @@ import { useState } from "react";
 import RemovePropertyForm from "./RemovePropertyForm";
 import axios from "axios";
 import { BaseUrl } from "../../../constants/api";
-import { authKey, accommodationKey } from "../../../constants/keys";
+import { authKey } from "../../../constants/keys";
 import { Link } from "react-router-dom";
-import { getFromStorage, saveToStorage } from "../../../utilities/localStorage/localStorageFunctions";
-import { GetData } from "../../../utilities/GetData";
+import { getFromStorage } from "../../../utilities/localStorage/localStorageFunctions";
+import { fetchAccommodations } from "../../../utilities/fetchAccommodations";
 
 const url = BaseUrl;
 const accUrl = url + "/accommodations";
@@ -17,6 +17,7 @@ const authData = getFromStorage(authKey);
 const authJWT = authData.jwt;
 
 function RemoveProperty() {
+  fetchAccommodations();
   // const [disabled, setDisabled] = useState(true);
   const [defaultValues, setDefaultValues] = useState([]);
   const [error, setError] = useState(null);
@@ -72,13 +73,13 @@ function RemoveProperty() {
     } finally {
       setLoading(false);
       setData("");
-      const { accommodations } = GetData(url + "/accommodations");
-      saveToStorage(accommodationKey, accommodations);
+      setTimeout(function () {
+        window.location.reload();
+      }, 2000);
     }
   }
 
   const handleOnSelect = (item) => {
-    console.log(typeof item.id);
     setDefaultValues(item);
     setData(item);
   };

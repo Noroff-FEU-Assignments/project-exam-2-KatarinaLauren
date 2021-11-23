@@ -1,12 +1,12 @@
 import { useForm, Controller } from "react-hook-form";
-import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
-// import { useState } from "react";
+import { useEffect } from "react";
 import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
 import FormError from "../../layout/FormError";
 import Paragraph from "../../layout/Paragraph";
 import { getFromStorage } from "../../../utilities/localStorage/localStorageFunctions";
+import { propertySchema } from "../../../utilities/yup/YupSchemas";
 import { accommodationKey } from "../../../constants/keys";
 
 // const url = BaseUrl;
@@ -15,31 +15,17 @@ import { accommodationKey } from "../../../constants/keys";
 // const authData = getFromStorage(authKey);
 // const authJWT = authData.jwt;
 
-const schema = yup.object().shape({
-  id: yup.number().required(),
-  name: yup.string().required("Please enter the name of the property"),
-  description: yup.string().min(20, "Must be minimum 20 characters long").required(),
-  room_rate: yup.number().required("Please enter the minimum room rate"),
-  phone: yup.number().required("Please enter the phone number of the property"),
-  address: yup.string().required("Please enter the visiting address of the property"),
-  latitude: yup.number().required("Please enter latitude"),
-  longitude: yup.number().required("Please enter longitude"),
-  location: yup.string().required("Please enter the general location of the property"),
-  category: yup.mixed().oneOf(["Hotel", "BB", "Guesthouse"]),
-  email: yup.string().email("Please enter a valid email address").required("Please enter the email address of the property"),
-  facilities: yup.object().required(),
-});
-
 function RemovePropertyForm(props) {
-  const defaultValues = props.defaultValues;
+  const defaultValues = "";
 
   const {
     register,
     handleSubmit,
     control,
+    reset,
     formState: { errors },
   } = useForm({
-    resolver: yupResolver(schema),
+    resolver: yupResolver(propertySchema),
     defaultValues,
   });
 
@@ -47,6 +33,12 @@ function RemovePropertyForm(props) {
   const facilities = accommodations[0].facilities;
   const facilityNames = Object.keys(facilities);
   facilityNames.shift();
+
+  useEffect(() => {
+    if (props.reset) {
+      reset(props.reset);
+    }
+  }, [reset, props.reset]);
 
   return (
     <>
@@ -56,7 +48,7 @@ function RemovePropertyForm(props) {
         </Paragraph>
 
         <fieldset disabled={props.disabled}>
-          <Form.Group className="mb-3" controlId="ControlInput1">
+          <Form.Group className="d-none" controlId="ControlInput1">
             <Form.Label>Id</Form.Label>
             <Form.Control {...register("id")} disabled />
           </Form.Group>
@@ -164,7 +156,7 @@ function RemovePropertyForm(props) {
 
           <div className="text-center">
             <Button variant="success" type="submit" className="mt-4 pe-5 ps-5">
-              Add Property
+              Edit Property
             </Button>
           </div>
         </fieldset>

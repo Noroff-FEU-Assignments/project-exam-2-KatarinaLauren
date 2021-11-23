@@ -1,7 +1,6 @@
 import { useForm, Controller } from "react-hook-form";
-import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
 import FormError from "../../layout/FormError";
@@ -9,30 +8,21 @@ import Paragraph from "../../layout/Paragraph";
 import axios from "axios";
 import { BaseUrl } from "../../../constants/api";
 import { Link } from "react-router-dom";
-import { getFromStorage } from "../../../utilities/localStorage/localStorageFunctions";
+import { getFromStorage, saveToStorage } from "../../../utilities/localStorage/localStorageFunctions";
 import { accommodationKey, authKey } from "../../../constants/keys";
+import { propertySchema } from "../../../utilities/yup/YupSchemas";
+import SuccessMessage from "../../layout/SuccessMessage";
+import ErrorMessage from "../../layout/ErrorMessage";
 
 const url = BaseUrl;
-const accUrl = url + "/accommodations";
+const accUrl = url + "/accommodsations";
 
 const authData = getFromStorage(authKey);
 const authJWT = authData.jwt;
 
-const schema = yup.object().shape({
-  name: yup.string().required("Please enter the name of the property"),
-  description: yup.string().min(20, "Must be minimum 20 characters long").required(),
-  room_rate: yup.number().required("Please enter the minimum room rate"),
-  phone: yup.number().required("Please enter the phone number of the property"),
-  address: yup.string().required("Please enter the visiting address of the property"),
-  latitude: yup.number().required("Please enter latitude"),
-  longitude: yup.number().required("Please enter longitude"),
-  location: yup.string().required("Please enter the general location of the property"),
-  category: yup.mixed().oneOf(["Hotel", "BB", "Guesthouse"]),
-  email: yup.string().email("Please enter a valid email address").required("Please enter the email address of the property"),
-  facilities: yup.object().required(),
-});
-
 function AddPropertyForm() {
+  // const isMounted = useRef(false);
+  // const hasMounted = useRef(false);
   const {
     register,
     handleSubmit,
@@ -40,37 +30,68 @@ function AddPropertyForm() {
     control,
     formState: { errors },
   } = useForm({
-    resolver: yupResolver(schema),
+    resolver: yupResolver(propertySchema),
   });
-  // const [data, setData] = useState(null);
+
   const [error, setError] = useState(null);
   const [loading, setLoading] = useState(false);
   const [message, setMessage] = useState(false);
+  const [data, setData] = useState(null);
 
-  async function onSubmit(data) {
+  function onSubmit(values) {
     setLoading(true);
     setError(null);
     setMessage(false);
-
-    // console.log(data);
-
-    try {
-      const response = await axios.post(accUrl, data, {
-        headers: {
-          Authorization: "Bearer " + authJWT,
-        },
-      });
-
-      console.log("response", response.data);
-      setMessage(true);
-      reset();
-    } catch (error) {
-      console.log("error", error);
-      setError(true);
-    } finally {
-      setLoading(false);
-    }
+    setData(values);
   }
+
+  // POST DATA AND RESET FORM //
+
+  useEffect(() => {
+    if (data) {
+      async function postData() {
+        try {
+          const response = await axios.post(accUrl, data, {
+            headers: {
+              Authorization: "Bearer " + authJWT,
+            },
+          });
+
+          console.log("response", response.data);
+          setMessage(true);
+          reset();
+        } catch (error) {
+          console.log("error", error);
+          setError(true);
+        } finally {
+          setLoading(false);
+        }
+      }
+      postData();
+    }
+  }, [data, reset]);
+
+  // FETCH UPDATED DATA AND SET TO LOCAL STORAGE //
+
+  // useEffect(() => {
+  //   if (message) {
+  //     const fetchData = () => {
+  //       axios
+  //         .get(accUrl)
+  //         .then((response) => {
+  //           console.log(response);
+  //           // saveToStorage(accommodationKey, response.data);
+  //         })
+  //         .catch((error) => {
+  //           console.log(error);
+  //         });
+  //     };
+  //     fetchData();
+  //   }
+  // }, [message]);
+
+  // GET FACILITY NAMES //
+
   const accommodations = getFromStorage(accommodationKey);
   const facilities = accommodations[0].facilities;
   const facilityNames = Object.keys(facilities);
@@ -78,18 +99,20 @@ function AddPropertyForm() {
 
   return (
     <>
-      <Form className="property__form p-5 m-auto mb-5 mt-5" onSubmit={handleSubmit(onSubmit)}>
-        <Paragraph className="fst-italic text-center mb-4" color="#a6adb4">
+      <Form className="property__form p-5 pt-2   m-auto mb-5 mt-5" onSubmit={handleSubmit(onSubmit)}>
+        {message && (
+          <SuccessMessage>
+            Property has been added. Go to <Link to="/accommodations">Accommodations</Link> to check it out.
+          </SuccessMessage>
+        )}
+        {error && (
+          <ErrorMessage>
+            Something went wrong. Please try again or <Link to="/contact">Contact Us</Link> if the problem persists.
+          </ErrorMessage>
+        )}
+        <Paragraph className="fst-italic text-center mb-4 pt-3" color="#a6adb4">
           All fields are required*
         </Paragraph>
-        {message && <p>Property added</p>}
-        {error && (
-          <FormError>
-            <p>
-              Something went wrong. Please try again or <Link to="/contact">contact us</Link>
-            </p>
-          </FormError>
-        )}
         <fieldset disabled={loading}>
           <Form.Group className="mb-3" controlId="ControlInput1">
             <Form.Label>Accommodation name</Form.Label>
@@ -194,11 +217,21 @@ function AddPropertyForm() {
           </Form.Group>
 
           <div className="text-center">
-            <Button variant="success" type="submit" className="mt-4 pe-5 ps-5">
+            <Button variant="success" type="submit" className="mt-4 mb-4 pe-5 ps-5">
               {loading ? "Uploading" : "Add property"}
             </Button>
           </div>
         </fieldset>
+        {message && (
+          <SuccessMessage>
+            Property has been added. Go to <Link to="/accommodations">Accommodations</Link> to check it out.
+          </SuccessMessage>
+        )}
+        {error && (
+          <ErrorMessage>
+            Something went wrong. Please try again or <Link to="/contact">Contact Us</Link> if the problem persists.
+          </ErrorMessage>
+        )}
       </Form>
     </>
   );

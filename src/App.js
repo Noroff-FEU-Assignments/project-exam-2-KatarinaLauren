@@ -14,9 +14,16 @@ import Footer from "./components/layout/Footer";
 import Inspiration from "./components/inspiration/Inspiration";
 import Details from "./components/accommodations/details/Details";
 import { AuthProvider } from "./context/AuthContext";
+import { GetData } from "./utilities/GetData";
+import { BaseUrl } from "./constants/api";
+import { saveToStorage } from "./utilities/localStorage/localStorageFunctions";
+import { accommodationKey } from "./constants/keys";
 import "./sass/style.scss";
 
 function App() {
+  const { data } = GetData(BaseUrl + "/accommodations");
+  saveToStorage(accommodationKey, data);
+
   return (
     <AuthProvider>
       <Router>

@@ -1,0 +1,18 @@
+.errormessage__alert,
+.successmessage__alert {
+  color: $text-color;
+  h5 {
+    color: $text-color;
+  }
+  .message__alert--bold {
+    font-weight: bold;
+  }
+  a {
+    color: $text-color;
+    font-weight: bold;
+    &:hover {
+      opacity: 70%;
+      text-decoration: underline;
+    }
+  }
+}

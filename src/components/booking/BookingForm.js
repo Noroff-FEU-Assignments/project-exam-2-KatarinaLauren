@@ -6,7 +6,7 @@ import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
 import FormError from "../layout/FormError";
 import Paragraph from "../layout/Paragraph";
-import SuccessMessage from "./SuccessMessage";
+import BookingMessage from "./BookingMessage";
 import { getFromStorage } from "../../utilities/localStorage/localStorageFunctions";
 import { BaseUrl } from "../../constants/api";
 import axios from "axios";
@@ -84,13 +84,21 @@ function BookingForm() {
   });
 
   if (error !== null) {
-    return <ErrorMessage />;
+    return (
+      <ErrorMessage>
+        <h5>An error has occurred</h5>
+        <p>Please refresh the page and try again.</p>
+        <p>
+          If you are unable to reach us though our contact forms - send us an email about the problem on <span className="message__alert--bold">post@holidaze.no</span>
+        </p>
+      </ErrorMessage>
+    );
   }
 
   if (data && error === null) {
     return (
       <div className={"booking__message d-flex flex-column justify-content-center mb-md-5 mt-md-4"}>
-        <SuccessMessage />
+        <BookingMessage />
         <Button variant="success" onClick={resetData} className="booking__message__button m-auto mb-4">
           Make a new enquiry
         </Button>

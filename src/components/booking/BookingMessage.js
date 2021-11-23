@@ -1,7 +1,7 @@
 import Alert from "react-bootstrap/Alert";
 import { Link } from "react-router-dom";
 
-function SuccessMessage() {
+function BookingMessage() {
   return (
     <Alert variant="white" className="contact__form__alert">
       <h5>Thank you for your booking enquiry!</h5>
@@ -15,4 +15,4 @@ function SuccessMessage() {
   );
 }
 
-export default SuccessMessage;
+export default BookingMessage;

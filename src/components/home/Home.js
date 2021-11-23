@@ -1,4 +1,3 @@
-import { fetchAccommodations } from "../../utilities/fetchAccommodations";
 import PageHeading from "../layout/PageHeading";
 import { Link } from "react-router-dom";
 import Hero from "../layout/Hero";
@@ -10,9 +9,14 @@ import InspirationCards from "./InspirationCards";
 import Container from "react-bootstrap/Container";
 import AccommodationOverview from "./AccommodationOverview";
 import { useHistory } from "react-router-dom";
+import { GetData } from "../../utilities/GetData";
+import { BaseUrl } from "../../constants/api";
+import { saveToStorage } from "../../utilities/localStorage/localStorageFunctions";
+import { accommodationKey } from "../../constants/keys";
 
 function Home() {
-  fetchAccommodations();
+  const { data } = GetData(BaseUrl + "/accommodations");
+  saveToStorage(accommodationKey, data);
   let history = useHistory();
 
   const handleOnSelect = (item) => {

@@ -14,6 +14,7 @@ import { accommodationKey } from "../../../constants/keys";
 
 // const authData = getFromStorage(authKey);
 // const authJWT = authData.jwt;
+const accommodations = getFromStorage(accommodationKey);
 
 function RemovePropertyForm(props) {
   const defaultValues = "";
@@ -29,7 +30,6 @@ function RemovePropertyForm(props) {
     defaultValues,
   });
 
-  const accommodations = getFromStorage(accommodationKey);
   const facilities = accommodations[0].facilities;
   const facilityNames = Object.keys(facilities);
   facilityNames.shift();

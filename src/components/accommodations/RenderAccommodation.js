@@ -9,6 +9,7 @@ import Filters from "./Filters";
 import { accommodationKey } from "../../constants/keys";
 
 const url = BaseUrl;
+const accommodations = getFromStorage(accommodationKey);
 
 class RenderAccommodation extends React.Component {
   constructor(props) {
@@ -28,7 +29,6 @@ class RenderAccommodation extends React.Component {
   }
 
   componentDidMount() {
-    const accommodations = getFromStorage(accommodationKey);
     if (accommodations.length > 0) {
       const facilities = accommodations[0].facilities;
       const facilityNames = Object.keys(facilities);

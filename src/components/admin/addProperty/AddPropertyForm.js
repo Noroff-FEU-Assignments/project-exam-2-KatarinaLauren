@@ -20,6 +20,8 @@ const accUrl = url + "/accommodsations";
 const authData = getFromStorage(authKey);
 const authJWT = authData.jwt;
 
+const accommodations = getFromStorage(accommodationKey);
+
 function AddPropertyForm() {
   // const isMounted = useRef(false);
   // const hasMounted = useRef(false);
@@ -73,26 +75,25 @@ function AddPropertyForm() {
 
   // FETCH UPDATED DATA AND SET TO LOCAL STORAGE //
 
-  // useEffect(() => {
-  //   if (message) {
-  //     const fetchData = () => {
-  //       axios
-  //         .get(accUrl)
-  //         .then((response) => {
-  //           console.log(response);
-  //           // saveToStorage(accommodationKey, response.data);
-  //         })
-  //         .catch((error) => {
-  //           console.log(error);
-  //         });
-  //     };
-  //     fetchData();
-  //   }
-  // }, [message]);
+  useEffect(() => {
+    if (message) {
+      const fetchData = () => {
+        axios
+          .get(accUrl)
+          .then((response) => {
+            console.log(response);
+            saveToStorage(accommodationKey, response.data);
+          })
+          .catch((error) => {
+            console.log(error);
+          });
+      };
+      fetchData();
+    }
+  }, [message]);
 
   // GET FACILITY NAMES //
 
-  const accommodations = getFromStorage(accommodationKey);
   const facilities = accommodations[0].facilities;
   const facilityNames = Object.keys(facilities);
   facilityNames.shift();

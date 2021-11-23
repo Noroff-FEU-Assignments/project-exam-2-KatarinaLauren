@@ -15,7 +15,7 @@ import SuccessMessage from "../../layout/SuccessMessage";
 import ErrorMessage from "../../layout/ErrorMessage";
 
 const url = BaseUrl;
-const accUrl = url + "/accommodsations";
+const accUrl = url + "/accommodations";
 
 const authData = getFromStorage(authKey);
 const authJWT = authData.jwt;
@@ -23,8 +23,6 @@ const authJWT = authData.jwt;
 const accommodations = getFromStorage(accommodationKey);
 
 function AddPropertyForm() {
-  // const isMounted = useRef(false);
-  // const hasMounted = useRef(false);
   const {
     register,
     handleSubmit,
@@ -81,7 +79,6 @@ function AddPropertyForm() {
         axios
           .get(accUrl)
           .then((response) => {
-            console.log(response);
             saveToStorage(accommodationKey, response.data);
           })
           .catch((error) => {

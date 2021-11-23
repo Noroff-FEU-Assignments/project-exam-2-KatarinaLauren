@@ -9,6 +9,8 @@ import { Link } from "react-router-dom";
 import { getFromStorage, saveToStorage } from "../../../utilities/localStorage/localStorageFunctions";
 import { accommodationKey, authKey } from "../../../constants/keys";
 import Spinner from "react-bootstrap/Spinner";
+import SuccessMessage from "../../layout/SuccessMessage";
+import ErrorMessage from "../../layout/ErrorMessage";
 
 const url = BaseUrl;
 const accUrl = url + "/accommodations";
@@ -21,7 +23,7 @@ function RemoveProperty() {
   const [error, setError] = useState(null);
   const [message, setMessage] = useState(false);
   const [loading, setLoading] = useState(false);
-  const [datas, setData] = useState([]);
+  const [data, setData] = useState("");
   const [disabled, setDisabled] = useState(true);
 
   function onSubmit(values) {
@@ -34,14 +36,14 @@ function RemoveProperty() {
   //UPDATE PROPERTY
 
   useEffect(() => {
-    if (datas.lenght > 0) {
-      const id = datas.id;
+    if (data) {
+      const id = data.id;
       const stringId = "" + id;
       const idUrl = accUrl + "/" + stringId;
 
       async function updateData() {
         try {
-          const response = await axios.put(idUrl, datas, {
+          const response = await axios.put(idUrl, data, {
             headers: {
               Authorization: "Bearer " + authJWT,
             },
@@ -54,11 +56,12 @@ function RemoveProperty() {
           setError(true);
         } finally {
           setLoading(false);
+          setData("");
         }
       }
       updateData();
     }
-  }, [datas]);
+  }, [data]);
 
   // FETCH UPDATED DATA AND SET TO LOCAL STORAGE //
 
@@ -78,33 +81,6 @@ function RemoveProperty() {
     }
   }, [message]);
 
-  // async function onSubmit(values) {
-  //   setLoading(true);
-  //   setError(null);
-  //   setMessage(false);
-
-  //   const id = values.id;
-  //   const stringId = "" + id;
-  //   const idUrl = accUrl + "/" + stringId;
-
-  //   try {
-  //     const response = await axios.put(idUrl, data, {
-  //       headers: {
-  //         Authorization: "Bearer " + authJWT,
-  //       },
-  //     });
-
-  //     console.log("response", response.data);
-  //     setMessage(true);
-  //   } catch (error) {
-  //     console.log("error", error);
-  //     setError(true);
-  //   } finally {
-  //     setLoading(false);
-  //     setData("");
-  //   }
-  // }
-
   const handleOnSelect = (item) => {
     setDefaultValues(item);
     setDisabled(false);
@@ -114,26 +90,38 @@ function RemoveProperty() {
     <Container>
       <PageHeading className="text-center mt-5 mb-5">Edit or Remove a property</PageHeading>
       <SearchBar onSelect={handleOnSelect} />
-      {loading && <Spinner animation="border" variant="primary" />}
-      {message && <p>Property added</p>}
-
-      {loading && <p>Loading...</p>}
+      {loading && (
+        <div className="text-center">
+          <Spinner animation="border" variant="primary" />
+        </div>
+      )}
+      {message && (
+        <SuccessMessage>
+          Property has been updated. Go to <Link to="/accommodations">Accommodations</Link> to check it out.
+        </SuccessMessage>
+      )}
 
       {error && (
-        <p>
-          Something went wrong. Please try again or <Link to="/contact">contact us</Link>
-        </p>
+        <ErrorMessage>
+          Something went wrong. Please try again or <Link to="/contact">Contact Us</Link> if the problem persists.
+        </ErrorMessage>
       )}
       <RemovePropertyForm key={defaultValues} onSubmit={onSubmit} reset={defaultValues} disabled={disabled} />
-      {loading && <Spinner animation="border" variant="primary" />}
-      {message && <p>Property added</p>}
-
-      {loading && <p>Loading...</p>}
+      {loading && (
+        <div className="text-center">
+          <Spinner animation="border" variant="primary" />
+        </div>
+      )}
+      {message && (
+        <SuccessMessage>
+          Property has been updated. Go to <Link to="/accommodations">Accommodations</Link> to check it out.
+        </SuccessMessage>
+      )}
 
       {error && (
-        <p>
-          Something went wrong. Please try again or <Link to="/contact">contact us</Link>
-        </p>
+        <ErrorMessage>
+          Something went wrong. Please try again or <Link to="/contact">Contact Us</Link> if the problem persists.
+        </ErrorMessage>
       )}
     </Container>
   );

@@ -1,11 +1,11 @@
 import { ReactSearchAutocomplete } from "react-search-autocomplete";
-import { getFromStorage } from "../../utilities/localStorage/localStorageFunctions";
+// import { getFromStorage } from "../../utilities/localStorage/localStorageFunctions";
 // import { useHistory } from "react-router-dom";
-import { accommodationKey } from "../../constants/keys";
+// import { accommodationKey } from "../../constants/keys";
 
 function SearchBar(props) {
   // let history = useHistory();
-  const items = getFromStorage(accommodationKey);
+  // const items = getFromStorage(accommodationKey);
 
   // const handleOnSearch = (string, results) => {
   //   // onSearch will have as the first callback parameter
@@ -35,7 +35,7 @@ function SearchBar(props) {
     <div className="m-auto mb-5 searchbar">
       <ReactSearchAutocomplete
         placeholder={"Search for accommodations.."}
-        items={items}
+        items={props.items}
         onSelect={props.onSelect}
         autoFocus
         formatResult={formatResult}

@@ -9,15 +9,30 @@ import InspirationCards from "./InspirationCards";
 import Container from "react-bootstrap/Container";
 import AccommodationOverview from "./AccommodationOverview";
 import { useHistory } from "react-router-dom";
+import { useEffect, useState } from "react";
+import { accommodationKey } from "../../constants/keys";
+import { getFromStorage } from "../../utilities/localStorage/localStorageFunctions";
+
+// let accItems = getFromStorage(accommodationKey);
 
 function Home() {
+  const [items, setItems] = useState(getFromStorage(accommodationKey));
+
   let history = useHistory();
 
   const handleOnSelect = (item) => {
     // console.log(item.id);
     const route = `/detail/${item.id}`;
-    history.push(route);
+    setTimeout(() => {
+      history.push(route);
+    }, 1000);
+    // history.push(route);
   };
+
+  useEffect(() => {
+    setItems(getFromStorage(accommodationKey));
+  }, [setItems]);
+
   return (
     <div>
       <Hero image={heroImage}>
@@ -37,7 +52,7 @@ function Home() {
         <Paragraph color={"#02A6B5"} className={"text-center p-4 mb-1 home__div__paragraph"}>
           Find your ideal accommodation in and around the city
         </Paragraph>
-        <SearchBar onSelect={handleOnSelect} />
+        <SearchBar onSelect={handleOnSelect} items={items} />
       </div>
       <Container>
         <h3 className="mt-5 mb-4">INSPIRATION</h3>

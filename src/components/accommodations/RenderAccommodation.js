@@ -1,15 +1,13 @@
 import React from "react";
-import { getFromStorage } from "../../utilities/localStorage/localStorageFunctions";
 import AccommodationItem from "./AccommodationItem";
 import Alert from "react-bootstrap/Alert";
 import Container from "react-bootstrap/Container";
 import Spinner from "react-bootstrap/Spinner";
 import { BaseUrl } from "../../constants/api";
 import Filters from "./Filters";
-import { accommodationKey } from "../../constants/keys";
 
 const url = BaseUrl;
-const accommodations = getFromStorage(accommodationKey);
+const accUrl = url + "/accommodations";
 
 class RenderAccommodation extends React.Component {
   constructor(props) {
@@ -29,24 +27,27 @@ class RenderAccommodation extends React.Component {
   }
 
   componentDidMount() {
-    if (accommodations.length > 0) {
-      const facilities = accommodations[0].facilities;
-      const facilityNames = Object.keys(facilities);
-      facilityNames.shift();
+    fetch(accUrl)
+      .then((res) => res.json())
+      .then(
+        (result) => {
+          const facilities = result[0].facilities;
+          const facilityNames = Object.keys(facilities);
+          facilityNames.shift();
+          this.setState({
+            isLoaded: true,
+            items: result,
+            availableFilters: facilityNames,
+          });
+        },
 
-      this.setState({
-        isLoaded: true,
-        items: accommodations,
-        availableFilters: facilityNames,
-      });
-    }
-
-    if (accommodations.length === 0) {
-      this.setState({
-        isLoaded: true,
-        error: "An error occurred",
-      });
-    }
+        (error) => {
+          this.setState({
+            isLoaded: true,
+            error: "An error occurred",
+          });
+        }
+      );
   }
 
   filterChange(e) {

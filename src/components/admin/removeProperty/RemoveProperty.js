@@ -27,6 +27,7 @@ function RemoveProperty() {
   const [disabled, setDisabled] = useState(true);
   const [deleteItem, setDeleteItem] = useState(null);
   const [deleteMessage, setDeleteMessage] = useState(false);
+  const [searchItems, setSearchItems] = useState(getFromStorage(accommodationKey));
 
   function onSubmit(values) {
     setLoading(true);
@@ -47,7 +48,7 @@ function RemoveProperty() {
 
   // DELETE PROPERTY
   useEffect(() => {
-    if (deleteItem) {
+    if (deleteItem > 0) {
       const id = deleteItem;
       const stringId = "" + id;
       const idUrl = accUrl + "/" + stringId;
@@ -95,7 +96,7 @@ function RemoveProperty() {
           });
 
           console.log("response", response.data);
-          setDeleteMessage(true);
+          setMessage(true);
         } catch (error) {
           console.log("error", error);
           setError(true);
@@ -117,6 +118,7 @@ function RemoveProperty() {
           .get(accUrl)
           .then((response) => {
             saveToStorage(accommodationKey, response.data);
+            setSearchItems(response.data);
           })
           .catch((error) => {
             console.log(error);
@@ -129,18 +131,22 @@ function RemoveProperty() {
   const handleOnSelect = (item) => {
     setDefaultValues(item);
     setDisabled(false);
+    setMessage(false);
+    setError(false);
+    setDeleteMessage(false);
   };
 
   return (
     <Container>
       <PageHeading className="text-center mt-5 mb-5">Edit or Remove a property</PageHeading>
-      <SearchBar onSelect={handleOnSelect} items={}/>
+      <SearchBar onSelect={handleOnSelect} items={searchItems} />
       {loading && (
         <div className="text-center">
           <Spinner animation="border" variant="primary" />
         </div>
       )}
       {deleteMessage && <SuccessMessage>Property has been removed.</SuccessMessage>}
+
       {message && (
         <SuccessMessage>
           Property has been updated. Go to <Link to="/accommodations">Accommodations</Link> to check it out.

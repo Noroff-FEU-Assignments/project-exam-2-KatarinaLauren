@@ -158,6 +158,9 @@ function RemovePropertyForm(props) {
             <Button variant="success" type="submit" className="mt-4 pe-5 ps-5">
               Edit Property
             </Button>
+            <Button variant="danger" className="mt-4 pe-5 ps-5" onClick={props.onDelete}>
+              Delete
+            </Button>
           </div>
         </fieldset>
       </Form>

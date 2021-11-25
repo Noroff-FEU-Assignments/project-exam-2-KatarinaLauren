@@ -1,38 +1,16 @@
 import { useForm, Controller } from "react-hook-form";
-import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
-import { useState } from "react";
+import { useEffect } from "react";
 import Form from "react-bootstrap/Form";
-import Button from "react-bootstrap/Button";
 import FormError from "../../layout/FormError";
 import Paragraph from "../../layout/Paragraph";
-import axios from "axios";
-import { BaseUrl } from "../../../constants/api";
-import { Link } from "react-router-dom";
 import { getFromStorage } from "../../../utilities/localStorage/localStorageFunctions";
-import { accommodationKey, authKey } from "../../../constants/keys";
+import { facilitiesKey } from "../../../constants/keys";
+import { propertySchema } from "../../../utilities/yup/YupSchemas";
 
-const url = BaseUrl;
-const accUrl = url + "/accommodations";
+const facilities = getFromStorage(facilitiesKey);
 
-const authData = getFromStorage(authKey);
-const authJWT = authData.jwt;
-
-const schema = yup.object().shape({
-  name: yup.string().required("Please enter the name of the property"),
-  description: yup.string().min(20, "Must be minimum 20 characters long").required(),
-  room_rate: yup.number().required("Please enter the minimum room rate"),
-  phone: yup.number().required("Please enter the phone number of the property"),
-  address: yup.string().required("Please enter the visiting address of the property"),
-  latitude: yup.number().required("Please enter latitude"),
-  longitude: yup.number().required("Please enter longitude"),
-  location: yup.string().required("Please enter the general location of the property"),
-  category: yup.mixed().oneOf(["Hotel", "BB", "Guesthouse"]),
-  email: yup.string().email("Please enter a valid email address").required("Please enter the email address of the property"),
-  facilities: yup.object().required(),
-});
-
-function PropertyForm() {
+function PropertyForm(props) {
   const {
     register,
     handleSubmit,
@@ -40,57 +18,30 @@ function PropertyForm() {
     control,
     formState: { errors },
   } = useForm({
-    resolver: yupResolver(schema),
+    resolver: yupResolver(propertySchema),
   });
-  // const [data, setData] = useState(null);
-  const [error, setError] = useState(null);
-  const [loading, setLoading] = useState(false);
-  const [message, setMessage] = useState(false);
 
-  async function onSubmit(data) {
-    setLoading(true);
-    setError(null);
-    setMessage(false);
+  // FETCH UPDATED DATA AND SET TO LOCAL STORAGE //
 
-    // console.log(data);
-
-    try {
-      const response = await axios.post(accUrl, data, {
-        headers: {
-          Authorization: "Bearer " + authJWT,
-        },
-      });
-
-      console.log("response", response.data);
-      setMessage(true);
-      reset();
-    } catch (error) {
-      console.log("error", error);
-      setError(true);
-    } finally {
-      setLoading(false);
+  useEffect(() => {
+    if (props.reset) {
+      reset(props.reset);
     }
-  }
-  const accommodations = getFromStorage(accommodationKey);
-  const facilities = accommodations[0].facilities;
-  const facilityNames = Object.keys(facilities);
-  facilityNames.shift();
+  }, [props.reset, reset]);
+
+  // GET FACILITY NAMES //
 
   return (
     <>
-      <Form className="property__form p-5 m-auto mb-5 mt-5" onSubmit={handleSubmit(onSubmit)}>
-        <Paragraph className="fst-italic text-center mb-4" color="#a6adb4">
+      <Form className="property__form p-5 pt-2   m-auto mb-5 mt-5" onSubmit={handleSubmit(props.onSubmit)}>
+        <Paragraph className="fst-italic text-center mb-4 pt-3" color="#a6adb4">
           All fields are required*
         </Paragraph>
-        {message && <p>Property added</p>}
-        {error && (
-          <FormError>
-            <p>
-              Something went wrong. Please try again or <Link to="/contact">contact us</Link>
-            </p>
-          </FormError>
-        )}
-        <fieldset disabled={loading}>
+        <fieldset disabled={props.disabled}>
+          <Form.Group className="d-none" controlId="ControlInput1">
+            <Form.Label>Id</Form.Label>
+            <Form.Control {...register("id")} disabled />
+          </Form.Group>
           <Form.Group className="mb-3" controlId="ControlInput1">
             <Form.Label>Accommodation name</Form.Label>
             <Form.Control {...register("name")} />
@@ -100,7 +51,7 @@ function PropertyForm() {
           <Form.Group className="mb-2" controlId="ControlInput1">
             <Form.Label>Location</Form.Label>
             <Form.Text className="d-block mt-0" muted>
-              Can be for example "City center", harbour, Fløien etc.
+              Can be for example: City center, harbour, Fløien etc.
             </Form.Text>
             <Form.Control {...register("location")} />
             {errors.location && <FormError>{errors.location.message}</FormError>}
@@ -144,15 +95,15 @@ function PropertyForm() {
             {errors.room_rate && <FormError>{errors.room_rate.message}</FormError>}
           </Form.Group>
 
-          <Form.Group className="m-auto mb-3 text-center" controlId="controlInput1">
+          <Form.Group className="m-auto mb-3" controlId="controlInput1">
             <Form.Label>Category</Form.Label>
             <Form.Select aria-label="Select category" {...register("category")} className="m-auto">
               <option>Select one option</option>
               <option value="Hotel">Hotel</option>
               <option value="BB">B&amp;B</option>
               <option value="Guesthouse">Guesthouse</option>
-              {errors.category && <FormError>{errors.category.message}</FormError>}
             </Form.Select>
+            {errors.category && <FormError>{errors.category.message}</FormError>}
           </Form.Group>
 
           <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
@@ -169,7 +120,7 @@ function PropertyForm() {
             <Form.Text className="d-block mt-0" muted>
               Check the facilities that are available at your accommodation. Leave the other ones empty.
             </Form.Text>
-            {facilityNames.map(function (name) {
+            {facilities.map(function (name) {
               return (
                 <Controller
                   key={name}
@@ -193,11 +144,7 @@ function PropertyForm() {
             })}
           </Form.Group>
 
-          <div className="text-center">
-            <Button variant="success" type="submit" className="mt-4 pe-5 ps-5">
-              {loading ? "Uploading" : "Add property"}
-            </Button>
-          </div>
+          <div className="text-center text-md-end">{props.children}</div>
         </fieldset>
       </Form>
     </>

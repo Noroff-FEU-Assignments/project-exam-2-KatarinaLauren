@@ -9,7 +9,7 @@ export const propertySchema = yup.object().shape({
   latitude: yup.number().typeError("Please enter latitude").required(),
   longitude: yup.number().typeError("Please enter longitude").required(),
   location: yup.string().required("Please enter the general location of the property"),
-  category: yup.mixed().oneOf(["Hotel", "BB", "Guesthouse"]),
+  category: yup.mixed().oneOf(["Hotel", "BB", "Guesthouse"], "Please choose a category"),
   email: yup.string().email("Please enter a valid email address").required("Please enter the email address of the property"),
   facilities: yup.object().required(),
 });

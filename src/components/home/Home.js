@@ -10,13 +10,13 @@ import Container from "react-bootstrap/Container";
 import AccommodationOverview from "./AccommodationOverview";
 import { useHistory } from "react-router-dom";
 import { useEffect, useState } from "react";
-import { accommodationKey } from "../../constants/keys";
-import { getFromStorage } from "../../utilities/localStorage/localStorageFunctions";
-
-// let accItems = getFromStorage(accommodationKey);
+import { AccUrl } from "../../constants/api";
+import axios from "axios";
+import ErrorMessage from "../layout/ErrorMessage";
 
 function Home() {
-  const [items, setItems] = useState(getFromStorage(accommodationKey));
+  const [items, setItems] = useState([]);
+  const [error, setError] = useState("");
 
   let history = useHistory();
 
@@ -30,7 +30,18 @@ function Home() {
   };
 
   useEffect(() => {
-    setItems(getFromStorage(accommodationKey));
+    const fetchData = () => {
+      axios
+        .get(AccUrl)
+        .then((response) => {
+          setItems(response.data);
+        })
+        .catch((error) => {
+          console.log(error);
+          setError("An error occurred while loading accommodation info");
+        });
+    };
+    fetchData();
   }, [setItems]);
 
   return (
@@ -51,9 +62,11 @@ function Home() {
       <div className={"home__div"}>
         <Paragraph color={"#02A6B5"} className={"text-center p-4 mb-1 home__div__paragraph"}>
           Find your ideal accommodation in and around the city
-        </Paragraph>
+        </Paragraph>{" "}
+        {error && <ErrorMessage>{error}</ErrorMessage>}
         <SearchBar onSelect={handleOnSelect} items={items} />
       </div>
+
       <Container>
         <h3 className="mt-5 mb-4">INSPIRATION</h3>
         <InspirationCards />

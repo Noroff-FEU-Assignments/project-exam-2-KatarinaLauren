@@ -3,7 +3,7 @@ import SuccessMessage from "./SuccessMessage";
 import ErrorMessage from "./ErrorMessage";
 import Spinner from "react-bootstrap/Spinner";
 
-function Messages({ error, loading, message }) {
+function FormMessages({ error, loading, message }) {
   return (
     <div>
       {loading && (
@@ -19,4 +19,4 @@ function Messages({ error, loading, message }) {
   );
 }
 
-export default Messages;
+export default FormMessages;

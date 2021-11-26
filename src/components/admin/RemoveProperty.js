@@ -8,7 +8,7 @@ import { AccUrl } from "../../constants/api";
 import { getFromStorage, saveToStorage } from "../../utilities/localStorage/localStorageFunctions";
 import { accommodationKey, authKey } from "../../constants/keys";
 import SuccessMessage from "../layout/SuccessMessage";
-import Messages from "../layout/Messages";
+import FormMessages from "../layout/FormMessages";
 import Button from "react-bootstrap/Button";
 
 const authData = getFromStorage(authKey);
@@ -136,7 +136,7 @@ function RemoveProperty() {
       <PageHeading className="text-center mt-5 mb-5">Edit or Remove a property</PageHeading>
       <SearchBar onSelect={handleOnSelect} items={searchItems} />
 
-      <Messages error={error} message={message} loading={loading} />
+      <FormMessages error={error} message={message} loading={loading} />
       {deleteMessage && <SuccessMessage>Property has been removed.</SuccessMessage>}
 
       <PropertyForm key={defaultValues} onSubmit={onSubmit} reset={defaultValues} disabled={disabled} onDelete={onDelete}>
@@ -148,7 +148,7 @@ function RemoveProperty() {
         </Button>
       </PropertyForm>
 
-      <Messages error={error} message={message} loading={loading} />
+      <FormMessages error={error} message={message} loading={loading} />
       {deleteMessage && <SuccessMessage>Property has been removed.</SuccessMessage>}
     </Container>
   );

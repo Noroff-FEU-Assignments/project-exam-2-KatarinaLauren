@@ -8,8 +8,8 @@ import Admin from "./components/admin/login/Admin";
 import AdminDashboard from "./components/admin/AdminDashboard";
 import AddProperty from "./components/admin//AddProperty";
 import RemoveProperty from "./components/admin/RemoveProperty";
-import SeeMessages from "./components/admin/SeeMessages";
-import SeeEnquiries from "./components/admin/SeeEnquiries";
+import ReadMessages from "./components/admin/messages/ReadMessages";
+import ReadEnquiries from "./components/admin/enquiries/ReadEnquiries";
 import Footer from "./components/layout/Footer";
 import Inspiration from "./components/inspiration/Inspiration";
 import Details from "./components/accommodations/details/Details";
@@ -42,8 +42,8 @@ function App() {
               <Route path="/detail/:id" component={Details} />
               <Route path="/add" component={AddProperty} />
               <Route path="/remove" component={RemoveProperty} />
-              <Route path="/enquiries" component={SeeEnquiries} />
-              <Route path="/messages" component={SeeMessages} />
+              <Route path="/enquiries" component={ReadEnquiries} />
+              <Route path="/messages" component={ReadMessages} />
             </Switch>
           </div>
         </div>

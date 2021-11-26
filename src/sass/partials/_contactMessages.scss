@@ -1,0 +1,31 @@
+.messages__accordion {
+  max-width: 650px;
+  margin: 0 auto;
+
+  .accordion-button {
+    text-align: center;
+    height: 50px;
+    i {
+      font-size: 1.5em;
+      color: $primary-color;
+    }
+    p {
+      margin: 0.5em;
+    }
+  }
+  .accordion-body {
+    padding: 2em;
+
+    p {
+      border-bottom: 2px solid $body-bgcolor;
+    }
+    .message__p--no_border {
+      border: none;
+    }
+  }
+
+  label {
+    margin-right: 1em;
+    font-weight: bold;
+  }
+}

@@ -31,6 +31,7 @@ class RenderAccommodation extends React.Component {
       .then((res) => res.json())
       .then(
         (result) => {
+          // console.log(result);
           const facilities = result[0].facilities;
           const facilityNames = Object.keys(facilities);
           facilityNames.shift();

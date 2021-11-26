@@ -7,7 +7,7 @@ import { useState, useEffect } from "react";
 import { getFromStorage, saveToStorage } from "../../utilities/localStorage/localStorageFunctions";
 import { AccUrl } from "../../constants/api";
 import { accommodationKey, authKey } from "../../constants/keys";
-import Messages from "../layout/Messages";
+import FormMessages from "../layout/FormMessages";
 import Button from "react-bootstrap/Button";
 
 const authData = getFromStorage(authKey);
@@ -74,13 +74,13 @@ function AddProperty() {
   return (
     <Container>
       <PageHeading className="text-center mt-5">Add property</PageHeading>
-      <Messages error={error} message={message} loading={loading} />
+      <FormMessages error={error} message={message} loading={loading} />
       <PropertyForm key={data} onSubmit={onSubmit} reset={reset} disabled={disabled}>
         <Button variant="success" type="submit" className="mt-4 mb-4 pe-5 ps-5">
           Add property
         </Button>
       </PropertyForm>
-      <Messages error={error} message={message} loading={loading} />
+      <FormMessages error={error} message={message} loading={loading} />
     </Container>
   );
 }

@@ -109,7 +109,8 @@ function PropertyForm(props) {
           <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
             <Form.Label>Description</Form.Label>
             <Form.Text className="d-block mt-0" muted>
-              A general description of the property with facilities and room types. Remember to include USPs (Unique Selling Points) and keep the text fun and interesting!
+              A general description of the property with facilities and room types. Remember to include USPs (Unique Selling Points) and keep the text fun and interesting! For proper formatting -
+              write in <span className="fw-bold">MarkDown</span>.
             </Form.Text>
             <Form.Control as="textarea" rows={10} {...register("description")} />
             {errors.description && <FormError>{errors.description.message}</FormError>}

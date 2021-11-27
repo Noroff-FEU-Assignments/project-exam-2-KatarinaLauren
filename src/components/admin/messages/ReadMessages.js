@@ -41,7 +41,7 @@ function ReadMessages() {
     <Container>
       <PageHeading className="text-center mt-5">MESSAGES</PageHeading>
       <Alert variant="white" className="messages__alert">
-        <p>Here you can see all messages sent via the contact form.</p>
+        <p>Here you can see all messages sent via our contact form.</p>
       </Alert>
       {error && <ErrorMessage>Something went wrong. Unable to load messages</ErrorMessage>}
       <Accordion className="messages__accordion mb-5">

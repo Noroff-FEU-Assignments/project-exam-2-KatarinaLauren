@@ -1,5 +1,6 @@
 import Paragraph from "../../layout/Paragraph";
 import Accordion from "react-bootstrap/Accordion";
+import ReactMarkdown from "react-markdown";
 
 function Description(props) {
   return (
@@ -10,7 +11,9 @@ function Description(props) {
           <Paragraph color={"#02a6b5"} fontWeight={"bold"} className={"d-none d-md-block"}>
             Description
           </Paragraph>
-          <p className={"ps-2 pe-2"}>{props.description}</p>
+          <div className={"ps-2 pe-2"}>
+            <ReactMarkdown>{props.description}</ReactMarkdown>
+          </div>
         </Accordion.Body>
       </Accordion.Item>
     </Accordion>

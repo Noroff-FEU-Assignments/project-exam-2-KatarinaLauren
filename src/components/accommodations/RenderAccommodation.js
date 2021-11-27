@@ -3,11 +3,8 @@ import AccommodationItem from "./AccommodationItem";
 import Alert from "react-bootstrap/Alert";
 import Container from "react-bootstrap/Container";
 import Spinner from "react-bootstrap/Spinner";
-import { BaseUrl } from "../../constants/api";
+import { AccUrl } from "../../constants/api";
 import Filters from "./Filters";
-
-const url = BaseUrl;
-const accUrl = url + "/accommodations";
 
 class RenderAccommodation extends React.Component {
   constructor(props) {
@@ -27,13 +24,14 @@ class RenderAccommodation extends React.Component {
   }
 
   componentDidMount() {
-    fetch(accUrl)
+    fetch(AccUrl)
       .then((res) => res.json())
       .then(
         (result) => {
           // console.log(result);
           const facilities = result[0].facilities;
-          const facilityNames = Object.keys(facilities);
+          console.log(facilities[0]);
+          const facilityNames = Object.keys(facilities[0]);
           facilityNames.shift();
           this.setState({
             isLoaded: true,
@@ -106,9 +104,9 @@ class RenderAccommodation extends React.Component {
               .filter((item) => this.filterBooking(item))
               .map(function (item) {
                 const imageUrl = item.images[0].url;
-                const image = url + imageUrl;
+                // const image = url + imageUrl;
                 const { id, name, location, room_rate } = item;
-                return <AccommodationItem key={id} id={id} name={name} location={location} rate={room_rate} image={image} />;
+                return <AccommodationItem key={id} id={id} name={name} location={location} rate={room_rate} image={imageUrl} />;
               })}
           </div>
         </Container>

@@ -3,12 +3,11 @@ import Container from "react-bootstrap/Container";
 import Accordion from "react-bootstrap/Accordion";
 import Spinner from "react-bootstrap/Spinner";
 import { GetData } from "../../utilities/GetData";
-import { BaseUrl } from "../../constants/api";
+import { InspirationUrl } from "../../constants/api";
 import PageHeading from "../layout/PageHeading";
-const url = BaseUrl;
 
 function Inspiration() {
-  const { data, error, isLoaded } = GetData(url + "/inspirations");
+  const { data, error, isLoaded } = GetData(InspirationUrl);
   // console.log(data);
 
   if (error !== null) {
@@ -29,7 +28,7 @@ function Inspiration() {
       <Container className="d-flex flex-wrap cardgroup">
         {data.map((item) => (
           <Card key={item.id} className="m-auto mt-5 mb-5 cardgroup__card--wide align-self-start">
-            <Card.Img variant="top" src={url + item.image.url} />
+            <Card.Img variant="top" src={item.image.url} />
             <Card.Body>
               <Card.Title>{item.title}</Card.Title>
               <Accordion flush>

@@ -6,33 +6,38 @@ function MessageItem({ id, date, name, email, phone, message }) {
   return (
     <Accordion.Item eventKey={id}>
       <Accordion.Header>
-        <i className="far fa-envelope ps-3"></i>
-
-        <p className="ms-4">{formattedDate}</p>
+        <div className="w-100 d-flex flex-row justify-content-between pe-2 pe-md-5 ps-md-3 align-items-center">
+          <i className="fas fa-envelope"></i>
+          {name}
+          <p className="accordion__header--date">{formattedDate}</p>
+        </div>
       </Accordion.Header>
       <Accordion.Body>
-        <p>
+        <p className="accordion__item--bottomBorder">
           <label>
             {" "}
             <i className="fas fa-user"> </i>
           </label>
           {name}
         </p>
-        <p>
+        <p className="accordion__item--bottomBorder">
           <label>
             {" "}
             <i className="fas fa-envelope-open"> </i>
           </label>
           {email}
         </p>
-        <p>
+        <p className="accordion__item--bottomBorder">
           <label>
             <i className="fas fa-phone-alt"></i>
           </label>
           {phone}
         </p>
-        <p className="message__p--no_border">
-          <label className="w-100 pb-3">Message: </label>
+        <p>
+          <label className="w-100 pb-2">
+            {" "}
+            <i className="fas fa-comment-dots"></i>
+          </label>
           {message}
         </p>
       </Accordion.Body>

@@ -1,6 +1,5 @@
 import { useState, useEffect } from "react";
 import { useParams, useHistory } from "react-router-dom";
-import { getFromStorage } from "../../../utilities/localStorage/localStorageFunctions";
 import Alert from "react-bootstrap/Alert";
 import Container from "react-bootstrap/Container";
 import Description from "./Description";
@@ -14,7 +13,8 @@ import Location from "./Location";
 import Info from "./Info";
 import ContactInfo from "./ContactInfo";
 import BookingModal from "./BookingModal";
-import { accommodationKey } from "../../../constants/keys";
+import axios from "axios";
+import { AccUrl } from "../../../constants/api";
 
 function Details() {
   const [data, setData] = useState(null);
@@ -32,19 +32,30 @@ function Details() {
     history.push("/");
   }
 
-  useEffect(
-    function () {
-      const accommodations = getFromStorage(accommodationKey);
-      if (accommodations.length > 0) {
-        const accDetails = accommodations.filter((acc) => acc.id === parseInt(id));
-        setData(accDetails[0]);
-      } else {
-        setError("An error occured");
-      }
-      setLoading(false);
-    },
-    [id]
-  );
+  useEffect(() => {
+    const fetchData = () => {
+      setLoading(true);
+      axios
+        .get(AccUrl)
+        .then((response) => {
+          console.log(response.data);
+          const accommodations = response.data;
+          const accDetails = accommodations.filter((acc) => acc.id === parseInt(id));
+          setData(accDetails[0]);
+          setError(null);
+          setLoading(false);
+        })
+        .catch((error) => {
+          // console.log(error);
+          setError(error);
+          setLoading(false);
+        })
+        .finally(() => {
+          setLoading(false);
+        });
+    };
+    fetchData();
+  }, [id]);
 
   if (loading) {
     return <Spinner animation="border" variant="primary" />;
@@ -59,8 +70,9 @@ function Details() {
   }
 
   const hotelImages = data.images;
-  const facilities = data.facilities;
-  // console.log(data);
+  console.log(data.images);
+  const facilities = data.facilities[0];
+  // console.log(data.facilities);
   return (
     <>
       <BookingModal show={show} closeFunction={handleClose} accName={data.name} />

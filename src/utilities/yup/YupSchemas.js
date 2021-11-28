@@ -13,3 +13,25 @@ export const propertySchema = yup.object().shape({
   email: yup.string().email("Please enter a valid email address").required("Please enter the email address of the property"),
   facilities: yup.object().required(),
 });
+
+const date = new Date();
+const tomorrow = new Date(date);
+tomorrow.setDate(tomorrow.getDate() + 1);
+
+export const bookingEnquirySchema = yup.object().shape({
+  accommodation: yup.mixed().notOneOf(["select", ""]),
+  checkin_date: yup.date().nullable().required().min(date),
+  checkout_date: yup.date().nullable().required().min(tomorrow),
+  number_of_guests: yup.number(),
+  customer_name: yup.string().min(4, "Must be minimum 4 characters long").required("Please enter your name"),
+  email: yup.string().email("Please enter a valid email address").required("Please enter an email address"),
+  phone_number: yup.number().required(),
+  message: yup.string(),
+});
+
+export const contactSchema = yup.object().shape({
+  name: yup.string().min(4, "Must be minimum 4 characters long").required("Please enter your name"),
+  email: yup.string().email("Please enter a valid email address").required("Please enter an email address"),
+  phone: yup.number().required(),
+  message: yup.string(),
+});

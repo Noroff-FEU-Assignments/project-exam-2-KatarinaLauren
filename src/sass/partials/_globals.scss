@@ -46,3 +46,12 @@ footer {
 .bold {
   font-weight: bold;
 }
+input,
+select,
+textarea {
+  box-shadow: 0 0 5px lighten($secondary-color, 20%);
+}
+
+input.form-check-input {
+  box-shadow: none;
+}

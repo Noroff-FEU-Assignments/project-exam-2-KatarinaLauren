@@ -1,11 +1,20 @@
 .cardgroup a {
   .card {
     width: 300px;
-    border: none;
+    border: 2px solid $light;
+    border-radius: 0;
+
+    &:hover {
+      box-shadow: 0 0 5px darken($light, 10%);
+      border: none;
+    }
 
     &:focus,
     &:active {
       outline: 3px solid $accent-color;
+    }
+    .card-img-top {
+      border-radius: 0;
     }
   }
   .cardgroup__overview {

@@ -4,9 +4,9 @@ import { useEffect } from "react";
 import Form from "react-bootstrap/Form";
 import FormError from "../../layout/FormError";
 import Paragraph from "../../layout/Paragraph";
+import { propertySchema } from "../../../utilities/yup/YupSchemas";
 import { getFromStorage } from "../../../utilities/localStorage/localStorageFunctions";
 import { facilitiesKey } from "../../../constants/keys";
-import { propertySchema } from "../../../utilities/yup/YupSchemas";
 
 const facilities = getFromStorage(facilitiesKey);
 

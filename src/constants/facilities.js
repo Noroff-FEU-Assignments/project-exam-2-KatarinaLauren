@@ -3,7 +3,7 @@ import { saveToStorage } from "../utilities/localStorage/localStorageFunctions";
 import { AccUrl } from "./api";
 import { facilitiesKey } from "./keys";
 
-function getFacilities() {
+export function getFacilities() {
   axios
     .get(AccUrl)
     .then((response) => {
@@ -13,11 +13,8 @@ function getFacilities() {
       console.log(facilityNames);
       facilityNames.shift();
       saveToStorage(facilitiesKey, facilityNames);
-      return facilityNames.shift();
     })
     .catch((error) => {
       console.log(error);
     });
 }
-
-getFacilities();

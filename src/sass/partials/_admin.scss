@@ -14,14 +14,38 @@
 }
 
 // DASHBOARD
-
-.admindash__container {
+.adminNav__container {
   background: #fff;
-  max-width: 300px;
-  margin: 0 auto;
+}
 
-  a .btn-outline-primary {
-    font-weight: 400;
-    width: 90%;
+.adminNav__container__div {
+  width: 90%;
+  max-width: 900px;
+  margin: 0 auto;
+  @media (min-width: 768px) {
+    text-align: center;
   }
+  .nav-link .active {
+    font-weight: bold;
+  }
+
+  a {
+    font-size: 0.9em;
+    color: $text-color;
+    font-weight: 400;
+    padding: 0.5em;
+    min-width: 150px;
+    @media (min-width: 540px) {
+      min-width: 0;
+    }
+
+    i {
+      color: $primary-color;
+      font-size: 1.1em;
+    }
+  }
+}
+.adminNav__container__div a.active {
+  color: $primary-color;
+  font-weight: 500;
 }

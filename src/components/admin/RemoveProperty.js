@@ -10,11 +10,11 @@ import { accommodationKey, authKey } from "../../constants/keys";
 import SuccessMessage from "../layout/SuccessMessage";
 import FormMessages from "../layout/FormMessages";
 import Button from "react-bootstrap/Button";
-
-const authData = getFromStorage(authKey);
-const authJWT = authData.jwt;
+import AdminDashboard from "./AdminDashboard";
 
 function RemoveProperty() {
+  const authData = getFromStorage(authKey);
+  const authJWT = authData.jwt;
   const [defaultValues, setDefaultValues] = useState([]);
   const [error, setError] = useState(null);
   const [message, setMessage] = useState(null);
@@ -76,7 +76,7 @@ function RemoveProperty() {
       }
       deleteData();
     }
-  }, [deleteItem]);
+  }, [deleteItem, authJWT]);
 
   //UPDATE PROPERTY
 
@@ -106,7 +106,7 @@ function RemoveProperty() {
       }
       updateData();
     }
-  }, [data]);
+  }, [data, authJWT]);
 
   useEffect(() => {
     const fetchData = () => {
@@ -132,25 +132,27 @@ function RemoveProperty() {
   };
 
   return (
-    <Container>
-      <PageHeading className="text-center mt-5 mb-5">Edit or Remove a property</PageHeading>
-      <SearchBar onSelect={handleOnSelect} items={searchItems} />
+    <AdminDashboard>
+      <Container>
+        <PageHeading className="text-center mt-5 mb-5">EDIT OR REMOVE PROPERTY</PageHeading>
+        <SearchBar onSelect={handleOnSelect} items={searchItems} />
 
-      <FormMessages error={error} message={message} loading={loading} />
-      {deleteMessage && <SuccessMessage>Property has been removed.</SuccessMessage>}
+        <FormMessages error={error} message={message} loading={loading} />
+        {deleteMessage && <SuccessMessage>Property has been removed.</SuccessMessage>}
 
-      <PropertyForm key={defaultValues} onSubmit={onSubmit} reset={defaultValues} disabled={disabled} onDelete={onDelete}>
-        <Button variant="success" type="submit" className="mt-4 pe-5 ps-5">
-          Edit Property
-        </Button>
-        <Button variant="danger" className="mt-4 pe-5 ps-5 ms-md-4" onClick={onDelete}>
-          Delete
-        </Button>
-      </PropertyForm>
+        <PropertyForm key={defaultValues} onSubmit={onSubmit} reset={defaultValues} disabled={disabled} onDelete={onDelete}>
+          <Button variant="success" type="submit" className="mt-4 pe-5 ps-5">
+            Edit Property
+          </Button>
+          <Button variant="danger" className="mt-4 pe-5 ps-5 ms-md-4" onClick={onDelete}>
+            Delete
+          </Button>
+        </PropertyForm>
 
-      <FormMessages error={error} message={message} loading={loading} />
-      {deleteMessage && <SuccessMessage>Property has been removed.</SuccessMessage>}
-    </Container>
+        <FormMessages error={error} message={message} loading={loading} />
+        {deleteMessage && <SuccessMessage>Property has been removed.</SuccessMessage>}
+      </Container>
+    </AdminDashboard>
   );
 }
 

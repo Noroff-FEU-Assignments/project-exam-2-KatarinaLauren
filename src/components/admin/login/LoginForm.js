@@ -1,6 +1,5 @@
 import { BaseUrl } from "../../../constants/api";
 import { useState, useContext } from "react";
-import { useHistory } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
@@ -20,8 +19,6 @@ const schema = yup.object().shape({
 export default function LoginForm() {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
-
-  const history = useHistory();
 
   const {
     register,
@@ -44,7 +41,6 @@ export default function LoginForm() {
 
       console.log("response", response.data);
       setAuth(response.data);
-      history.push("/dashboard");
     } catch (error) {
       console.log("error", error);
       setError(true);

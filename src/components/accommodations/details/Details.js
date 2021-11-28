@@ -71,7 +71,7 @@ function Details() {
 
   const hotelImages = data.images;
   console.log(data.images);
-  const facilities = data.facilities[0];
+  const facilities = data.facilities;
   // console.log(data.facilities);
   return (
     <>

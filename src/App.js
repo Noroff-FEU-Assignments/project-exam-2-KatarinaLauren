@@ -19,6 +19,9 @@ import { BaseUrl } from "./constants/api";
 import { saveToStorage } from "./utilities/localStorage/localStorageFunctions";
 import { accommodationKey } from "./constants/keys";
 import "./sass/style.scss";
+import { getFacilities } from "./constants/facilities";
+
+getFacilities();
 
 function App() {
   const { data } = GetData(BaseUrl + "/accommodations");

@@ -13,7 +13,7 @@ export default function Location(props) {
   };
 
   return (
-    <div style={{ height: "320px", width: "320px" }} className={"details__map"}>
+    <div style={{ height: "320px", width: "350px" }} className={"details__map"}>
       <GoogleMapReact bootstrapURLKeys={{ key: "AIzaSyB470ELeGCSANQpmIBA3JNtcJVP2OvZARo" }} defaultCenter={defaultProps.center} defaultZoom={defaultProps.zoom} yesIWantToUseGoogleMapApiInternals>
         <AnyReactComponent lat={defaultProps.center.lat} lng={defaultProps.center.lng} text={<i class="fas fa-map-marker-alt"></i>} />
       </GoogleMapReact>

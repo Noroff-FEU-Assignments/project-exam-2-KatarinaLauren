@@ -9,11 +9,12 @@ import { AccUrl } from "../../constants/api";
 import { accommodationKey, authKey } from "../../constants/keys";
 import FormMessages from "../layout/FormMessages";
 import Button from "react-bootstrap/Button";
-
-const authData = getFromStorage(authKey);
-const authJWT = authData.jwt;
+import AdminDashboard from "./AdminDashboard";
 
 function AddProperty() {
+  const authData = getFromStorage(authKey);
+  const authJWT = authData.jwt;
+
   const [reset, setReset] = useState("");
   const [error, setError] = useState(null);
   const [loading, setLoading] = useState(false);
@@ -53,7 +54,7 @@ function AddProperty() {
       }
       postData();
     }
-  }, [data, reset]);
+  }, [data, reset, authJWT]);
 
   useEffect(() => {
     if (message) {
@@ -72,16 +73,18 @@ function AddProperty() {
   }, [message]);
 
   return (
-    <Container>
-      <PageHeading className="text-center mt-5">Add property</PageHeading>
-      <FormMessages error={error} message={message} loading={loading} />
-      <PropertyForm key={data} onSubmit={onSubmit} reset={reset} disabled={disabled}>
-        <Button variant="success" type="submit" className="mt-4 mb-4 pe-5 ps-5">
-          Add property
-        </Button>
-      </PropertyForm>
-      <FormMessages error={error} message={message} loading={loading} />
-    </Container>
+    <AdminDashboard>
+      <Container>
+        <PageHeading className="text-center mt-5">ADD PROPERTY</PageHeading>
+        <FormMessages error={error} message={message} loading={loading} />
+        <PropertyForm key={data} onSubmit={onSubmit} reset={reset} disabled={disabled}>
+          <Button variant="success" type="submit" className="mt-4 mb-4 pe-5 ps-5">
+            Add property
+          </Button>
+        </PropertyForm>
+        <FormMessages error={error} message={message} loading={loading} />
+      </Container>
+    </AdminDashboard>
   );
 }
 

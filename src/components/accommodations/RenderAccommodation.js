@@ -5,6 +5,10 @@ import Container from "react-bootstrap/Container";
 import Spinner from "react-bootstrap/Spinner";
 import { AccUrl } from "../../constants/api";
 import Filters from "./Filters";
+import { getFromStorage } from "../../utilities/localStorage/localStorageFunctions";
+import { facilitiesKey } from "../../constants/keys";
+
+// const facilities = getFromStorage(facilitiesKey);
 
 class RenderAccommodation extends React.Component {
   constructor(props) {
@@ -15,7 +19,7 @@ class RenderAccommodation extends React.Component {
       isLoaded: false,
       facilitiesFilter: {},
       items: [],
-      availableFilters: [],
+      availableFilters: getFromStorage(facilitiesKey),
     };
 
     this.filterBooking = this.filterBooking.bind(this);
@@ -29,14 +33,14 @@ class RenderAccommodation extends React.Component {
       .then(
         (result) => {
           // console.log(result);
-          const facilities = result[0].facilities;
-          console.log(facilities[0]);
-          const facilityNames = Object.keys(facilities[0]);
-          facilityNames.shift();
+          // const facilities = result[0].facilities;
+
+          // const facilityNames = Object.keys(facilities);
+          // facilityNames.shift();
           this.setState({
             isLoaded: true,
             items: result,
-            availableFilters: facilityNames,
+            // availableFilters: facilityNames,
           });
         },
 

@@ -84,8 +84,8 @@ function Footer() {
           <div className="position-absolute bottom-0 end-0">
             {auth ? (
               <>
-                <Link to="/dashboard" className="me-3">
-                  Admin dashboard
+                <Link to="/admin" className="me-3">
+                  Admin
                 </Link>
                 <Button variant="outline-white" onClick={logout} className="me-3 mb-2">
                   Log out

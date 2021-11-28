@@ -18,8 +18,9 @@ import { GetData } from "./utilities/GetData";
 import { BaseUrl } from "./constants/api";
 import { saveToStorage } from "./utilities/localStorage/localStorageFunctions";
 import { accommodationKey } from "./constants/keys";
-import "./sass/style.scss";
 import { getFacilities } from "./constants/facilities";
+import TestPage from "./TestPage";
+import "./sass/style.scss";
 
 getFacilities();
 
@@ -47,6 +48,7 @@ function App() {
               <Route path="/remove" component={RemoveProperty} />
               <Route path="/enquiries" component={ReadEnquiries} />
               <Route path="/messages" component={ReadMessages} />
+              <Route path="/test" component={TestPage} />
             </Switch>
           </div>
         </div>

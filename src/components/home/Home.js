@@ -52,8 +52,8 @@ function Home() {
         </PageHeading>
         <div className="mt-5">{error ? <div></div> : <SearchBar onSelect={handleOnSelect} items={items} />}</div>
       </Hero>
-      <div className={"home__div"}>
-        <Paragraph className={"text-center p-4 mb-1 home__div__paragraph"}>Find your ideal accommodation in and around the city</Paragraph>
+      <div>
+        <Paragraph className={"text-center p-4 mb-1 home__div__paragraph"}>Find your ideal accommodation in and around the city!</Paragraph>
 
         <Link to="/booking" className=" nav-link">
           <Button variant="success" className="d-block m-auto" size="lg">

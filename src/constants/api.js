@@ -1,4 +1,5 @@
 export const BaseUrl = "https://strapihost.herokuapp.com";
+
 // export const BaseUrl = "http://localhost:1337";
 
 export const AccUrl = BaseUrl + "/accommodations";

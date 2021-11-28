@@ -10,7 +10,7 @@ export function getFacilities() {
       const data = response.data;
       const facilityData = data[0].facilities;
       const facilityNames = Object.keys(facilityData);
-      console.log(facilityNames);
+      // console.log(facilityNames);
       facilityNames.shift();
       saveToStorage(facilitiesKey, facilityNames);
     })

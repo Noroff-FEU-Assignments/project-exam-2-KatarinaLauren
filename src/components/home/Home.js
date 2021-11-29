@@ -4,7 +4,6 @@ import Hero from "../layout/Hero";
 import heroImage from "../../images/home.jpg";
 import Button from "react-bootstrap/Button";
 import Container from "react-bootstrap/Container";
-import Paragraph from "../layout/Paragraph";
 import SearchBar from "../searchBar/SearchBar";
 import InspirationCards from "./InspirationCards";
 import AccommodationOverview from "./AccommodationOverview";

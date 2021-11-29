@@ -20,7 +20,7 @@ function TestPage() {
     formData.append("files", files[0]);
 
     axios
-      .post(BaseUrl + "/upload", formData, {
+      .put(BaseUrl + "/upload", formData, {
         headers: {
           Authorization: "Bearer " + authJWT,
         },
@@ -29,8 +29,8 @@ function TestPage() {
         console.log(response.data[0].id);
         const imageId = response.data[0].id;
         axios
-          .put(
-            AccUrl + "/68",
+          .post(
+            AccUrl + "/77",
             { images: imageId },
             {
               headers: {

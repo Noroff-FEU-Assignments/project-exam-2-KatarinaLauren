@@ -3,7 +3,6 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import { useEffect } from "react";
 import Form from "react-bootstrap/Form";
 import FormError from "../../layout/FormError";
-import Paragraph from "../../layout/Paragraph";
 import { propertySchema } from "../../../utilities/yup/YupSchemas";
 import { getFromStorage } from "../../../utilities/localStorage/localStorageFunctions";
 import { facilitiesKey } from "../../../constants/keys";
@@ -21,22 +20,15 @@ function PropertyForm(props) {
     resolver: yupResolver(propertySchema),
   });
 
-  // FETCH UPDATED DATA AND SET TO LOCAL STORAGE //
-
   useEffect(() => {
     if (props.reset) {
       reset(props.reset);
     }
   }, [props.reset, reset]);
 
-  // GET FACILITY NAMES //
-
   return (
     <>
-      <Form className="property__form p-5 pt-2   m-auto mb-5 mt-5" onSubmit={handleSubmit(props.onSubmit)}>
-        <Paragraph className="fst-italic text-center mb-4 pt-3" color="#a6adb4">
-          All fields are required*
-        </Paragraph>
+      <Form className="property__form p-2 p-sm-3 p-md-5 pt-md-2 m-auto mb-5" onSubmit={handleSubmit(props.onSubmit)}>
         <fieldset disabled={props.disabled}>
           <Form.Group className="d-none" controlId="ControlInput1">
             <Form.Label>Id</Form.Label>
@@ -116,7 +108,7 @@ function PropertyForm(props) {
             {errors.description && <FormError>{errors.description.message}</FormError>}
           </Form.Group>
 
-          <Form.Group className="mb-3 d-flex flex-wrap justify-content-between justify-content-md-start" controlId="formBasicCheckbox">
+          <Form.Group className="mb-3 d-flex flex-wrap justify-content-start" controlId="formBasicCheckbox">
             <Form.Label>Facilities</Form.Label>
             <Form.Text className="d-block mt-0" muted>
               Check the facilities that are available at your accommodation. Leave the other ones empty.
@@ -145,7 +137,7 @@ function PropertyForm(props) {
             })}
           </Form.Group>
 
-          <div className="text-center text-md-end">{props.children}</div>
+          <div className="text-end">{props.children}</div>
         </fieldset>
       </Form>
     </>

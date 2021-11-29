@@ -52,17 +52,14 @@ function Home() {
         </PageHeading>
         <div className="mt-5">{error ? <div></div> : <SearchBar onSelect={handleOnSelect} items={items} />}</div>
       </Hero>
-      <div>
-        <Paragraph className={"text-center p-4 mb-1 home__div__paragraph"}>Find your ideal accommodation in and around the city!</Paragraph>
+      <Link to="/booking" className="nav-link mt-4">
+        <Button variant="success" className="d-block m-auto pe-5 ps-5" size="lg">
+          Book a room
+        </Button>
+      </Link>
 
-        <Link to="/booking" className=" nav-link">
-          <Button variant="success" className="d-block m-auto" size="lg">
-            Book a room
-          </Button>
-        </Link>
-      </div>
       <Container>
-        <h3 className="mb-4 mt-5">INSPIRATION</h3>
+        <h3 className="mb-4 mt-4">INSPIRATION</h3>
         <div className="home__div mt-3 p-4">
           <InspirationCards />
         </div>

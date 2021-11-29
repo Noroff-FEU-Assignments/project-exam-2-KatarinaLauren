@@ -135,22 +135,24 @@ function RemoveProperty() {
     <AdminDashboard>
       <Container>
         <PageHeading className="text-center mt-5 mb-5">EDIT OR REMOVE PROPERTY</PageHeading>
-        <SearchBar onSelect={handleOnSelect} items={searchItems} />
+        <div className="div--bgWhite property__div pt-5 mt-4">
+          <FormMessages error={error} message={message} loading={loading} />
+          {deleteMessage && <SuccessMessage>Property has been removed.</SuccessMessage>}
+          <SearchBar onSelect={handleOnSelect} items={searchItems} />
+          <PropertyForm key={defaultValues} onSubmit={onSubmit} reset={defaultValues} disabled={disabled} onDelete={onDelete}>
+            <div className="mb-5">
+              <Button variant="success" type="submit" className="mt-4 pe-3 ps-3">
+                Edit Property
+              </Button>
+              <Button variant="danger" className="mt-4 pe-3 ps-3 ms-2 ms-md-4" onClick={onDelete}>
+                Delete
+              </Button>
+            </div>
+          </PropertyForm>
 
-        <FormMessages error={error} message={message} loading={loading} />
-        {deleteMessage && <SuccessMessage>Property has been removed.</SuccessMessage>}
-
-        <PropertyForm key={defaultValues} onSubmit={onSubmit} reset={defaultValues} disabled={disabled} onDelete={onDelete}>
-          <Button variant="success" type="submit" className="mt-4 pe-5 ps-5">
-            Edit Property
-          </Button>
-          <Button variant="danger" className="mt-4 pe-5 ps-5 ms-md-4" onClick={onDelete}>
-            Delete
-          </Button>
-        </PropertyForm>
-
-        <FormMessages error={error} message={message} loading={loading} />
-        {deleteMessage && <SuccessMessage>Property has been removed.</SuccessMessage>}
+          <FormMessages error={error} message={message} loading={loading} />
+          {deleteMessage && <SuccessMessage>Property has been removed.</SuccessMessage>}
+        </div>
       </Container>
     </AdminDashboard>
   );

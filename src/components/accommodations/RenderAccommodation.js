@@ -108,7 +108,6 @@ class RenderAccommodation extends React.Component {
               .filter((item) => this.filterBooking(item))
               .map(function (item) {
                 const imageUrl = item.images[0].url;
-                // const image = url + imageUrl;
                 const { id, name, location, room_rate } = item;
                 return <AccommodationItem key={id} id={id} name={name} location={location} rate={room_rate} image={imageUrl} />;
               })}

@@ -79,9 +79,9 @@ function Details() {
                   Book a room
                 </Button>
 
-                <div className={"details__container__contact p-4 d-flex flex-row flex-wrap align-items-start"}>
+                <div className={"details__container__contact p-4 d-flex flex-row flex-wrap justify-content-center"}>
                   <ContactInfo address={data.address} phone={data.phone} email={data.email} />
-                  <div className={"ps-md-4 ps-lg-0"}>
+                  <div className={""}>
                     <Paragraph color={"#02a6b5"} fontWeight={"bold"} className={"mt-4 mt-md-0"}>
                       Location
                     </Paragraph>

@@ -6,7 +6,7 @@ import heroImage from "../../images/accommodation/accommodation_hero.jpg";
 
 function Accommodations() {
   return (
-    <div className={"h-100"}>
+    <div className={"h-100 accommodation__container"}>
       <Hero image={heroImage}>
         <PageHeading color={"#fff"}>ACCOMMODATIONS</PageHeading>
       </Hero>

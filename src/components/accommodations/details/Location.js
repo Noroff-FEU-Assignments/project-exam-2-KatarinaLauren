@@ -4,10 +4,13 @@ import GoogleMapReact from "google-map-react";
 const AnyReactComponent = ({ text }) => <div>{text}</div>;
 
 export default function Location(props) {
+  let latitude = props.latitude;
+  let longitude = props.longitude;
+
   const defaultProps = {
     center: {
-      lat: props.latitude,
-      lng: props.longitude,
+      lat: latitude,
+      lng: longitude,
     },
     zoom: 11,
   };
@@ -15,7 +18,7 @@ export default function Location(props) {
   return (
     <div style={{ height: "320px", width: "350px" }} className={"details__map"}>
       <GoogleMapReact bootstrapURLKeys={{ key: "AIzaSyB470ELeGCSANQpmIBA3JNtcJVP2OvZARo" }} defaultCenter={defaultProps.center} defaultZoom={defaultProps.zoom} yesIWantToUseGoogleMapApiInternals>
-        <AnyReactComponent lat={defaultProps.center.lat} lng={defaultProps.center.lng} text={<i class="fas fa-map-marker-alt"></i>} />
+        <AnyReactComponent lat={defaultProps.center.lat} lng={defaultProps.center.lng} text={<i className="fas fa-map-marker-alt"></i>} />
       </GoogleMapReact>
     </div>
   );

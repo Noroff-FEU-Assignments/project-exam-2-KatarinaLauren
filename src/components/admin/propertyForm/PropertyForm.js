@@ -2,7 +2,7 @@ import { useForm, Controller } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { useEffect } from "react";
 import Form from "react-bootstrap/Form";
-import FormError from "../../layout/FormError";
+import FormError from "../../layout/messages/FormError";
 import { propertySchema } from "../../../utilities/yup/YupSchemas";
 import { getFromStorage } from "../../../utilities/localStorage/localStorageFunctions";
 import { facilitiesKey } from "../../../constants/keys";
@@ -15,6 +15,7 @@ function PropertyForm(props) {
     handleSubmit,
     reset,
     control,
+    defaultValue,
     formState: { errors },
   } = useForm({
     resolver: yupResolver(propertySchema),
@@ -118,19 +119,10 @@ function PropertyForm(props) {
                 <Controller
                   key={name}
                   control={control}
+                  defaultValue={false}
                   name={`facilities.${name}`}
-                  render={({ field: { value, onChange } }) => (
-                    <Form.Check
-                      {...register(`facilities.${name}`)}
-                      type="checkbox"
-                      id={name}
-                      name={name}
-                      label={name}
-                      checked={value}
-                      onChange={(e) => {
-                        onChange(e.target.checked);
-                      }}
-                    />
+                  render={({ field }) => (
+                    <Form.Check {...register(`facilities.${name}`)} type="checkbox" id={name} name={name} label={name} onChange={(e) => field.onChange(e.target.checked)} checked={field.value} />
                   )}
                 />
               );

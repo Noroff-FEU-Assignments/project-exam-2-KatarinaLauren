@@ -40,7 +40,7 @@ function EnquiryItem({ id, date, accommodation, checkin, checkout, numberOfGuest
 
         <p className="accordion__item--bottomBorder">
           <label>
-            <i class="fas fa-users"></i>
+            <i className="fas fa-users"></i>
           </label>
           {numberOfGuests} <label className="ms-2">person(s)</label>
         </p>

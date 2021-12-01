@@ -5,12 +5,12 @@ import Form from "react-bootstrap/Form";
 import Alert from "react-bootstrap/Alert";
 import Button from "react-bootstrap/Button";
 import Container from "react-bootstrap/Container";
-import FormError from "../layout/FormError";
+import FormError from "../layout/messages/FormError";
 import ContactMessage from "./ContactMessage";
 import { Link } from "react-router-dom";
 import { MessageUrl } from "../../constants/api";
 import axios from "axios";
-import FormMessages from "../layout/FormMessages";
+import ErrorLoadingMessage from "../layout/messages/ErrorLoadingMessage";
 import { contactSchema } from "../../utilities/yup/YupSchemas";
 import ContactError from "./ContactError";
 
@@ -47,6 +47,7 @@ function ContactForm() {
           })
           .finally(() => {
             setLoading(false);
+            window.scrollTo(0, 0);
           });
       }
       postData();
@@ -71,7 +72,7 @@ function ContactForm() {
           </p>
         </div>
       </Alert>
-      <FormMessages error={error} message={message} loading={loading} />
+      <ErrorLoadingMessage error={error} message={message} loading={loading} />
 
       <Form onSubmit={handleSubmit(onSubmit)}>
         <Form.Group className="mb-2" controlId="ControlInput1">

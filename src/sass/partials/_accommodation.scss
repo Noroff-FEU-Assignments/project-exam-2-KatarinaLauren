@@ -1,19 +1,9 @@
 .accommodation__card {
-  width: 250px;
-  margin: 2rem auto;
-  color: $text-color;
+  width: 270px;
   border: none;
   @media (min-width: 768px) {
-    width: 80%;
-
-    .card-body {
-      padding-left: 3rem;
-      padding-right: 3rem;
-    }
-    @media (min-width: 992px) {
-      width: 100%;
-      max-width: 700px;
-    }
+    width: 100%;
+    max-width: 700px;
   }
 
   .card__text--location {
@@ -21,14 +11,23 @@
   }
   .card__text--rate {
     font-weight: bold;
+    color: $accent-color;
+    position: absolute;
+    text-align: right;
+    bottom: 0;
+    right: 0;
+    @media (min-width: 768px) {
+      top: 0;
+    }
   }
   .h5 {
     font-family: "Open Sans", sans-serif;
     font-weight: bold;
+    color: $text-color;
   }
 
   .card-img-top {
-    height: 200px;
-    width: 250px;
+    height: 220px;
+    width: 270px;
   }
 }

@@ -3,7 +3,7 @@ import axios from "axios";
 
 export const GetData = (url) => {
   const [data, setData] = useState([]);
-  const [isLoaded, setIsLoaded] = useState(false);
+  const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
   useEffect(() => {
@@ -11,15 +11,17 @@ export const GetData = (url) => {
       axios
         .get(url)
         .then((response) => {
-          setIsLoaded(true);
           setData(response.data);
         })
         .catch((error) => {
           setError(error);
+        })
+        .finally(() => {
+          setLoading(false);
         });
     };
     fetchData();
   }, [url]);
 
-  return { error, isLoaded, data };
+  return { error, loading, data };
 };

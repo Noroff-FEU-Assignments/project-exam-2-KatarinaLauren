@@ -24,7 +24,7 @@ function Footer() {
           </div>
           <ul className="list-unstyled m-md-3">
             <li>
-              <Link to="/" exact className="nav-link">
+              <Link to="/" exact="true" className="nav-link">
                 Home
               </Link>
             </li>
@@ -68,23 +68,23 @@ function Footer() {
           </ul>
           <div className="align-self-center mb-5 pb-3 m-md-0 p-md-0 mt-3 d-flex">
             <a href="#!" className="p-3">
-              <i class="fab fa-facebook-f"></i>
+              <i className="fab fa-facebook-f"></i>
             </a>
 
             <a href="#!" className="p-3">
-              <i class="fab fa-twitter"></i>
+              <i className="fab fa-twitter"></i>
             </a>
             <a href="#!" className="p-3">
-              <i class="fab fa-instagram"></i>
+              <i className="fab fa-instagram"></i>
             </a>
             <a href="#!" className="p-3">
-              <i class="fas fa-globe-americas"></i>
+              <i className="fas fa-globe-americas"></i>
             </a>
           </div>
           <div className="position-absolute bottom-0 end-0">
             {auth ? (
               <>
-                <Link to="/admin" className="me-3">
+                <Link to="/admin" className="me-3" onClick={() => window.scrollTo(0, 0)}>
                   Admin
                 </Link>
                 <Button variant="outline-white" onClick={logout} className="me-3 mb-2">

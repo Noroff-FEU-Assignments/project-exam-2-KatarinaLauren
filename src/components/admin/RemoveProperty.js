@@ -7,10 +7,12 @@ import axios from "axios";
 import { AccUrl } from "../../constants/api";
 import { getFromStorage, saveToStorage } from "../../utilities/localStorage/localStorageFunctions";
 import { accommodationKey, authKey } from "../../constants/keys";
-import SuccessMessage from "../layout/SuccessMessage";
-import FormMessages from "../layout/FormMessages";
+import SuccessMessage from "../layout/messages/SuccessMessage";
+import ErrorLoadingMessage from "../layout/messages/ErrorLoadingMessage";
 import Button from "react-bootstrap/Button";
 import AdminDashboard from "./AdminDashboard";
+import { confirmAlert } from "react-confirm-alert";
+import "react-confirm-alert/src/react-confirm-alert.css";
 
 function RemoveProperty() {
   const authData = getFromStorage(authKey);
@@ -34,16 +36,28 @@ function RemoveProperty() {
   }
 
   function onDelete(e) {
-    if (window.confirm("Are you sure you wish to delete this property?")) {
-      const id = e.target.form[1].value;
-      setLoading(true);
-      setError(null);
-      setMessage(null);
-      setDeleteMessage(false);
-      setDeleteItem(id);
-    }
+    confirmAlert({
+      title: "Delete Property",
+      message: "Are you sure you want to remove the property? All data will be lost.",
+      buttons: [
+        {
+          label: "Yes",
+          onClick: () => {
+            const id = e.target.form[1].value;
+            setLoading(true);
+            setError(null);
+            setMessage(null);
+            setDeleteMessage(false);
+            setDeleteItem(id);
+          },
+        },
+        {
+          label: "No",
+          onClick: () => {},
+        },
+      ],
+    });
   }
-
   // DELETE PROPERTY
   useEffect(() => {
     if (deleteItem > 0) {
@@ -53,7 +67,7 @@ function RemoveProperty() {
 
       async function deleteData() {
         try {
-          const response = await axios.delete(
+          await axios.delete(
             idUrl,
 
             {
@@ -63,10 +77,11 @@ function RemoveProperty() {
             }
           );
 
-          console.log("DELETED", response.data);
+          // console.log("DELETED", response.data);
           setDeleteMessage(true);
+          setDisabled(true);
         } catch (error) {
-          console.log("error", error);
+          // console.log("error", error);
           setError("Something went wrong. Please try again or go to our contact page and let us know if the problem persists.");
         } finally {
           setLoading(false);
@@ -88,16 +103,16 @@ function RemoveProperty() {
 
       async function updateData() {
         try {
-          const response = await axios.put(idUrl, data, {
+          await axios.put(idUrl, data, {
             headers: {
               Authorization: "Bearer " + authJWT,
             },
           });
 
-          console.log("response", response.data);
+          // console.log("response", response.data);
           setMessage("Property has been updated. Go to the accommodations page to check it out!");
         } catch (error) {
-          console.log("error", error);
+          // console.log("error", error);
           setError("Something went wrong. Please try again or go to our contact page and let us know if the problem persists.");
         } finally {
           setLoading(false);
@@ -135,10 +150,12 @@ function RemoveProperty() {
     <AdminDashboard>
       <Container>
         <PageHeading className="text-center mt-5 mb-5">EDIT OR REMOVE PROPERTY</PageHeading>
+
+        <ErrorLoadingMessage error={error} message={message} loading={loading} />
+        {deleteMessage && <SuccessMessage>Property has been removed.</SuccessMessage>}
+
         <div className="div--bgWhite property__div pt-5 mt-4">
-          <FormMessages error={error} message={message} loading={loading} />
-          {deleteMessage && <SuccessMessage>Property has been removed.</SuccessMessage>}
-          <SearchBar onSelect={handleOnSelect} items={searchItems} />
+          <SearchBar onSelect={handleOnSelect} items={searchItems} placeholder={"Find property to edit..."} />
           <PropertyForm key={defaultValues} onSubmit={onSubmit} reset={defaultValues} disabled={disabled} onDelete={onDelete}>
             <div className="mb-5">
               <Button variant="success" type="submit" className="mt-4 pe-3 ps-3">
@@ -149,10 +166,9 @@ function RemoveProperty() {
               </Button>
             </div>
           </PropertyForm>
-
-          <FormMessages error={error} message={message} loading={loading} />
-          {deleteMessage && <SuccessMessage>Property has been removed.</SuccessMessage>}
         </div>
+        <ErrorLoadingMessage error={error} message={message} loading={loading} />
+        {deleteMessage && <SuccessMessage>Property has been removed.</SuccessMessage>}
       </Container>
     </AdminDashboard>
   );

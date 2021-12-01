@@ -8,7 +8,7 @@ function Filters(props) {
 
   return (
     <div>
-      <Accordion className={"filters__container"}>
+      <Accordion className={"filters__container mt-lg-4"}>
         <Accordion.Item eventKey="0">
           <Accordion.Header className={"d-lg-none"}>Filters</Accordion.Header>
           <Accordion.Body>

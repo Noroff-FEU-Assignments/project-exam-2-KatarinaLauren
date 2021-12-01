@@ -1,4 +1,4 @@
-import { BaseUrl } from "../../../constants/api";
+import { AuthUrl } from "../../../constants/api";
 import { useState, useContext } from "react";
 import { useForm } from "react-hook-form";
 import * as yup from "yup";
@@ -6,11 +6,9 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import axios from "axios";
 import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
-import FormError from "../../layout/FormError";
+import FormError from "../../layout/messages/FormError";
 import AuthContext from "../../../context/AuthContext";
 
-const url = BaseUrl;
-const authUrl = url + "/auth/local";
 const schema = yup.object().shape({
   identifier: yup.string().required("Please enter your username"),
   password: yup.string().required("Please enter your password"),
@@ -34,15 +32,15 @@ export default function LoginForm() {
     setLoading(true);
     setError(null);
 
-    console.log(data);
+    // console.log(data);
 
     try {
-      const response = await axios.post(authUrl, data);
+      const response = await axios.post(AuthUrl, data);
 
-      console.log("response", response.data);
+      // console.log("response", response.data);
       setAuth(response.data);
     } catch (error) {
-      console.log("error", error);
+      // console.log("error", error);
       setError(true);
     } finally {
       setLoading(false);
@@ -51,7 +49,7 @@ export default function LoginForm() {
 
   return (
     <>
-      <Form onSubmit={handleSubmit(onSubmit)} className="login__form d-flex flex-column align-items-center mt-4 pt-5 pb-5">
+      <Form onSubmit={handleSubmit(onSubmit)} className="login__form d-flex flex-column align-items-center mt-4 pt-5 pb-5 mb-5">
         {error && (
           <FormError>
             <p>Unable to login. Please check your credentials</p>
@@ -71,7 +69,7 @@ export default function LoginForm() {
           </Form.Group>
           <div className="text-end">
             <Button variant="success" type="submit" className="mt-4 pe-5 ps-5">
-              {loading ? "Loggin in..." : "Login"}
+              {loading ? "Logging in..." : "Login"}
             </Button>
           </div>
         </fieldset>

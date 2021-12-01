@@ -8,30 +8,22 @@ import Admin from "./components/admin/login/Admin";
 import AdminDashboard from "./components/admin/AdminDashboard";
 import AddProperty from "./components/admin//AddProperty";
 import RemoveProperty from "./components/admin/RemoveProperty";
-import ReadMessages from "./components/admin/messages/ReadMessages";
+import ReadMessages from "./components/admin/contactMessages/ReadMessages";
 import ReadEnquiries from "./components/admin/enquiries/ReadEnquiries";
 import Footer from "./components/layout/Footer";
 import Inspiration from "./components/inspiration/Inspiration";
 import Details from "./components/accommodations/details/Details";
 import { AuthProvider } from "./context/AuthContext";
-import { GetData } from "./utilities/GetData";
-import { BaseUrl } from "./constants/api";
-import { saveToStorage } from "./utilities/localStorage/localStorageFunctions";
-import { accommodationKey } from "./constants/keys";
 import { getFacilities } from "./constants/facilities";
-import TestPage from "./TestPage";
 import "./sass/style.scss";
 
 getFacilities();
 
 function App() {
-  const { data } = GetData(BaseUrl + "/accommodations");
-  saveToStorage(accommodationKey, data);
-
   return (
     <AuthProvider>
       <Router>
-        <div class="wrapper">
+        <div className="wrapper">
           <Navigation />
 
           <div>
@@ -48,7 +40,6 @@ function App() {
               <Route path="/remove" component={RemoveProperty} />
               <Route path="/enquiries" component={ReadEnquiries} />
               <Route path="/messages" component={ReadMessages} />
-              <Route path="/test" component={TestPage} />
             </Switch>
           </div>
         </div>

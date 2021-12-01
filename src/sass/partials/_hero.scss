@@ -1,15 +1,15 @@
 .hero__image {
-  height: 250px;
+  height: 280px;
   background-position: center;
   background-repeat: no-repeat;
   background-size: cover;
   position: relative;
   background-color: $primary-color;
   @media (min-width: 768px) {
-    height: 370px;
+    height: 400px;
   }
   @media (min-width: 992px) {
-    height: 450px;
+    height: 500px;
   }
 }
 .hero__text {

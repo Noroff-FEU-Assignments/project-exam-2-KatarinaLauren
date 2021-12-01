@@ -1,34 +1,13 @@
 import { ReactSearchAutocomplete } from "react-search-autocomplete";
 
 function SearchBar(props) {
-  // const handleOnSearch = (string, results) => {
-  //   // onSearch will have as the first callback parameter
-  //   // the string searched and for the second the results.
-  //   console.log(string, results);
-  // };
-
-  // const handleOnHover = (result) => {
-  //   // the item hovered
-  //   console.log(result);
-  // };
-  // const handleOnSelect = (item) => {
-  //   // console.log(item.id);
-  //   const route = `/detail/${item.id}`;
-  //   history.push(route);
-  // };
-
-  // const handleOnFocus = () => {
-  //   console.log("Focused");
-  // };
-
   const formatResult = (item) => {
-    // return item;
-    return <p dangerouslySetInnerHTML={{ __html: "<strong>" + item + "</strong>" }}></p>; //To format result as html
+    return <p dangerouslySetInnerHTML={{ __html: "<strong>" + item + "</strong>" }}></p>;
   };
   return (
     <div className="m-auto mb-5 searchbar">
       <ReactSearchAutocomplete
-        placeholder={"Search for accommodations.."}
+        placeholder={props.placeholder}
         items={props.items}
         onSelect={props.onSelect}
         autoFocus

@@ -3,12 +3,12 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import { useState, useEffect } from "react";
 import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
-import FormError from "../layout/FormError";
+import FormError from "../layout/messages/FormError";
 import BookingMessage from "./BookingMessage";
 import BookingError from "./BookingError";
 import { BookingUrl, AccUrl } from "../../constants/api";
 import axios from "axios";
-import FormMessages from "../layout/FormMessages";
+import ErrorLoadingMessage from "../layout/messages/ErrorLoadingMessage";
 import { bookingEnquirySchema } from "../../utilities/yup/YupSchemas";
 
 const date = new Date();
@@ -53,6 +53,7 @@ function BookingForm() {
           })
           .finally(() => {
             setLoading(false);
+            window.scrollTo(0, 0);
           });
       }
       postData();
@@ -90,7 +91,7 @@ function BookingForm() {
 
   return (
     <div className={"booking__form"}>
-      <FormMessages error={error} message={message} loading={loading} />
+      <ErrorLoadingMessage error={error} message={message} loading={loading} />
       <Form onSubmit={handleSubmit(onSubmit)}>
         <Form.Group className="mb-2" controlId="controlInput1">
           <Form.Label>Accommodation</Form.Label>
@@ -116,7 +117,7 @@ function BookingForm() {
 
         <Form.Group className="booking__form__select m-auto mb-2 text-center" controlId="controlInput1">
           <Form.Label>Number of guests</Form.Label>
-          <Form.Select aria-label="Select number of guests" {...register("number_of_guests")} className="m-auto">
+          <Form.Select aria-label="Select number of guests" {...register("number_of_guests")} className="m-auto text-center">
             <option value="1">1</option>
             <option value="2">2</option>
             <option value="3">3</option>
@@ -155,7 +156,7 @@ function BookingForm() {
         </Form.Group>
 
         <Button variant="primary" type="submit" className="m-3 ms-auto pe-5 ps-5">
-          Submit
+          {loading ? "Sending..." : "Send"}
         </Button>
       </Form>
     </div>

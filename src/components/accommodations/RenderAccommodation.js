@@ -8,8 +8,6 @@ import Filters from "./Filters";
 import { getFromStorage } from "../../utilities/localStorage/localStorageFunctions";
 import { facilitiesKey } from "../../constants/keys";
 
-// const facilities = getFromStorage(facilitiesKey);
-
 class RenderAccommodation extends React.Component {
   constructor(props) {
     super(props);
@@ -32,15 +30,9 @@ class RenderAccommodation extends React.Component {
       .then((res) => res.json())
       .then(
         (result) => {
-          // console.log(result);
-          // const facilities = result[0].facilities;
-
-          // const facilityNames = Object.keys(facilities);
-          // facilityNames.shift();
           this.setState({
             isLoaded: true,
             items: result,
-            // availableFilters: facilityNames,
           });
         },
 
@@ -100,7 +92,7 @@ class RenderAccommodation extends React.Component {
       return <Spinner animation="border" variant="primary" />;
     } else {
       return (
-        <Container className={"d-flex flex-column flex-lg-row justify-content-evenly mt-4"}>
+        <Container className={"d-flex flex-column flex-lg-row justify-content-enter justify-content-lg-evenly mt-4 mb-5"}>
           <Filters filterValues={availableFilters} changeFunction={this.filterChange} resetFunction={this.resetFilters} />
           <div className={"flex-grow-1"}>
             {items

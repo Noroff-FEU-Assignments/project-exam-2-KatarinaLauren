@@ -1,7 +1,7 @@
 import PageHeading from "../layout/PageHeading";
 import { Link } from "react-router-dom";
 import Hero from "../layout/Hero";
-import heroImage from "../../images/home.jpg";
+import heroImage from "../../images/home/home.jpg";
 import Button from "react-bootstrap/Button";
 import Container from "react-bootstrap/Container";
 import SearchBar from "../searchBar/SearchBar";
@@ -49,7 +49,7 @@ function Home() {
         <PageHeading color={"#FFC96C"} className={"d-inline ms-2"}>
           Bergen?
         </PageHeading>
-        <div className="mt-5">{error ? <div></div> : <SearchBar onSelect={handleOnSelect} items={items} />}</div>
+        <div className="mt-5 pt-5 p-md-0">{error ? <div></div> : <SearchBar onSelect={handleOnSelect} items={items} placeholder={"Find accommodations..."} />}</div>
       </Hero>
       <Link to="/booking" className="nav-link mt-4">
         <Button variant="success" className="d-block m-auto pe-5 ps-5" size="lg">
@@ -59,9 +59,7 @@ function Home() {
 
       <Container>
         <h3 className="mb-4 mt-4">INSPIRATION</h3>
-        <div className="home__div mt-3 p-4">
-          <InspirationCards />
-        </div>
+        <InspirationCards />
 
         <h3 className="mt-5 mb-4">ACCOMMODATIONS</h3>
         <AccommodationOverview />

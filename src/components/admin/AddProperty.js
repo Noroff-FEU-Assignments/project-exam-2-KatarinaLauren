@@ -5,9 +5,9 @@ import Container from "react-bootstrap/Container";
 import axios from "axios";
 import { useState, useEffect } from "react";
 import { getFromStorage } from "../../utilities/localStorage/localStorageFunctions";
-import { AccUrl, BaseUrl } from "../../constants/api";
+import { AccUrl, BASE_URL } from "../../constants/api";
 import { authKey } from "../../constants/keys";
-import FormMessages from "../layout/FormMessages";
+import ErrorLoadingMessage from "../layout/messages/ErrorLoadingMessage";
 import Button from "react-bootstrap/Button";
 import AdminDashboard from "./AdminDashboard";
 import AddImages from "./propertyForm/AddImages";
@@ -44,16 +44,18 @@ function AddProperty() {
 
   // HANDLE CHOOSE IMAGE FILE
   function onChange(e) {
-    console.log(e.target.files[0]);
+    // console.log(e.target.files[0]);
     setFile(e.target.files[0]);
   }
 
   // HANDLE SUBMIT IMAGE
   function addImage(e) {
     e.preventDefault();
-    e.target.reset();
-    setImages(true);
-    setImageName(file.name);
+    if (file) {
+      e.target.reset();
+      setImages(true);
+      setImageName(file.name);
+    }
   }
 
   // HANDLE DELETE IMAGE
@@ -74,12 +76,12 @@ function AddProperty() {
             },
           });
 
-          console.log("response", response.data.id);
+          // console.log("response", response.data.id);
           setRefId(response.data.id);
           setMessage("Property has been added. Go to the accommodations page to check it out!");
           setReset("");
         } catch (error) {
-          console.log("error", error);
+          // console.log("error", error);
           setError("Something went wrong. Please try again or go to our contact page and let us know if the problem persists.");
           setReset(data);
         } finally {
@@ -100,7 +102,7 @@ function AddProperty() {
         formData.append("files", file);
 
         axios
-          .post(BaseUrl + "/upload", formData, {
+          .post(BASE_URL + "/upload", formData, {
             headers: {
               Authorization: "Bearer " + authJWT,
             },
@@ -108,7 +110,6 @@ function AddProperty() {
           .then((response) => {
             setImages(false);
             setFile(null);
-            // setImageName("");
             const responseData = response.data[0].id;
 
             axios
@@ -122,15 +123,15 @@ function AddProperty() {
                 }
               )
               .then((response) => {
-                console.log(response);
+                // console.log(response);
                 setRefId(null);
               })
               .catch((error) => {
-                console.log(error);
+                // console.log(error);
               });
           })
           .catch((error) => {
-            console.log(error);
+            // console.log(error);
             setError("Something went wrong. Please try again or go to our contact page and let us know if the problem persists.");
           });
       };
@@ -142,19 +143,19 @@ function AddProperty() {
     <AdminDashboard>
       <Container>
         <PageHeading className="text-center mt-5">ADD PROPERTY</PageHeading>
-        <FormMessages error={error} message={message} loading={loading} />
+        <ErrorLoadingMessage error={error} message={message} loading={loading} />
         <div className="div--bgWhite property__div pt-3 mt-4">
           <AddImages onChange={onChange} addImage={addImage} imageName={imageName} deleteImage={deleteImage} />
           <PropertyForm key={data} onSubmit={onSubmit} reset={reset} disabled={disabled}>
             <Button variant="success" type="submit" className="mt-4 mb-4 pe-5 ps-5 me-4">
-              Add property
+              {loading ? "Adding..." : "Add property"}
             </Button>
-            <Paragraph className="fst-italic text-center mb-4 pt-3" color="#a6adb4">
+            <Paragraph className="fst-italic text-center mb-4 pt-3" color={"#02a6b5"}>
               All fields are required*
             </Paragraph>
           </PropertyForm>
         </div>
-        <FormMessages error={error} message={message} loading={loading} />
+        <ErrorLoadingMessage error={error} message={message} loading={loading} />
       </Container>
     </AdminDashboard>
   );

@@ -14,7 +14,7 @@ function Admin() {
       {auth ? (
         <AdminDashboard>
           <h3 className="text-center mt-5">ADMIN DASHBOARD</h3>
-          <div className="admin__login__message p-4 ps-5 mt-3">
+          <div className="admin__login__message p-4 ps-5 mt-3 mb-5">
             <Paragraph>Here you can edit properties, add new establishments and manage booking enquiries and messages.</Paragraph>
             <Paragraph>Use the Admin menu above to navigate between tasks.</Paragraph>
             <Paragraph className="fst-italic">

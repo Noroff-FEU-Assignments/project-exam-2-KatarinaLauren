@@ -1,9 +1,9 @@
 import { Link } from "react-router-dom";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
-import bb from "../../images/accommodation/bb.jpg";
-import hotel from "../../images/accommodation/hotel.jpg";
-import cottage from "../../images/accommodation/cottage.jpg";
+import bb from "../../images/home/bb.jpg";
+import hotel from "../../images/home/hotel.jpg";
+import cottage from "../../images/home/cottage.jpg";
 
 function AccommodationOverview() {
   return (

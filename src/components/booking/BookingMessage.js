@@ -7,7 +7,7 @@ function BookingMessage() {
       <div className="text-start mt-3">
         <p>The establishment of your choice will contact you as soon as possible!</p>
         <p>
-          In the mean time - go to our <Link to="/inspiration">inspiration page</Link> to read more about things to do when in Bergen. Or click the button below to make a new enquiry.
+          In the mean time - you can go to our <Link to="/inspiration">inspiration page</Link> to read more about things to do when in Bergen.
         </p>
       </div>
     </>

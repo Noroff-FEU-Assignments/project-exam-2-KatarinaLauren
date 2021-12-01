@@ -1,5 +1,6 @@
 import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
+import Paragraph from "../../layout/Paragraph";
 
 function AddImages(props) {
   return (
@@ -14,9 +15,9 @@ function AddImages(props) {
         </Button>
       </div>
       {props.imageName && (
-        <p className="fw-bold text-center pb-0 mb-0">
-          {props.imageName} <i className="far fa-trash-alt" onClick={props.deleteImage}></i>
-        </p>
+        <Paragraph className={"text-center pb-0 mb-0"} color={"#02a6b5"}>
+          {props.imageName} <i className="far fa-trash-alt fw-bold" onClick={props.deleteImage}></i>
+        </Paragraph>
       )}
     </Form>
   );

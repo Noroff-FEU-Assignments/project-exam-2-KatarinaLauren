@@ -13,25 +13,21 @@
 @import "./partials/custom";
 @import "~bootstrap/scss/bootstrap";
 @import "./partials/globals";
-@import "./partials/navigation";
-@import "./partials/footer";
-@import "./partials/hero";
-@import "./partials/buttons";
-@import "./partials/home";
-@import "./partials/searchBar";
-@import "./partials/inspiration";
-@import "./partials/accommodationOverview";
-@import "./partials/accommodation";
-@import "./partials/filters";
-@import "./partials/details";
-@import "./partials/bookingForm";
-@import "./partials/booking";
-@import "./partials/contact";
-@import "./partials/messages";
-@import "./partials/admin";
-@import "./partials/propertyForm";
-@import "./partials/enquiriesAndMessages";
-
-// * {
-//   outline: 1px solid #f00 !important;
-// }
+@import "./partials/layout/navigation";
+@import "./partials/layout/footer";
+@import "./partials/layout/hero";
+@import "./partials/layout/buttons";
+@import "./partials/home/home";
+@import "./partials/layout/searchBar";
+@import "./partials/inspiration/inspiration";
+@import "./partials/home/accommodationOverview";
+@import "./partials/accommodations/accommodation";
+@import "./partials/accommodations/filters";
+@import "./partials/accommodations/details";
+@import "./partials/booking/bookingForm";
+@import "./partials/booking/booking";
+@import "./partials/contact/contact";
+@import "./partials/layout/messages";
+@import "./partials/admin/admin";
+@import "./partials/admin/propertyForm";
+@import "./partials/admin/enquiriesAndMessages";

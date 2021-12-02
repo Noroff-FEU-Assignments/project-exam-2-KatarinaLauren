@@ -9,6 +9,8 @@ import { authKey } from "../../../constants/keys";
 import EnquiryItem from "./EnquiryItem";
 import ErrorLoadingMessage from "../../layout/messages/ErrorLoadingMessage";
 import AdminDashboard from "../AdminDashboard";
+import { confirmAlert } from "react-confirm-alert";
+import "react-confirm-alert/src/react-confirm-alert.css";
 
 function ReadEnquiries() {
   const authData = getFromStorage(authKey);
@@ -17,30 +19,79 @@ function ReadEnquiries() {
   const [enquiries, setEnquiries] = useState([]);
   const [error, setError] = useState(null);
   const [loading, setLoading] = useState(false);
+  const [deleteItem, setDeleteItem] = useState(null);
+  const [reload, setReload] = useState(true);
 
   useEffect(() => {
-    const fetchData = () => {
-      setLoading(true);
-      axios
-        .get(BookingUrl, {
-          headers: {
-            Authorization: "Bearer " + authJWT,
+    if (reload) {
+      const fetchData = () => {
+        setLoading(true);
+
+        axios
+          .get(BookingUrl, {
+            headers: {
+              Authorization: "Bearer " + authJWT,
+            },
+          })
+          .then((response) => {
+            // console.log(response.data);
+            setEnquiries(response.data);
+            setError(null);
+          })
+          .catch((error) => {
+            // console.log(error);
+            setError("Something went wrong. Unable to load messages");
+          })
+          .finally(() => {
+            setReload(false);
+            setLoading(false);
+          });
+      };
+
+      fetchData();
+    }
+  }, [authJWT, reload]);
+
+  function deletePost(e) {
+    const removeId = e.target.dataset.remove;
+    confirmAlert({
+      title: "Delete Message?",
+      buttons: [
+        {
+          label: "Yes",
+          onClick: () => {
+            setDeleteItem(removeId);
           },
-        })
-        .then((response) => {
-          // console.log(response.data);
-          setEnquiries(response.data);
-          setError(null);
-          setLoading(false);
-        })
-        .catch((error) => {
-          // console.log(error);
-          setError("Something went wrong. Unable to load messages");
-          setLoading(false);
-        });
-    };
-    fetchData();
-  }, [authJWT]);
+        },
+        {
+          label: "No",
+          onClick: () => {},
+        },
+      ],
+    });
+  }
+  useEffect(() => {
+    if (deleteItem > 0) {
+      const id = deleteItem;
+      const idUrl = BookingUrl + "/" + id;
+
+      async function deleteData() {
+        try {
+          await axios.delete(idUrl, {
+            headers: {
+              Authorization: "Bearer " + authJWT,
+            },
+          });
+        } catch (error) {
+          setError("Unable to delete message");
+        } finally {
+          setDeleteItem(null);
+          setReload(true);
+        }
+      }
+      deleteData();
+    }
+  }, [deleteItem, authJWT]);
 
   return (
     <AdminDashboard>
@@ -65,6 +116,7 @@ function ReadEnquiries() {
                   checkout={checkout_date}
                   numberOfGuests={number_of_guests}
                   accommodation={accommodation}
+                  deletePost={deletePost}
                 />
               );
             })}

@@ -20,6 +20,7 @@
   }
   .accordion-body {
     padding: 2em;
+    padding-bottom: 1em;
     font-weight: 300;
 
     .accordion__item--bottomBorder {
@@ -32,4 +33,9 @@
     color: $primary-color;
     font-weight: 400;
   }
+}
+
+.accordion__deleteButton {
+  color: $secondary-color;
+  margin-right: -15px;
 }

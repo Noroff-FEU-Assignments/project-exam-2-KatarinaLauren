@@ -1,6 +1,6 @@
 import Accordion from "react-bootstrap/Accordion";
 
-function EnquiryItem({ id, date, accommodation, checkin, checkout, numberOfGuests, name, email, phone, message }) {
+function EnquiryItem({ id, date, accommodation, checkin, checkout, numberOfGuests, name, email, phone, message, deletePost }) {
   const newDate = new Date(date);
   const formattedDate = newDate.toISOString().substring(0, 10);
 
@@ -72,6 +72,9 @@ function EnquiryItem({ id, date, accommodation, checkin, checkout, numberOfGuest
           </label>
           {message}
         </p>
+        <div className="text-end mt-3 pb-0 mb-0 accordion__deleteButton">
+          <i className="fas fa-trash-alt p-2 pe-0" onClick={deletePost} data-remove={id}></i>
+        </div>
       </Accordion.Body>
     </Accordion.Item>
   );

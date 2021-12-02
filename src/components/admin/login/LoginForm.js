@@ -56,13 +56,13 @@ export default function LoginForm() {
           </FormError>
         )}
         <fieldset disabled={loading}>
-          <Form.Group className="mb-2" controlId="ControlInput1">
+          <Form.Group className="mb-2">
             <Form.Label>Username/Email</Form.Label>
             <Form.Control {...register("identifier")} name="identifier" type="text" />
             {errors.identifier && <FormError>{errors.identifier.message}</FormError>}
           </Form.Group>
 
-          <Form.Group className="mb-2" controlId="exampleForm.ControlInput1">
+          <Form.Group className="mb-2">
             <Form.Label>Password</Form.Label>
             <Form.Control {...register("password")} name="password" type="password" />
             {errors.password && <FormError>{errors.password.message}</FormError>}

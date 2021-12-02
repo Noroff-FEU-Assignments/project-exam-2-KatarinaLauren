@@ -11,6 +11,8 @@ import ContactMessageItem from "./ContactMessageItem";
 import ErrorMessage from "../../layout/messages/ErrorMessage";
 import AdminDashboard from "../AdminDashboard";
 import Spinner from "react-bootstrap/Spinner";
+import { confirmAlert } from "react-confirm-alert";
+import "react-confirm-alert/src/react-confirm-alert.css";
 
 function ReadMessages() {
   const authData = getFromStorage(authKey);
@@ -18,29 +20,77 @@ function ReadMessages() {
   const [messages, setMessages] = useState([]);
   const [error, setError] = useState(null);
   const [loading, setLoading] = useState(false);
+  const [deleteItem, setDeleteItem] = useState(null);
+  const [reload, setReload] = useState(true);
 
   useEffect(() => {
-    const fetchData = () => {
-      setLoading(true);
-      axios
-        .get(MessageUrl, {
-          headers: {
-            Authorization: "Bearer " + authJWT,
+    if (reload) {
+      const fetchData = () => {
+        setLoading(true);
+        axios
+          .get(MessageUrl, {
+            headers: {
+              Authorization: "Bearer " + authJWT,
+            },
+          })
+          .then((response) => {
+            // console.log(response.data);
+            setMessages(response.data);
+            setError(null);
+          })
+          .catch((error) => {
+            // console.log(error);
+            setError("Something went wrong. Unable to load messages");
+          })
+          .finally(() => {
+            setReload(false);
+            setLoading(false);
+          });
+      };
+      fetchData();
+    }
+  }, [authJWT, reload]);
+
+  function deletePost(e) {
+    const removeId = e.target.dataset.remove;
+    confirmAlert({
+      title: "Delete Message?",
+      buttons: [
+        {
+          label: "Yes",
+          onClick: () => {
+            setDeleteItem(removeId);
           },
-        })
-        .then((response) => {
-          // console.log(response.data);
-          setMessages(response.data);
-          setLoading(false);
-        })
-        .catch((error) => {
-          // console.log(error);
-          setError(error);
-          setLoading(false);
-        });
-    };
-    fetchData();
-  }, [authJWT]);
+        },
+        {
+          label: "No",
+          onClick: () => {},
+        },
+      ],
+    });
+  }
+  useEffect(() => {
+    if (deleteItem > 0) {
+      const id = deleteItem;
+      const idUrl = MessageUrl + "/" + id;
+
+      async function deleteData() {
+        try {
+          await axios.delete(idUrl, {
+            headers: {
+              Authorization: "Bearer " + authJWT,
+            },
+          });
+        } catch (error) {
+          setError("Unable to delete message");
+        } finally {
+          setDeleteItem(null);
+          setReload(true);
+        }
+      }
+      deleteData();
+    }
+  }, [deleteItem, authJWT]);
 
   return (
     <AdminDashboard>
@@ -60,7 +110,7 @@ function ReadMessages() {
             .sort((a, b) => new Date(b.published_at) - new Date(a.published_at))
             .map(function (item) {
               const { id, name, email, phone, published_at, message } = item;
-              return <ContactMessageItem key={id} id={id} name={name} phone={phone} date={published_at} email={email} message={message} />;
+              return <ContactMessageItem key={id} id={id} name={name} phone={phone} date={published_at} email={email} message={message} deletePost={deletePost} />;
             })}
         </Accordion>
       </Container>

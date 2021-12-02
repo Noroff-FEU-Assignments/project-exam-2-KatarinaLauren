@@ -92,7 +92,7 @@ function Footer() {
                 </Button>
               </>
             ) : (
-              <Link to="/admin" className="nav-link">
+              <Link to="/admin" className="nav-link" onClick={() => window.scrollTo(0, 0)}>
                 Admin
               </Link>
             )}

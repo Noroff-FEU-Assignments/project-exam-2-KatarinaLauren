@@ -71,7 +71,7 @@ function Details() {
             </Button>
             <Info category={data.category} location={data.location} room_rate={data.room_rate} />
 
-            <div className={"d-flex flex-column flex-lg-row align-items-center align-items-lg-start justify-content-center mt-3 mt-md-5"}>
+            <div className={"d-flex flex-column flex-lg-row align-items-center align-items-lg-start justify-content-around mt-3 mt-lg-5"}>
               <Description description={data.description} />
 
               <div>
@@ -79,10 +79,10 @@ function Details() {
                   Book a room
                 </Button>
 
-                <div className={"details__container__contact p-4 d-flex flex-row flex-wrap justify-content-center"}>
+                <div className={"details__container__contact p-3 pt-4 pb-4 d-flex flex-column justify-content-center"}>
                   <ContactInfo address={data.address} phone={data.phone} email={data.email} />
-                  <div className={""}>
-                    <Paragraph color={"#02a6b5"} fontWeight={"bold"} className={"mt-4 mt-md-0"}>
+                  <div>
+                    <Paragraph color={"#02a6b5"} fontWeight={"bold"} className={"mt-4 mt-md-0 ps-3"}>
                       Location
                     </Paragraph>
                     <Location latitude={data.latitude} longitude={data.longitude} />

@@ -93,7 +93,7 @@ function BookingForm() {
     <div className={"booking__form"}>
       <ErrorLoadingMessage error={error} message={message} loading={loading} />
       <Form onSubmit={handleSubmit(onSubmit)}>
-        <Form.Group className="mb-2" controlId="controlInput1">
+        <Form.Group className="mb-2">
           <Form.Label>Accommodation</Form.Label>
           <Form.Select aria-label="Select accommodation" name="accommodation" {...register("accommodation")}>
             <option value="select">Select accommodation</option>
@@ -102,20 +102,20 @@ function BookingForm() {
           {errors.accommodation && <FormError>{"Please select your accommodation"}</FormError>}
         </Form.Group>
         <div className=" d-flex flex-column flex-md-row mb-3 justify-content-evenly">
-          <Form.Group className="booking__form__dates" controlId="controlInput1">
+          <Form.Group className="booking__form__dates">
             <Form.Label>Check-in date</Form.Label>
             <Form.Control type="date" name="checkin" error={errors.checkin} {...register("checkin_date")} defaultValue={tomorrowsDate} />
             {errors.checkin_date && <FormError>{"Check-in date is required and must be a future date"}</FormError>}
           </Form.Group>
 
-          <Form.Group className="booking__form__dates" controlId="controlInput1">
+          <Form.Group className="booking__form__dates">
             <Form.Label>Check-out date</Form.Label>
             <Form.Control type="date" name="checkout" error={errors.checkin} {...register("checkout_date")} defaultValue={dayAfterTomorrowsDate} />
             {errors.checkout_date && <FormError>{"Check-in date is required and must be a future date"}</FormError>}
           </Form.Group>
         </div>
 
-        <Form.Group className="booking__form__select m-auto mb-2 text-center" controlId="controlInput1">
+        <Form.Group className="booking__form__select m-auto mb-2 text-center">
           <Form.Label>Number of guests</Form.Label>
           <Form.Select aria-label="Select number of guests" {...register("number_of_guests")} className="m-auto text-center">
             <option value="1">1</option>
@@ -131,25 +131,25 @@ function BookingForm() {
           </Form.Select>
         </Form.Group>
 
-        <Form.Group className="mb-2" controlId="ControlInput1">
+        <Form.Group className="mb-2">
           <Form.Label>Full name*</Form.Label>
           <Form.Control {...register("customer_name")} name="customer_name" type="text" />
           {errors.customer_name && <FormError>{errors.customer_name.message}</FormError>}
         </Form.Group>
 
-        <Form.Group className="mb-2" controlId="exampleForm.ControlInput1">
+        <Form.Group className="mb-2">
           <Form.Label>Email*</Form.Label>
           <Form.Control {...register("email")} />
           {errors.email && <FormError>{errors.email.message}</FormError>}
         </Form.Group>
 
-        <Form.Group className="mb-2" controlId="exampleForm.ControlInput1">
+        <Form.Group className="mb-2">
           <Form.Label>Phone Number*</Form.Label>
           <Form.Control {...register("phone_number")} />
           {errors.phone_number && <FormError>{"Please enter a valid phone number"}</FormError>}
         </Form.Group>
 
-        <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
+        <Form.Group className="mb-3">
           <Form.Label>Message &amp; Special requests</Form.Label>
           <Form.Control as="textarea" rows={5} {...register("message")} />
           {errors.message && <FormError>{errors.message.message}</FormError>}

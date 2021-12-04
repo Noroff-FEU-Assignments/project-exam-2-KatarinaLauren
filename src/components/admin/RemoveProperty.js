@@ -5,8 +5,8 @@ import { useState, useEffect } from "react";
 import PropertyForm from "./propertyForm/PropertyForm";
 import axios from "axios";
 import { AccUrl } from "../../constants/api";
-import { getFromStorage, saveToStorage } from "../../utilities/localStorage/localStorageFunctions";
-import { accommodationKey, authKey } from "../../constants/keys";
+import { getFromStorage } from "../../utilities/localStorage/localStorageFunctions";
+import { authKey } from "../../constants/keys";
 import SuccessMessage from "../layout/messages/SuccessMessage";
 import ErrorLoadingMessage from "../layout/messages/ErrorLoadingMessage";
 import Button from "react-bootstrap/Button";
@@ -17,7 +17,7 @@ import "react-confirm-alert/src/react-confirm-alert.css";
 function RemoveProperty() {
   const authData = getFromStorage(authKey);
   const authJWT = authData.jwt;
-  const [defaultValues, setDefaultValues] = useState([]);
+  const [defaultValues, setDefaultValues] = useState(false);
   const [error, setError] = useState(null);
   const [message, setMessage] = useState(null);
   const [loading, setLoading] = useState(false);
@@ -128,7 +128,6 @@ function RemoveProperty() {
       axios
         .get(AccUrl)
         .then((response) => {
-          saveToStorage(accommodationKey, response.data);
           setSearchItems(response.data);
         })
         .catch((error) => {
@@ -149,7 +148,7 @@ function RemoveProperty() {
   return (
     <AdminDashboard>
       <Container>
-        <PageHeading className="text-center mt-5 mb-5">EDIT OR REMOVE PROPERTY</PageHeading>
+        <PageHeading className="text-center mt-5 mb-5 text-uppercase">Edit or remove property</PageHeading>
 
         <ErrorLoadingMessage error={error} message={message} loading={loading} />
         {deleteMessage && <SuccessMessage>Property has been removed.</SuccessMessage>}
@@ -159,7 +158,7 @@ function RemoveProperty() {
           <PropertyForm key={defaultValues} onSubmit={onSubmit} reset={defaultValues} disabled={disabled} onDelete={onDelete}>
             <div className="mb-5">
               <Button variant="success" type="submit" className="mt-4 pe-3 ps-3">
-                Edit Property
+                Save changes
               </Button>
               <Button variant="danger" className="mt-4 pe-3 ps-3 ms-2 ms-md-4" onClick={onDelete}>
                 Delete

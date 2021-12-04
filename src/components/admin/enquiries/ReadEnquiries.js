@@ -96,7 +96,7 @@ function ReadEnquiries() {
   return (
     <AdminDashboard>
       <Container>
-        <PageHeading className="text-center mt-5">BOOKING ENQUIRIES</PageHeading>
+        <PageHeading className="text-center mt-5 text-uppercase">Booking Enquiries</PageHeading>
         <ErrorLoadingMessage error={error} loading={loading} />
         <Accordion className="bookings__accordion mb-5 mt-5">
           {enquiries

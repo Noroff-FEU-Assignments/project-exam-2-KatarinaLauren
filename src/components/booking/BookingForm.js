@@ -93,7 +93,7 @@ function BookingForm() {
     <div className={"booking__form"}>
       <ErrorLoadingMessage error={error} message={message} loading={loading} />
       <Form onSubmit={handleSubmit(onSubmit)}>
-        <Form.Group className="mb-2">
+        <Form.Group className="mb-3">
           <Form.Label>Accommodation</Form.Label>
           <Form.Select aria-label="Select accommodation" name="accommodation" {...register("accommodation")}>
             <option value="select">Select accommodation</option>
@@ -102,7 +102,7 @@ function BookingForm() {
           {errors.accommodation && <FormError>{"Please select your accommodation"}</FormError>}
         </Form.Group>
         <div className=" d-flex flex-column flex-md-row mb-3 justify-content-evenly">
-          <Form.Group className="booking__form__dates">
+          <Form.Group className="booking__form__dates mb-3 mb-lg-auto">
             <Form.Label>Check-in date</Form.Label>
             <Form.Control type="date" name="checkin" error={errors.checkin} {...register("checkin_date")} defaultValue={tomorrowsDate} />
             {errors.checkin_date && <FormError>{"Check-in date is required and must be a future date"}</FormError>}
@@ -115,7 +115,7 @@ function BookingForm() {
           </Form.Group>
         </div>
 
-        <Form.Group className="booking__form__select m-auto mb-2 text-center">
+        <Form.Group className="booking__form__select m-auto mb-3 text-md-center">
           <Form.Label>Number of guests</Form.Label>
           <Form.Select aria-label="Select number of guests" {...register("number_of_guests")} className="m-auto text-center">
             <option value="1">1</option>
@@ -131,19 +131,19 @@ function BookingForm() {
           </Form.Select>
         </Form.Group>
 
-        <Form.Group className="mb-2">
+        <Form.Group className="mb-3">
           <Form.Label>Full name*</Form.Label>
           <Form.Control {...register("customer_name")} name="customer_name" type="text" />
           {errors.customer_name && <FormError>{errors.customer_name.message}</FormError>}
         </Form.Group>
 
-        <Form.Group className="mb-2">
+        <Form.Group className="mb-3">
           <Form.Label>Email*</Form.Label>
           <Form.Control {...register("email")} />
           {errors.email && <FormError>{errors.email.message}</FormError>}
         </Form.Group>
 
-        <Form.Group className="mb-2">
+        <Form.Group className="mb-3">
           <Form.Label>Phone Number*</Form.Label>
           <Form.Control {...register("phone_number")} />
           {errors.phone_number && <FormError>{"Please enter a valid phone number"}</FormError>}

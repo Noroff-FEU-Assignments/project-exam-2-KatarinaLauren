@@ -75,19 +75,19 @@ function ContactForm() {
       <ErrorLoadingMessage error={error} message={message} loading={loading} />
 
       <Form onSubmit={handleSubmit(onSubmit)}>
-        <Form.Group className="mb-2">
+        <Form.Group className="mb-3">
           <Form.Label>Full name*</Form.Label>
           <Form.Control {...register("name")} name="name" type="text" />
           {errors.name && <FormError>{errors.name.message}</FormError>}
         </Form.Group>
 
-        <Form.Group className="mb-2">
+        <Form.Group className="mb-3">
           <Form.Label>Email*</Form.Label>
           <Form.Control {...register("email")} />
           {errors.email && <FormError>{errors.email.message}</FormError>}
         </Form.Group>
 
-        <Form.Group className="mb-2">
+        <Form.Group className="mb-3">
           <Form.Label>Phone Number*</Form.Label>
           <Form.Control {...register("phone")} />
           {errors.phone && <FormError>{"Please enter a valid phone number"}</FormError>}

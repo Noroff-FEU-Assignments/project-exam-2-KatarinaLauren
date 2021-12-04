@@ -95,7 +95,7 @@ function ReadMessages() {
   return (
     <AdminDashboard>
       <Container>
-        <PageHeading className="text-center mt-5">MESSAGES</PageHeading>
+        <PageHeading className="text-center mt-5 text-uppercase">Messages</PageHeading>
         <Alert variant="white" className="messages__alert">
           <p>Here you can see all messages sent via our contact form.</p>
         </Alert>

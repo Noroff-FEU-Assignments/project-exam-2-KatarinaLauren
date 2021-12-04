@@ -13,6 +13,7 @@
   color: $light-color;
 
   li {
+    cursor: pointer;
     &:hover {
       color: #fff;
     }

@@ -12,10 +12,11 @@
   }
 
   .booking__form__select {
-    width: 50%;
+    width: 100%;
     select {
       @media (min-width: 768px) {
-        width: 50%;
+        width: 25%;
+        text-align: center;
       }
     }
   }

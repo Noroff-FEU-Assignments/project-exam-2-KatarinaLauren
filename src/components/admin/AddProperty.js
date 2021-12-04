@@ -142,7 +142,7 @@ function AddProperty() {
   return (
     <AdminDashboard>
       <Container>
-        <PageHeading className="text-center mt-5">ADD PROPERTY</PageHeading>
+        <PageHeading className="text-center mt-5 text-uppercase">Add property</PageHeading>
         <ErrorLoadingMessage error={error} message={message} loading={loading} />
         <div className="div--bgWhite property__div pt-3 mt-4">
           <AddImages onChange={onChange} addImage={addImage} imageName={imageName} deleteImage={deleteImage} />

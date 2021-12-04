@@ -7,7 +7,9 @@ function Contact() {
   return (
     <div className={"contact__container"}>
       <Hero image={heroImage}>
-        <PageHeading color={"#fff"}>CONTACT US</PageHeading>
+        <PageHeading color={"#fff"} className={"text-uppercase"}>
+          Contact us
+        </PageHeading>
       </Hero>
       <ContactForm />
     </div>

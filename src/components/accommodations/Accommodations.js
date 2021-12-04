@@ -8,7 +8,9 @@ function Accommodations() {
   return (
     <div className={"h-100 accommodation__container"}>
       <Hero image={heroImage}>
-        <PageHeading color={"#fff"}>ACCOMMODATIONS</PageHeading>
+        <PageHeading color={"#fff"} className={"text-uppercase"}>
+          Accommodations
+        </PageHeading>
       </Hero>
       <Container className={"d-flex flex-column justify-content-center align-items-center"} fluid>
         <RenderAccommodations />

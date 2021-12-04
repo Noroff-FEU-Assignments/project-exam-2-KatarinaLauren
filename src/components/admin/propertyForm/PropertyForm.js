@@ -41,7 +41,7 @@ function PropertyForm(props) {
             {errors.name && <FormError>{errors.name.message}</FormError>}
           </Form.Group>
 
-          <Form.Group className="mb-2">
+          <Form.Group className="mb-3">
             <Form.Label>Location</Form.Label>
             <Form.Text className="d-block mt-0" muted>
               Can be for example: City center, harbour, Fløien etc.
@@ -64,25 +64,25 @@ function PropertyForm(props) {
             </Form.Group>
           </div>
 
-          <Form.Group className="mb-2">
+          <Form.Group className="mb-3">
             <Form.Label>Address</Form.Label>
             <Form.Control as="textarea" rows={3} {...register("address")} />
             {errors.address && <FormError>{errors.address.message}</FormError>}
           </Form.Group>
 
-          <Form.Group className="mb-2">
+          <Form.Group className="mb-3">
             <Form.Label>Phone Number</Form.Label>
             <Form.Control {...register("phone")} />
             {errors.phone && <FormError>{errors.phone.message}</FormError>}
           </Form.Group>
 
-          <Form.Group className="mb-2">
+          <Form.Group className="mb-3">
             <Form.Label>Email</Form.Label>
             <Form.Control {...register("email")} />
             {errors.email && <FormError>{errors.email.message}</FormError>}
           </Form.Group>
 
-          <Form.Group className="mb-2">
+          <Form.Group className="mb-3">
             <Form.Label>Room rate (NOK)</Form.Label>
             <Form.Control {...register("room_rate")} />
             {errors.room_rate && <FormError>{errors.room_rate.message}</FormError>}

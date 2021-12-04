@@ -9,7 +9,9 @@ function Booking() {
   return (
     <div className="booking__container">
       <Hero image={heroImage}>
-        <PageHeading color={"#fff"}>BOOKING ENQUIRIES</PageHeading>
+        <PageHeading color={"#fff"} className={"text-uppercase"}>
+          Booking enquiries
+        </PageHeading>
       </Hero>
       <Container className="booking__form__container mt-4 mb-5">
         <h5 className="text-center booking__form__heading">Booking enquiry</h5>

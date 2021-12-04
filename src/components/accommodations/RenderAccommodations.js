@@ -22,12 +22,12 @@ function RenderAccommodations() {
       axios
         .get(AccUrl)
         .then((response) => {
-          console.log(response.data);
+          // console.log(response.data);
           setItems(response.data);
           setError(null);
         })
         .catch((error) => {
-          console.log(error);
+          // console.log(error);
           setError("Something went wrong. Unable to load accommodations");
         })
         .finally(() => {
@@ -38,7 +38,7 @@ function RenderAccommodations() {
   }, []);
 
   function filterChange(e) {
-    console.log("Filter changed:", e.target.name, "set to ", e.target.checked);
+    // console.log("Filter changed:", e.target.name, "set to ", e.target.checked);
     setFacilityFilter((prevFacilityFilter) => ({ ...prevFacilityFilter, [e.target.name]: e.target.checked }));
   }
 

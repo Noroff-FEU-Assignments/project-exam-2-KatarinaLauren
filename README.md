@@ -1,4 +1,4 @@
-## LOGIN INFO
+## LOGIN INFO FOR TESTING THE ADMIN SECTION
 
 Username: Admin@admin.com
 Password: Admin1234
